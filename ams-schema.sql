@@ -15,7 +15,7 @@ CREATE TABLE user(
 
 DROP TABLE IF EXISTS student;
 CREATE TABLE student(
-    id int(11),
+    id int(11) NOT NULL,
     studentNumber varchar(10) NOT NULL,
     sex char,
     degree varchar(10),
@@ -25,7 +25,7 @@ CREATE TABLE student(
 
 DROP TABLE IF EXISTS teacher;
 CREATE TABLE teacher(
-    id int(11),
+    id int(11) NOT NULL,
     employeeId varchar(11) NOT NULL,
     unit varchar(10),
     position varchar(30),
