@@ -1,0 +1,20 @@
+<div class="block row">
+  <div class="title"><h4>Select your CSV file: </h4></div>
+    <div class="block right">
+      <ng-csv-import 
+        class="import"
+        content="csv.content"
+        header="csv.header" 
+        header-visible="csv.headerVisible" 
+        separator="csv.separator"
+        separator-visible="csv.separatorVisible"
+        result="csv.result"
+        encoding="csv.encoding"
+        encoding-visible="csv.encodingVisible">
+      </ng-csv-import>
+    </div>
+</div> 
+
+<div class="block row"  ng-if="parseCSV(csv.content)">
+  <h3>Successful!</h3>
+</div>
