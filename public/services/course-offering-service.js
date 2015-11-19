@@ -29,21 +29,22 @@
 		        .error(function (data, status){
 		        	deferred.reject(status);
 		        });
-			}/*else{
+			}else{
 				//Add User
 				user.firstName = "";
 				user.lastName = data[4];
 				user.middleName = "";
 				user.emailAddress = data[5];
 				
-				$http.post(course_url, data)
+				$http.post(user_url, user)
 	        	.success(function (data){
+	        		console.log(data);
 	        		deferred.resolve(data);
 		        })
 		        .error(function (data, status){
 		        	deferred.reject(status);
 		        });
-			}*/
+			}
 
 	        return deferred.promise;
         };

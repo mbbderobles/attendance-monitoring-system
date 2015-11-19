@@ -1,5 +1,6 @@
 var teacher = require('./../controllers/teacher');
 var course = require('./../controllers/course');
+var user = require('./../controllers/user');
 
 module.exports = function(router) {
 
@@ -20,6 +21,15 @@ module.exports = function(router) {
 		.get(course.findOne)
 		.put(course.update)
 		.delete(course.remove);
+
+	router.route('/api/users')
+		.get(user.find)
+		.post(user.insert);
+
+	router.route('/api/users/:id')
+		.get(user.findOne)
+		.put(user.update)
+		.delete(user.remove);
 
 	/*router.all('*', function (req, res, next) {
 		res.status(404).send('Nothing to do here.');

@@ -1,153 +1,153 @@
 CMSC 2,Introduction to the Internet,3
-E,1:00-2:00,WF,ICS MH,Manalang,malmanalang@gmail.com
-E-1L,10:00-1:00,Tue,PC Lab 2,Samaniego K,ksam@gmail.com
-E-2L,1:00-4:00,Tue,PC Lab 2,Queliste,mquel@gmail.com
-E-3L,4:00-7:00,Wed,PC Lab 2,Tan,ktan@gmail.com
-E-4L,10:00-1:00,Thu,PC Lab 2,Queliste,mquel@gmail.com
-E-5L,1:00-4:00,Thu,PC Lab 2,Queliste,mquel@gmail.com
-WX,2:00-3:00,TTh,ICS MH,Manalang,malmanalang@gmail.com
-WX-1L,4:00-7:00,Tue,PC Lab 2,Obrero,jobrero@gmail.com
-WX-2L,1:00-4:00,Wed,PC Lab 2,Aguirre,mgaguirre@gmail.com
-WX-3L,10:00-1:00,Thu,PC Lab 8,Obrero,jobrero@gmail.com
-WX-4L,4:00-7:00,Thu,PC Lab 2,Tan,ktan@gmail.com
-WX-5L,10:00-1:00,Fri,PC Lab 2,Aguirre,mgaguirre@gmail.com
-WX-6L,1:00-4:00,Fri,PC Lab 2,Aguirre,mgaguirre@gmail.com
-Y,4:00-5:00,TTh,ICS MH,Manalang,malmanalang@gmail.com
-Y-1L,10:00-1:00,Tue,PC Lab 3,Obrero,jobrero@gmail.com
-Y-2L,10:00-1:00,Wed,PC Lab 2,Obrero,jobrero@gmail.com
-Y-3L,1:00-4:00,Wed,PC Lab 3,Tan,ktan@gmail.com
-Y-4L,10:00-1:00,Thu,PC Lab 3,Samaniego K,ksam@gmail.com
-Y-5L,10:00-1:00,Fri,PC Lab 3,Queliste,mquel@gmail.com
-Y-6L,1:00-4:00,Fri,PC Lab 3,Samaniego K,ksam@gmail.com
+E,1:00-2:00,WF,ICS MH,Manalang,malmanalang@gmail.com,001
+E-1L,10:00-1:00,Tue,PC Lab 2,Samaniego K,ksam@gmail.com,002
+E-2L,1:00-4:00,Tue,PC Lab 2,Queliste,mquel@gmail.com,003
+E-3L,4:00-7:00,Wed,PC Lab 2,Tan,ktan@gmail.com,004
+E-4L,10:00-1:00,Thu,PC Lab 2,Queliste,mquel@gmail.com,003
+E-5L,1:00-4:00,Thu,PC Lab 2,Queliste,mquel@gmail.com,003
+WX,2:00-3:00,TTh,ICS MH,Manalang,malmanalang@gmail.com,001
+WX-1L,4:00-7:00,Tue,PC Lab 2,Obrero,jobrero@gmail.com,005
+WX-2L,1:00-4:00,Wed,PC Lab 2,Aguirre,mgaguirre@gmail.com,006
+WX-3L,10:00-1:00,Thu,PC Lab 8,Obrero,jobrero@gmail.com,005
+WX-4L,4:00-7:00,Thu,PC Lab 2,Tan,ktan@gmail.com,004
+WX-5L,10:00-1:00,Fri,PC Lab 2,Aguirre,mgaguirre@gmail.com,006
+WX-6L,1:00-4:00,Fri,PC Lab 2,Aguirre,mgaguirre@gmail.com,006
+Y,4:00-5:00,TTh,ICS MH,Manalang,malmanalang@gmail.com,001
+Y-1L,10:00-1:00,Tue,PC Lab 3,Obrero,jobrero@gmail.com,005
+Y-2L,10:00-1:00,Wed,PC Lab 2,Obrero,jobrero@gmail.com,005
+Y-3L,1:00-4:00,Wed,PC Lab 3,Tan,ktan@gmail.com,004
+Y-4L,10:00-1:00,Thu,PC Lab 3,Samaniego K,ksam@gmail.com,002
+Y-5L,10:00-1:00,Fri,PC Lab 3,Queliste,mquel@gmail.com,003
+Y-6L,1:00-4:00,Fri,PC Lab 3,Samaniego K,ksam@gmail.com,002
 CMSC 11,Introduction to Computer Science,3
-F,3:00-4:00,WF,ICS MH,Bawagan,jmbawagan@gmail.com
-F-1L,1:00-4:00,Tue,PC Lab 6,Angeles,angeles@gmail.com
-F-2L,4:00-7:00,Tue,PC Lab 6,Vega,kvega@gmail.com
-F-3L,10:00-1:00,Thu,PC Lab 6,Angeles,angeles@gmail.com
-F-4L,4:00-7:00,Thu,PC Lab 7,Ramirez,rramirez@gmail.com
-F-5L,4:00-7:00,Fri,PC Lab 6,Vega,kvega@gmail.com
-G,4:00-5:00,WF,ICS MH,Bawagan,jmbawagan@gmail.com
-G-1L,10:00-1:00,Tue,PC Lab 7,Tan,ktan@gmail.com
-G-2L,1:00-4:00,Tue,PC Lab 7,Tan,ktan@gmail.com
-G-3L,10:00-1:00,Wed,PC Lab 7,Samaniego K,ksam@gmail.com
-G-4L,10:00-1:00,Thu,PC Lab 7,Bawagan,jmbawagan@gmail.com
-G-5L,1:00-4:00,Thu,PC Lab 7,Angeles,angeles@gmail.com
-G-6L,10:00-1:00,Fri,PC Lab 7,Samaniego K,ksam@gmail.com
-S,7:00-8:00,TTh,ICS MH,de Robles MY,mybderobles@gmail.com
-S-1L,10:00-1:00,Tue,PC Lab 6,de Robles MY,mybderobles@gmail.com
-S-2L,10:00-1:00,Wed,PC Lab 6,Vega,kvega@gmail.com
-S-3L,1:00-4:00,Wed,PC Lab 6,Samaniego K,ksam@gmail.com
-S-4L,4:00-7:00,Thu,PC Lab 6,Drio,ddrio@gmail.com
-S-5L,10:00-1:00,Fri,PC Lab 6,Vega,kvega@gmail.com
-S-6L,1:00-4:00,Fri,PC Lab 6,Tan,ktan@gmail.com
+F,3:00-4:00,WF,ICS MH,Bawagan,jmbawagan@gmail.com,007
+F-1L,1:00-4:00,Tue,PC Lab 6,Angeles,angeles@gmail.com,008
+F-2L,4:00-7:00,Tue,PC Lab 6,Vega,kvega@gmail.com,009
+F-3L,10:00-1:00,Thu,PC Lab 6,Angeles,angeles@gmail.com,008
+F-4L,4:00-7:00,Thu,PC Lab 7,Ramirez,rramirez@gmail.com,010
+F-5L,4:00-7:00,Fri,PC Lab 6,Vega,kvega@gmail.com,009
+G,4:00-5:00,WF,ICS MH,Bawagan,jmbawagan@gmail.com,007
+G-1L,10:00-1:00,Tue,PC Lab 7,Tan,ktan@gmail.com,004
+G-2L,1:00-4:00,Tue,PC Lab 7,Tan,ktan@gmail.com,004
+G-3L,10:00-1:00,Wed,PC Lab 7,Samaniego K,ksam@gmail.com,002
+G-4L,10:00-1:00,Thu,PC Lab 7,Bawagan,jmbawagan@gmail.com,007
+G-5L,1:00-4:00,Thu,PC Lab 7,Angeles,angeles@gmail.com,008
+G-6L,10:00-1:00,Fri,PC Lab 7,Samaniego K,ksam@gmail.com,002
+S,7:00-8:00,TTh,ICS MH,de Robles MY,mybderobles@gmail.com,011
+S-1L,10:00-1:00,Tue,PC Lab 6,de Robles MY,mybderobles@gmail.com,011
+S-2L,10:00-1:00,Wed,PC Lab 6,Vega,kvega@gmail.com,009
+S-3L,1:00-4:00,Wed,PC Lab 6,Samaniego K,ksam@gmail.com,002
+S-4L,4:00-7:00,Thu,PC Lab 6,Drio,ddrio@gmail.com,012
+S-5L,10:00-1:00,Fri,PC Lab 6,Vega,kvega@gmail.com,009
+S-6L,1:00-4:00,Fri,PC Lab 6,Tan,ktan@gmail.com,004
 CMSC 21,Fundamentals of Programming,3
-U,10:00-11:00,TTh,ICS LH 3,Magno,kmagno@gmail.com
-U-1L,4:00-7:00,Tue,PC Lab 5,Pelaez,kbpelaez@gmail.com
-U-2L,10:00-1:00,Wed,PC Lab 5,Pelaez,kbpelaez@gmail.com
-U-3L,1:00-4:00,Fri,PC Lab 5,Pelaez,kbpelaez@gmail.com
-U-4L,4:00-7:00,Fri,PC Lab 5,Pelaez,kbpelaez@gmail.com
+U,10:00-11:00,TTh,ICS LH 3,Magno,kmagno@gmail.com,013
+U-1L,4:00-7:00,Tue,PC Lab 5,Pelaez,kbpelaez@gmail.com,014
+U-2L,10:00-1:00,Wed,PC Lab 5,Pelaez,kbpelaez@gmail.com,014
+U-3L,1:00-4:00,Fri,PC Lab 5,Pelaez,kbpelaez@gmail.com,014
+U-4L,4:00-7:00,Fri,PC Lab 5,Pelaez,kbpelaez@gmail.com,014
 CMSC 22,Object Oriented Programming,3
-X,3:00-4:00,TTh,ICS LH 3,Bulalacao,rbulacs@gmail.com
-X-1L,10:00-1:00,Tue,PC Lab 4,Alfonso,malfonso@gmail.com
-X-2L,4:00-7:00,Wed,PC Lab 7,Alfonso,malfonso@gmail.com
-X-3L,10:00-1:00,Thu,PC Lab 4,Alfonso,malfonso@gmail.com
-X-4L,10:00-1:00,Thu,PC Lab 9,Bulalacao,rbulacs@gmail.com
-Y,4:00-5:00,TTh,ICS LH 3,Bulalacao,rbulacs@gmail.com
-Y-1L,10:00-1:00,Tue,PC Lab 5,Jaen,kjaen@gmail.com
-Y-2L,1:00-4:00,Tue,PC Lab 3,Alfonso,malfonso@gmail.com
-Y-3L,10:00-1:00,Thu,PC Lab 5,Jaen,kjaen@gmail.com
-Y-4L,1:00-4:00,Thu,PC Lab 3,Jaen,kjaen@gmail.com
+X,3:00-4:00,TTh,ICS LH 3,Bulalacao,rbulacs@gmail.com,015
+X-1L,10:00-1:00,Tue,PC Lab 4,Alfonso,malfonso@gmail.com,016
+X-2L,4:00-7:00,Wed,PC Lab 7,Alfonso,malfonso@gmail.com,016
+X-3L,10:00-1:00,Thu,PC Lab 4,Alfonso,malfonso@gmail.com,016
+X-4L,10:00-1:00,Thu,PC Lab 9,Bulalacao,rbulacs@gmail.com,015
+Y,4:00-5:00,TTh,ICS LH 3,Bulalacao,rbulacs@gmail.com,015
+Y-1L,10:00-1:00,Tue,PC Lab 5,Jaen,kjaen@gmail.com,017
+Y-2L,1:00-4:00,Tue,PC Lab 3,Alfonso,malfonso@gmail.com,016
+Y-3L,10:00-1:00,Thu,PC Lab 5,Jaen,kjaen@gmail.com,017
+Y-4L,1:00-4:00,Thu,PC Lab 3,Jaen,kjaen@gmail.com,017
 CMSC 56,Discrete Mathematical Structures in Computer Science I,3
-ST,8:00-9:00,TTh,ICS LH 3,Danila,ldanila@gmail.com
-ST-1L,10:00-1:00,Tue,ICS LH 4,Aguila,ijaguila@gmail.com
-ST-2L,4:00-7:00,Wed,ICS LH 4,Angeles,angeles@gmail.com
-ST-3L,4:00-7:00,Thu,ICS LH 4,Aguila,ijaguila@gmail.com
-T,9:00-10:00,TTh,ICS LH 3,Danila,ldanila@gmail.com
-T-1L,4:00-7:00,Tue,ICS LH 4,Lactuan,lklactuan@gmail.com
-T-2L,10:00-1:00,Wed,ICS LH 4,Angeles,angeles@gmail.com
-T-3L,10:00-1:00,Thu,ICS LH 4,Lactuan,lklactuan@gmail.com
+ST,8:00-9:00,TTh,ICS LH 3,Danila,ldanila@gmail.com,018
+ST-1L,10:00-1:00,Tue,ICS LH 4,Aguila,ijaguila@gmail.com,019
+ST-2L,4:00-7:00,Wed,ICS LH 4,Angeles,angeles@gmail.com,008
+ST-3L,4:00-7:00,Thu,ICS LH 4,Aguila,ijaguila@gmail.com,019
+T,9:00-10:00,TTh,ICS LH 3,Danila,ldanila@gmail.com,018
+T-1L,4:00-7:00,Tue,ICS LH 4,Lactuan,lklactuan@gmail.com,020
+T-2L,10:00-1:00,Wed,ICS LH 4,Angeles,angeles@gmail.com,008
+T-3L,10:00-1:00,Thu,ICS LH 4,Lactuan,lklactuan@gmail.com,020
 CMSC 57,Discrete Mathematical Structures in Computer Science II,3
-D,12:00-1:00,WF,ICS LH 3,Ramirez,rramirez@gmail.com
-D-1L,1:00-4:00,Wed,ICS LH 4,Ramirez,rramirez@gmail.com
+D,12:00-1:00,WF,ICS LH 3,Ramirez,rramirez@gmail.com,010
+D-1L,1:00-4:00,Wed,ICS LH 4,Ramirez,rramirez@gmail.com,010
 CMSC 100,Web Programming,3
-UV,11:00-12:00,TTh,ICS MH,Sandoval,mmmsandoval@gmail.com
-UV-1L,1:00-4:00,Tue,PC Lab 8,Sandoval,mmmsandoval@gmail.com
-UV-2L,1:00-4:00,Wed,PC Lab 8,Alfonso,malfonso@gmail.com
-UV-3L,1:00-4:00,Fri,PC Lab 8,Alfonso,malfonso@gmail.com
+UV,11:00-12:00,TTh,ICS MH,Sandoval,mmmsandoval@gmail.com,021
+UV-1L,1:00-4:00,Tue,PC Lab 8,Sandoval,mmmsandoval@gmail.com,021
+UV-2L,1:00-4:00,Wed,PC Lab 8,Alfonso,malfonso@gmail.com,016
+UV-3L,1:00-4:00,Fri,PC Lab 8,Alfonso,malfonso@gmail.com,016
 CMSC 123,Data Structures,3
-CD,11:00-12:00,WF,ICS MH,Ramirez,rramirez@gmail.com
-CD-1L,10:00-1:00,Tue,PC Lab 8,de Robles MBB,mbbderobles@gmail.com
-CD-2L,4:00-7:00,Tue,PC Lab 8,de Robles MBB,mbbderobles@gmail.com
-CD-3L,4:00-7:00,Wed,PC Lab 8,Queliste,mquel@gmail.com
-CD-4L,1:00-4:00,Thu,PC Lab 8,de Robles MBB,mbbderobles@gmail.com
-CD-5L,4:00-7:00,Thu,PC Lab 9,de Robles MBB,mbbderobles@gmail.com
-CD-6L,4:00-7:00,Fri,PC Lab 8,Queliste,mquel@gmail.com
+CD,11:00-12:00,WF,ICS MH,Ramirez,rramirez@gmail.com,010
+CD-1L,10:00-1:00,Tue,PC Lab 8,de Robles MBB,mbbderobles@gmail.com,022
+CD-2L,4:00-7:00,Tue,PC Lab 8,de Robles MBB,mbbderobles@gmail.com,022
+CD-3L,4:00-7:00,Wed,PC Lab 8,Queliste,mquel@gmail.com,003
+CD-4L,1:00-4:00,Thu,PC Lab 8,de Robles MBB,mbbderobles@gmail.com,022
+CD-5L,4:00-7:00,Thu,PC Lab 9,de Robles MBB,mbbderobles@gmail.com,022
+CD-6L,4:00-7:00,Fri,PC Lab 8,Queliste,mquel@gmail.com,003
 CMSC 124,Design and Implementation of Programming Languages,3
-S,7:00-8:00,TTh,ICS GS Room,Sandoval,mmmsandoval@gmail.com
-S-1L,7:00-10:00,Wed,PC Lab 4,Sandoval,mmmsandoval@gmail.com
+S,7:00-8:00,TTh,ICS GS Room,Sandoval,mmmsandoval@gmail.com,021
+S-1L,7:00-10:00,Wed,PC Lab 4,Sandoval,mmmsandoval@gmail.com,021
 CMSC 125,Operating Systems,3
-ST,8:00-9:00,TTh,ICS MH,Encinas,jencinas@gmail.com
-ST-1L,1:00-4:00,Tue,PC Lab 9,Encinas,jencinas@gmail.com
-ST-2L,4:00-7:00,Tue,PC Lab 9,Tandoc,ftandoc@gmail.com
-ST-3L,10:00-1:00,Wed,PC Lab 9,Encinas,jencinas@gmail.com
-ST-4L,1:00-4:00,Wed,PC Lab 9,Lactuan,lklactuan@gmail.com
-ST-6L,1:00-4:00,Thu,PC Lab 9,Encinas,jencinas@gmail.com
-ST-7L,10:00-1:00,Fri,PC Lab 9,Lactuan,lklactuan@gmail.com
-ST-8L,1:00-4:00,Fri,PC Lab 9,Lactuan,lklactuan@gmail.com
-ST-9L,1:00-4:00,Mon,PC Lab 9,Tandoc,ftandoc@gmail.com
+ST,8:00-9:00,TTh,ICS MH,Encinas,jencinas@gmail.com,023
+ST-1L,1:00-4:00,Tue,PC Lab 9,Encinas,jencinas@gmail.com,023
+ST-2L,4:00-7:00,Tue,PC Lab 9,Tandoc,ftandoc@gmail.com,024
+ST-3L,10:00-1:00,Wed,PC Lab 9,Encinas,jencinas@gmail.com,023
+ST-4L,1:00-4:00,Wed,PC Lab 9,Lactuan,lklactuan@gmail.com,020
+ST-6L,1:00-4:00,Thu,PC Lab 9,Encinas,jencinas@gmail.com,023
+ST-7L,10:00-1:00,Fri,PC Lab 9,Lactuan,lklactuan@gmail.com,020
+ST-8L,1:00-4:00,Fri,PC Lab 9,Lactuan,lklactuan@gmail.com,020
+ST-9L,1:00-4:00,Mon,PC Lab 9,Tandoc,ftandoc@gmail.com,024
 CMSC 128,Introduction to Software Engineering,3
-AB,8:00-9:00,WF,ICS MH,Recario,rrecario@gmail.com
-AB-1L,1:00-4:00,Tue,PC Lab 4,Bautista,kbautista@gmail.com
-AB-2L,4:00-7:00,Tue,PC Lab 4,Bautista,kbautista@gmail.com
-AB-3L,10:00-1:00,Wed,PC Lab 4,de Robles MBB,mbbderobles@gmail.com
-AB-4L,4:00-7:00,Wed,PC Lab 4,de Robles MBB,mbbderobles@gmail.com
-AB-5L,4:00-7:00,Wed,PC Lab 5,Recario,rrecario@gmail.com
-AB-6L,1:00-4:00,Thu,PC Lab 4,Bautista,kbautista@gmail.com
-AB-7L,4:00-7:00,Fri,PC Lab 4,Recario,rrecario@gmail.com
+AB,8:00-9:00,WF,ICS MH,Recario,rrecario@gmail.com,026
+AB-1L,1:00-4:00,Tue,PC Lab 4,Bautista,kbautista@gmail.com,025
+AB-2L,4:00-7:00,Tue,PC Lab 4,Bautista,kbautista@gmail.com,025
+AB-3L,10:00-1:00,Wed,PC Lab 4,de Robles MBB,mbbderobles@gmail.com,022
+AB-4L,4:00-7:00,Wed,PC Lab 4,de Robles MBB,mbbderobles@gmail.com,022
+AB-5L,4:00-7:00,Wed,PC Lab 5,Recario,rrecario@gmail.com,026
+AB-6L,1:00-4:00,Thu,PC Lab 4,Bautista,kbautista@gmail.com,025
+AB-7L,4:00-7:00,Fri,PC Lab 4,Recario,rrecario@gmail.com,026
 CMSC 129,Principles of Compiler Design,3
-EF,2:00-4:00,Mon,ICS Conf Room,Monserrat,tjmonserrat@gmail.com
-EF-1L,4:00-7:00,Mon,PhySci C-100,Monserrat,tjmonserrat@gmail.com
+EF,2:00-4:00,Mon,ICS Conf Room,Monserrat,tjmonserrat@gmail.com,027
+EF-1L,4:00-7:00,Mon,PhySci C-100,Monserrat,tjmonserrat@gmail.com,027
 CMSC 130,Logic Design and Digital Computer Circuits,3
-B,9:00-10:00,WF,ICS MH,Danila,ldanila@gmail.com
-B-1L,1:00-4:00,Tue,ICS LH 4,Jaen,kjaen@gmail.com
-B-2L,1:00-4:00,Wed,ICS LH 3,Danila,ldanila@gmail.com
-B-3L,4:00-7:00,Wed,ICS LH 3,Jaen,kjaen@gmail.com
-B-4L,1:00-4:00,Thu,ICS LH 4,Danila,ldanila@gmail.com
-B-5L,1:00-4:00,Fri,ICS LH 4,Jaen,kjaen@gmail.com
+B,9:00-10:00,WF,ICS MH,Danila,ldanila@gmail.com,018
+B-1L,1:00-4:00,Tue,ICS LH 4,Jaen,kjaen@gmail.com,017
+B-2L,1:00-4:00,Wed,ICS LH 3,Danila,ldanila@gmail.com,018
+B-3L,4:00-7:00,Wed,ICS LH 3,Jaen,kjaen@gmail.com,017
+B-4L,1:00-4:00,Thu,ICS LH 4,Danila,ldanila@gmail.com,018
+B-5L,1:00-4:00,Fri,ICS LH 4,Jaen,kjaen@gmail.com,017
 CMSC 132,Computer Architecture,3
-T,9:00-10:00,TTh,ICS MH,Recario,rrecario@gmail.com
-T-1L,4:00-7:00,Tue,PC Lab 7,Aguila,ijaguila@gmail.com
-T-2L,1:00-4:00,Wed,PC Lab 7,Bautista,kbautista@gmail.com
-T-3L,4:00-7:00,Wed,PC Lab 6,Bautista,kbautista@gmail.com
-T-4L,1:00-4:00,Thu,PC Lab 6,Aguila,ijaguila@gmail.com
-T-5L,4:00-7:00,Thu,PC Lab 5,Bautista,kbautista@gmail.com
-T-6L,1:00-4:00,Fri,PC Lab 7,Aguila,ijaguila@gmail.com
+T,9:00-10:00,TTh,ICS MH,Recario,rrecario@gmail.com,026
+T-1L,4:00-7:00,Tue,PC Lab 7,Aguila,ijaguila@gmail.com,019
+T-2L,1:00-4:00,Wed,PC Lab 7,Bautista,kbautista@gmail.com,025
+T-3L,4:00-7:00,Wed,PC Lab 6,Bautista,kbautista@gmail.com,025
+T-4L,1:00-4:00,Thu,PC Lab 6,Aguila,ijaguila@gmail.com,019
+T-5L,4:00-7:00,Thu,PC Lab 5,Bautista,kbautista@gmail.com,025
+T-6L,1:00-4:00,Fri,PC Lab 7,Aguila,ijaguila@gmail.com,019
 CMSC 137,Data Communications and Networking,3
-CD,10:00-12:00,Mon,ICS LH 4,Maniaol,smaniaol@gmail.com
-CD-1L,1:00-4:00,Mon,PC Lab 8,Alfonso,malfonso@gmail.com
+CD,10:00-12:00,Mon,ICS LH 4,Maniaol,smaniaol@gmail.com,028
+CD-1L,1:00-4:00,Mon,PC Lab 8,Alfonso,malfonso@gmail.com,016
 CMSC 141,Automata and Language Theory,3
-D,12:00-1:00,WF,ICS MH,Samaniego J,jimsam@gmail.com
-D-1L,1:00-4:00,Tue,PC Lab 5,Tandoc,ftandoc@gmail.com
-D-2L,1:00-4:00,Thu,PC Lab 5,Tandoc,ftandoc@gmail.com
+D,12:00-1:00,WF,ICS MH,Samaniego J,jimsam@gmail.com,029
+D-1L,1:00-4:00,Tue,PC Lab 5,Tandoc,ftandoc@gmail.com,024
+D-2L,1:00-4:00,Thu,PC Lab 5,Tandoc,ftandoc@gmail.com,024
 CMSC 142,Design and Analysis of Algorithms,3
-C,10:00-11:00,WF,ICS MH,de Robles MY,mybderobles@gmail.com
-C-1L,1:00-4:00,Wed,PC Lab 4,de Robles MY,mybderobles@gmail.com
-C-2L,4:00-7:00,Wed,PC Lab 3,Peralta,kperalta@gmail.com
-C-3L,4:00-7:00,Thu,PC Lab 4,Bawagan,jmbawagan@gmail.com
-C-4L,1:00-4:00,Fri,PC Lab 4,Ramirez,rramirez@gmail.com
+C,10:00-11:00,WF,ICS MH,de Robles MY,mybderobles@gmail.com,011
+C-1L,1:00-4:00,Wed,PC Lab 4,de Robles MY,mybderobles@gmail.com,011
+C-2L,4:00-7:00,Wed,PC Lab 3,Peralta,kperalta@gmail.com,030
+C-3L,4:00-7:00,Thu,PC Lab 4,Bawagan,jmbawagan@gmail.com,007
+C-4L,1:00-4:00,Fri,PC Lab 4,Ramirez,rramirez@gmail.com,010
 CMSC 161,Interactive Computer Graphics,3
-UV,11:00-12:00,TTh,ICS LH 3,Plaras,jplaras@gmail.com
-UV-1L,1:00-4:00,Wed,PC Lab 5,Plaras,jplaras@gmail.com
-UV-2L,4:00-7:00,Thu,PC Lab 8,Plaras,jplaras@gmail.com
-UV-3L,10:00-1:00,Fri,PC Lab 5,Plaras,jplaras@gmail.com
+UV,11:00-12:00,TTh,ICS LH 3,Plaras,jplaras@gmail.com,031
+UV-1L,1:00-4:00,Wed,PC Lab 5,Plaras,jplaras@gmail.com,031
+UV-2L,4:00-7:00,Thu,PC Lab 8,Plaras,jplaras@gmail.com,031
+UV-3L,10:00-1:00,Fri,PC Lab 5,Plaras,jplaras@gmail.com,031
 CMSC 170,Introduction to Artificial Intelligence,3
-U,10:00-11:00,TTh,ICS MH,Peralta,kperalta@gmail.com
-U-1L,4:00-7:00,Tue,PC Lab 3,Peralta,kperalta@gmail.com
-U-2L,10:00-1:00,Wed,PC Lab 3,Peralta,kperalta@gmail.com
-U-3L,10:00-1:00,Wed,PC Lab 8,Tandoc,ftandoc@gmail.com
-U-4L,4:00-7:00,Thu,PC Lab 3,Obrero,jobrero@gmail.com
-U-5L,10:00-1:00,Fri,PC Lab 4,Tandoc,ftandoc@gmail.com
-U-6L,10:00-1:00,Fri,PC Lab 8,Obrero,jobrero@gmail.com
+U,10:00-11:00,TTh,ICS MH,Peralta,kperalta@gmail.com,030
+U-1L,4:00-7:00,Tue,PC Lab 3,Peralta,kperalta@gmail.com,030
+U-2L,10:00-1:00,Wed,PC Lab 3,Peralta,kperalta@gmail.com,030
+U-3L,10:00-1:00,Wed,PC Lab 8,Tandoc,ftandoc@gmail.com,024
+U-4L,4:00-7:00,Thu,PC Lab 3,Obrero,jobrero@gmail.com,005
+U-5L,10:00-1:00,Fri,PC Lab 4,Tandoc,ftandoc@gmail.com,024
+U-6L,10:00-1:00,Fri,PC Lab 8,Obrero,jobrero@gmail.com,005
 CMSC 172,Robot Modelling,3
-UV,10:00-12:00,Tue,ICS GS Room,Pabico,jppabico@gmail.com
-UV-1L,1:00-4:00,Tue,PC Lab 1,Pabico,jppabico@gmail.com
+UV,10:00-12:00,Tue,ICS GS Room,Pabico,jppabico@gmail.com,032
+UV-1L,1:00-4:00,Tue,PC Lab 1,Pabico,jppabico@gmail.com,032
