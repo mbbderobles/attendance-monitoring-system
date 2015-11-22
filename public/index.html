@@ -4,10 +4,12 @@
         <title>Attendance Monitoring System</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
+        <meta name="google-signin-client_id" content="740121264589-1gm3r2gtlb391so2d7ustvgmmmnncrsl.apps.googleusercontent.com">
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles/custom.css">
+        <script src='https://apis.google.com/js/client:plusone.js'></script>
     </head>
-    <body ng-app="myApp">
+    <body ng-app="myApp" ng-controller="AuthCtrl">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -20,10 +22,11 @@
                 <a class="navbar-brand" href="#">Attendance Monitoring System</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Login</a></li>
+                    <ul class="nav navbar-nav" ng-switch="signedIn">
+                        <li><a href="#/">Home</a></li>
                         <li><a href="#">About Us</a></li>
+                        <li ng-switch-when='true'><a href="#" onClick="gapi.auth.signOut()">Logout</a></li>
+                        <li><div id="my-signin2"></div></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -40,7 +43,6 @@
         <div class="container" ng-view="">
         </div> <!-- /container -->
 
-
         <!--Scripts-->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
@@ -51,5 +53,6 @@
         <script src="app.js"></script>
         <script src="controllers/course-offering-controller.js"></script>
         <script src="services/course-offering-service.js"></script>
+        <script src="controllers/auth-controller.js"></script>
     </body>
 </html>
