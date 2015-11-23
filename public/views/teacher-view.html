@@ -1,0 +1,55 @@
+<h1> Teachers </h1>
+<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addT = !addT"><span class="glyphicon glyphicon-plus"></span></button>
+
+<div class="default" ng-show="addT" style="margin: 0 auto">
+	<form ng-submit="AddTeacher()">
+		<input type="text" placeholder="Employee Id" ng-model="newTeacher.employeeId" /> <br/>
+		<input type="text" placeholder="Last Name" ng-model="newUser.lastName" /> <br/>
+		<input type="text" placeholder="First Name" ng-model="newUser.firstName" /> <br/>
+		<input type="text" placeholder="Middle Name" ng-model="newUser.middleName" /> <br/>
+		<input type="text" placeholder="Email Address" ng-model="newUser.emailAddress" /> <br/>
+		<input type="text" placeholder="Unit" ng-model="newTeacher.unit" /> <br/>
+		<input type="text" placeholder="Position" ng-model="newTeacher.position" /> <br/>
+		<input type="submit" value="Add Teacher" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<div class="default" ng-show="editT" style="margin: 0 auto">
+	<form ng-submit="EditTeacher()">
+		<input type="text" placeholder="Employee Id" ng-model="editTeacher.employeeId" /> <br/>
+		<input type="text" placeholder="Last Name" ng-model="editUser.lastName" /> <br/>
+		<input type="text" placeholder="First Name" ng-model="editUser.firstName" /> <br/>
+		<input type="text" placeholder="Middle Name" ng-model="editUser.middleName" /> <br/>
+		<input type="text" placeholder="Email Address" ng-model="editUser.emailAddress" /> <br/>
+		<input type="text" placeholder="Unit" ng-model="editTeacher.unit" /> <br/>
+		<input type="text" placeholder="Position" ng-model="editTeacher.position" /> <br/>
+		<input type="submit" value="Edit Teacher" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Employee Id</th>
+			<th>Last Name</th>
+			<th>First Name</th>
+			<th>Middle Name</th>
+			<th>Email Address</th>
+			<th>Unit</th>
+			<th>Position</th>
+			<th>Edit / Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="teacher in teachers">
+			<td>{{teacher.employeeId}}</td>
+			<td>{{teacher.lastName}}</td>
+			<td>{{teacher.firstName}}</td>
+			<td>{{teacher.middleName}}</td>
+			<td>{{teacher.emailAddress}}</td>
+			<td>{{teacher.unit}}</td>
+			<td>{{teacher.position}}</td>
+			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewTeacher(teacher.id)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteTeacher(teacher.id)"><span class="glyphicon glyphicon-remove"></span></button></td>
+		</tr>
+	</tbody>
+</table>

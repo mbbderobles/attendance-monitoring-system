@@ -25,7 +25,7 @@ exports.insert = function(req, res, next) {
 		if (err) return next(err);
 		selectOne(row.insertId, function(newRow) {
 			if (!newRow) {
-				res.status(552).send('course ('+ row.insertId +') was not created.');
+				res.status(552).send('Course ('+ row.insertId +') was not created.');
 			} else {
 				res.send(newRow);
 			}
@@ -39,7 +39,7 @@ exports.update = function(req, res, next) {
 		if (err) return next(err);
 		selectOne(req.params.id, function(updatedRow) {
 			if (!updatedRow) {
-				res.status(553).send('course ('+req.params.id+') was not updated.');
+				res.status(553).send('Course ('+req.params.id+') was not updated.');
 			} else {
 				res.send(updatedRow);
 			}
@@ -52,7 +52,7 @@ exports.remove = function(req, res, next) {
 	db.query("DELETE FROM course WHERE courseId=?", [req.params.id], function(err, row) {
 		if (err) return next(err);
 		if (row.affectedRows === 0) {
-			res.send(554, {message: 'course ('+req.params.id+') was not removed.'});
+			res.send(554, {message: 'Course ('+req.params.id+') was not removed.'});
 		} else {
 			res.send(row);
 		}

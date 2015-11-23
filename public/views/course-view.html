@@ -1,0 +1,35 @@
+<h1> Courses </h1>
+<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addCrs = !addCrs"><span class="glyphicon glyphicon-plus"></span></button>
+
+<div class="default" ng-show="addCrs" style="margin: 0 auto">
+	<form ng-submit="AddCourse()">
+		<input type="text" placeholder="Course Number" ng-model="newCourse.courseNum" /> <br/>
+		<input type="text" placeholder="Course Title" ng-model="newCourse.courseTitle" /> <br/>
+		<input type="submit" value="Add Course" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<div class="default" ng-show="editCrs" style="margin: 0 auto">
+	<form ng-submit="EditCourse()">
+		<input type="text" placeholder="Course Number" ng-model="editCourse.courseNum" /> <br/>
+		<input type="text" placeholder="Course Title" ng-model="editUser.courseTitle" /> <br/>
+		<input type="submit" value="Edit Course" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Course Number</th>
+			<th>Course Title</th>
+			<th>Edit / Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="course in courses">
+			<td><a href="/#/sections/{{course.courseId}}">{{course.courseNum}}</a></td>
+			<td>{{course.courseTitle}}</td>
+			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewCourse(course.courseId)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteCourse(course.courseId)"><span class="glyphicon glyphicon-remove"></span></button></td>
+		</tr>
+	</tbody>
+</table>

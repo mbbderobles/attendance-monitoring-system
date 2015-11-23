@@ -1,0 +1,51 @@
+<h1> Sections </h1>
+<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addSBC = !addSBC"><span class="glyphicon glyphicon-plus"></span></button>
+
+<div class="default" ng-show="addSBC" style="margin: 0 auto">
+	<form ng-submit="AddSection()">
+		<input type="text" placeholder="Section Code" ng-model="newSection.sectionCode" /> <br/>
+		<input type="text" placeholder="Instructor" ng-model="newSection.employeeId" /> <br/>
+		<input type="text" placeholder="Day" ng-model="newSection.day" /> <br/>
+		<input type="text" placeholder="Time" ng-model="newSection.time" /> <br/>
+		<input type="text" placeholder="Room" ng-model="newSection.room" /> <br/>
+		<input type="submit" value="Add Section" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<div class="default" ng-show="editSBC" style="margin: 0 auto">
+	<form ng-submit="EditSection()">
+		<input type="text" placeholder="Section Code" ng-model="editSection.sectionCode" /> <br/>
+		<input type="text" placeholder="Instructor" ng-model="editSection.employeeId" /> <br/>
+		<input type="text" placeholder="Day" ng-model="editSection.day" /> <br/>
+		<input type="text" placeholder="Time" ng-model="editSection.time" /> <br/>
+		<input type="text" placeholder="Year" ng-model="editSection.year" /> <br/>
+		<input type="submit" value="Edit Section" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Course Number</th>
+			<th>Course Title</th>
+			<th>Section Code</th>
+			<th>Instructor</th>
+			<th>Day</th>
+			<th>Time</th>
+			<th>Room</th>
+			<th>Edit / Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="section in sections">
+			<td>{{section.courseNum}}</td>
+			<td>{{section.courseTitle}}</td>
+			<td>{{section.sectionCode}}</td>
+			<td>{{section.employeeId}}</td>
+			<td>{{section.day}}</td>
+			<td>{{section.time}}</td>
+			<td>{{section.room}}</td>
+			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewSection(section.sectionId)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteSection(section.sectionId)"><span class="glyphicon glyphicon-remove"></span></button></td>
+		</tr>
+	</tbody>
+</table>

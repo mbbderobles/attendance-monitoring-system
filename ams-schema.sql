@@ -35,7 +35,7 @@ CREATE TABLE teacher(
 DROP TABLE IF EXISTS course;
 CREATE TABLE course(
     courseId int(10) AUTO_INCREMENT,
-    courseNum varchar(7) NOT NULL,
+    courseNum varchar(10) NOT NULL,
     courseTitle varchar(256) NOT NULL,
     PRIMARY KEY(courseId)
 );
@@ -51,8 +51,8 @@ CREATE TABLE section(
     room varchar(20) NOT NULL,
     semester varchar(1) NOT NULL,
     year varchar(9) NOT NULL,
-    maxAllowedAbsences int,
-    combinedAbsences int,
+    maxAllowedAbsences int DEFAULT 0,
+    combinedAbsences int DEFAULT 0,
     PRIMARY KEY(sectionId)
 );
 

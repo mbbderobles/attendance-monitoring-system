@@ -1,0 +1,61 @@
+
+
+<h1> Students </h1>
+<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addS = !addS"><span class="glyphicon glyphicon-plus"></span></button>
+
+<div class="default" ng-show="addS" style="margin: 0 auto">
+	<form ng-submit="AddStudent()">
+		<input type="text" placeholder="Student Number" ng-model="newStudent.studentNumber" /> <br/>
+		<input type="text" placeholder="Last Name" ng-model="newUser.lastName" /> <br/>
+		<input type="text" placeholder="First Name" ng-model="newUser.firstName" /> <br/>
+		<input type="text" placeholder="Middle Name" ng-model="newUser.middleName" /> <br/>
+		<input type="text" placeholder="Email Address" ng-model="newUser.emailAddress" /> <br/>
+		<input type="radio" ng-model="newStudent.sex" value="F"> Female <input type="radio" ng-model="newStudent.sex" value="M"> Male <br/>
+		<input type="text" placeholder="Degree" ng-model="newStudent.degree" /> <br/>
+		<input type="text" placeholder="College" ng-model="newStudent.college" /> <br/>
+		<input type="submit" value="Add Student" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<div class="default" ng-show="editS" style="margin: 0 auto">
+	<form ng-submit="EditStudent()">
+		<input type="text" placeholder="Student Number" ng-model="editStudent.studentNumber" /> <br/>
+		<input type="text" placeholder="Last Name" ng-model="editUser.lastName" /> <br/>
+		<input type="text" placeholder="First Name" ng-model="editUser.firstName" /> <br/>
+		<input type="text" placeholder="Middle Name" ng-model="editUser.middleName" /> <br/>
+		<input type="text" placeholder="Email Address" ng-model="editUser.emailAddress" /> <br/>
+		<input type="radio" ng-model="editStudent.sex" value="F"> Female <input type="radio" ng-model="editStudent.sex" value="M"> Male <br/>
+		<input type="text" placeholder="Degree" ng-model="editStudent.degree" /> <br/>
+		<input type="text" placeholder="College" ng-model="editStudent.college" /> <br/>
+		<input type="submit" value="Edit Student" class="btn btn-primary btn-xs" />
+	</form>
+</div>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Student Number</th>
+			<th>Last Name</th>
+			<th>First Name</th>
+			<th>Middle Name</th>
+			<th>Email Address</th>
+			<th>Sex</th>
+			<th>Degree</th>
+			<th>College</th>
+			<th>Edit / Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="student in students">
+			<td>{{student.studentNumber}}</td>
+			<td>{{student.lastName}}</td>
+			<td>{{student.firstName}}</td>
+			<td>{{student.middleName}}</td>
+			<td>{{student.emailAddress}}</td>
+			<td>{{student.sex}}</td>
+			<td>{{student.degree}}</td>
+			<td>{{student.college}}</td>
+			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewStudent(student.id)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteStudent(student.id)"><span class="glyphicon glyphicon-remove"></span></button></td>
+		</tr>
+	</tbody>
+</table>

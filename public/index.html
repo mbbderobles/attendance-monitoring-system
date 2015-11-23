@@ -21,9 +21,12 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Home</a></li>
                         <li><a href="#">Login</a></li>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="/#/course-offering">Course Offering</a></li>
+                        <li><a href="/#/courses">Courses</a></li>
+                        <li><a href="/#/teachers">Teachers</a></li>
+                        <li><a href="/#/students">Students</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -32,8 +35,7 @@
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <div class="container">
-                <h1>Hello, world!</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                
             </div>
         </div>
         
@@ -45,11 +47,20 @@
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/angular/angular.js"></script>
         <script src="bower_components/json3/lib/json3.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="bower_components/angular-csv-import-tmp/dist/angular-csv-import.js"></script>
         <script src="app.js"></script>
         <script src="controllers/course-offering-controller.js"></script>
+        <script src="controllers/course-controller.js"></script>
+        <script src="controllers/teacher-controller.js"></script>
+        <script src="controllers/student-controller.js"></script>
+        <script src="controllers/section-by-course-controller.js"></script>
         <script src="services/course-offering-service.js"></script>
+        <script src="services/course-service.js"></script>
+        <script src="services/teacher-service.js"></script>
+        <script src="services/student-service.js"></script>
+        <script src="services/section-by-course-service.js"></script>
     </body>
 </html>
