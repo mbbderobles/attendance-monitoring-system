@@ -4,10 +4,12 @@
         <title>Attendance Monitoring System</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
+        <meta name="google-signin-client_id" content="740121264589-1gm3r2gtlb391so2d7ustvgmmmnncrsl.apps.googleusercontent.com">
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles/custom.css">
+        <script src='https://apis.google.com/js/client:plusone.js'></script>
     </head>
-    <body ng-app="myApp">
+    <body ng-app="myApp" ng-controller="AuthCtrl">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -22,11 +24,12 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Login</a></li>
                         <li><a href="/#/course-offering">Course Offering</a></li>
                         <li><a href="/#/courses">Courses</a></li>
                         <li><a href="/#/teachers">Teachers</a></li>
                         <li><a href="/#/students">Students</a></li>
+                        <li ng-switch-when='true'><a href="#" onClick="gapi.auth.signOut()">Logout</a></li>
+                        <li><div id="my-signin2"></div></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -41,7 +44,6 @@
         
         <div class="container" ng-view="">
         </div> <!-- /container -->
-
 
         <!--Scripts-->
         <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -62,5 +64,6 @@
         <script src="services/teacher-service.js"></script>
         <script src="services/student-service.js"></script>
         <script src="services/section-by-course-service.js"></script>
+        <script src="controllers/auth-controller.js"></script>
     </body>
 </html>
