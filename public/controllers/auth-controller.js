@@ -26,6 +26,12 @@ function renderButton() {
     .controller('AuthCtrl', ['$scope', function($scope){
         $scope.signedIn = false;
         
+        $scope.logout = function(){
+            $scope.user = '';
+            $scope.signedIn = false;
+            gapi.auth.signOut();
+        }
+
         $scope.userInfoCallback = function(userInfo){
             $scope.user = userInfo['displayName'];
         };

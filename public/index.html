@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="styles/custom.css">
         <script src='https://apis.google.com/js/client:plusone.js'></script>
     </head>
-    <body ng-app="myApp" ng-controller="AuthCtrl">
+    <body ng-app="myApp" ng-controller='AuthCtrl'>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -22,13 +22,13 @@
                 <a class="navbar-brand" href="#">Attendance Monitoring System</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Home</a></li>
+                    <ul class="nav navbar-nav" ng-switch="signedIn">
+                        <li><a href="#/">Home</a></li>
                         <li><a href="/#/course-offering">Course Offering</a></li>
                         <li><a href="/#/courses">Courses</a></li>
                         <li><a href="/#/teachers">Teachers</a></li>
                         <li><a href="/#/students">Students</a></li>
-                        <li ng-switch-when='true'><a href="#" onClick="gapi.auth.signOut()">Logout</a></li>
+                        <li ng-switch-when='true'><a href="#/" ng-click="logout()">Logout</a></li>
                         <li><div id="my-signin2"></div></li>
                     </ul>
                 </div><!--/.nav-collapse -->
