@@ -12,6 +12,18 @@ CREATE TABLE user(
     PRIMARY KEY(id)
 );
 
+DROP TABLE IF EXISTS admin;
+CREATE TABLE admin(
+    id int(11) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+INSERT INTO user (firstName, middleName, lastName, emailAddress) VALUES ("Marie Betel", "Baduel", "de Robles", "mbbderobles@gmail.com");
+INSERT INTO admin (id) SELECT id FROM user WHERE emailAddress="mbbderobles@gmail.com";
+INSERT INTO user (firstName, middleName, lastName, emailAddress) VALUES ("Shiela Kathleen", "Lanuzo", "Borja", "shielakathleenborja@gmail.com");
+INSERT INTO admin (id) SELECT id FROM user WHERE emailAddress="shielakathleenborja@gmail.com";
+INSERT INTO user (firstName, middleName, lastName, emailAddress) VALUES ("Mark Froilan", "Bunao", "Tandoc", "markfroilantandoc@gmail.com");
+INSERT INTO admin (id) SELECT id FROM user WHERE emailAddress="markfroilantandoc@gmail.com";
 
 DROP TABLE IF EXISTS student;
 CREATE TABLE student(
@@ -55,6 +67,14 @@ CREATE TABLE section(
     combinedAbsences int DEFAULT 0,
     PRIMARY KEY(sectionId)
 );
+
+DROP TABLE IF EXISTS student_section;
+CREATE TABLE student_section(
+    id int(11) NOT NULL,
+    sectionId int(10) NOT NULL,
+    PRIMARY KEY(id, sectionId)
+);
+
 
 DROP TABLE IF EXISTS attendance_record;
 CREATE TABLE attendance_record(

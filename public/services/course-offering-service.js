@@ -34,10 +34,12 @@
 					$http.post(course_url,course)
 					.then(function(data3){
 						cId = data3.data.courseId;
+						console.log("2 "+cId);
 					});
 
 					return;
 				}else{
+					console.log(cId);
 					user.lastName = file[4];
 					user.middleName = "";
 					user.firstName = "";
@@ -50,8 +52,10 @@
 						teacher.position = "";
 						$http.post(teacher_url,teacher)
 						.then(function(data2){
+
 							section.sectionCode = file[0];
 							section.employeeId = data2.data.employeeId;
+							
 							section.courseId = cId;
 							section.day = file[2];
 							section.time = file[1];
