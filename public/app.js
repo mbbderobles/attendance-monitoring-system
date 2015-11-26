@@ -9,6 +9,7 @@
 
   config.$inject = ['$routeProvider'];
 
+
   function config($routeProvider){
     $routeProvider
     .when('/', {
@@ -16,23 +17,28 @@
     })
     .when('/courses', {
       templateUrl: 'views/course-view.html',
-      controller: 'CourseCtrl'
+      controller: 'CourseCtrl',
+      privilege: 3
     })
     .when('/sections/:id', {
       templateUrl: 'views/section-by-course-view.html',
-      controller: 'SectionByCourseCtrl'
+      controller: 'SectionByCourseCtrl',
+      privilege: 3
     })
     .when('/course-offering', {
       templateUrl: 'views/course-offering-view.html',
-      controller: 'CourseOfferingCtrl'
+      controller: 'CourseOfferingCtrl',
+      privilege: 3
     })
     .when('/students', {
       templateUrl: 'views/student-view.html',
-      controller: 'StudentCtrl'
+      controller: 'StudentCtrl',
+      privilege: 1
     })
     .when('/teachers', {
       templateUrl: 'views/teacher-view.html',
-      controller: 'TeacherCtrl'
+      controller: 'TeacherCtrl',
+      privilege: 2
     })
     .otherwise({redirectTo: '/'});
   }

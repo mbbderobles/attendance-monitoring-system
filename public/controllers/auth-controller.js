@@ -1,80 +1,99 @@
-/*
-function onSuccess(googleUser) {
-  console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-}
-function onFailure(error) {
-  console.log(error);
-}
-
-function renderButton() {
-    gapi.signin2.render('my-signin2', {
-        'scope': 'https://www.googleapis.com/auth/plus.login',
-        'width': 250,
-        'height': 60,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-    });
-}
-*/
 'use strict';
 
 (function(){
+
     angular
     .module('myApp')
-    .controller('AuthCtrl', ['$scope', function($scope){
+    .controller('AuthCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
+        $scope.auth2 = {};
+        $scope.g = {};
         $scope.signedIn = false;
-        
+        $scope.privilege = -1;
+        $scope.user = '';
+        $scope.email = '';
+                
         $scope.logout = function(){
             $scope.user = '';
+            $scope.email = '';
             $scope.signedIn = false;
-            gapi.auth.signOut();
+            $scope.privilege = -1;
+            $scope.auth2.signOut();
         }
-
-        $scope.userInfoCallback = function(userInfo){
-            $scope.user = userInfo['displayName'];
+        
+        $scope.signInSuccess = function(googleUser){
+            $scope.signedIn = true;
+            $scope.user = googleUser.getBasicProfile().getName();
+            $scope.email = googleUser.getBasicProfile().getEmail();
+            AuthService.GetUsers()
+                .then(function(data){
+                    for(var i=0; i<data.length; i++){
+                        if($scope.email == data[i].emailAddress){               // To find privilege, find user based from email
+                            AuthService.CheckAdmin(data[i].id)                  // Check if Admin
+                                .then(function(data2){
+                                    $scope.privilege = 3;
+                                }, function(error){                             // If not, check if Teacher
+                                    AuthService.CheckTeacher(data[i].id)
+                                        .then(function(data2){
+                                            $scope.privilege = 2;
+                                        }, function(error){                     //If not, check if Student
+                                            AuthService.CheckStudent(data[i].id)
+                                                .then(function(data2){
+                                                    $scope.privilege = 1;
+                                                });
+                                        });
+                                });
+                            break;
+                        }
+                    }
+                });
+            $scope.$apply();
         };
         
-        $scope.getUserName = function(){
-            gapi.client.request({
-                'path': '/plus/v1/people/me',
-                'method': 'GET',
-                'callback': $scope.userInfoCallback
-            });
-        };
-        
-        $scope.processAuth = function(authResult){
-            if(authResult['access_token']){
-                $scope.signedIn = true;
-                $scope.getUserName();
-            }else if(authResult['error']){
-                $scope.signedIn = false;
-            }
-        };
-        
-        $scope.signInCallback = function(authResult){
-            $scope.$apply(function(){
-                $scope.processAuth(authResult);
-            });
-        };
+        $scope.signInFailure = function(error){
+            console.log(error);
+            $scope.signedIn = false;
+            $scope.privilege = -1;
+            $scope.user = '';
+            $scope.email = '';
+        }
         
         $scope.renderSignInButton = function(){
-            gapi.signin.render('my-signin2', {
+            gapi.signin2.render('my-signin2', {
+                'fetch_basic_profile': true,
                 'scope': 'https://www.googleapis.com/auth/plus.login',
-                'clientid': '740121264589-1gm3r2gtlb391so2d7ustvgmmmnncrsl.apps.googleusercontent.com',
-                'callback': $scope.signInCallback,
-                'cookiepolicy': 'single_host_origin',
-                'requestvisibleactions': 'http://schemas.google.com/AddActivity'
+                'width': 120,
+                'height': 36,
+                'longtitle': false,
+                'theme': 'dark',
+                'onsuccess': $scope.signInSuccess,
+                'onfailure': $scope.signInFailure
             });
         };
         
         $scope.start = function(){
-            $scope.renderSignInButton();
+            gapi.load('auth2', function() {
+                gapi.client.load('plus','v1').then(function() {
+                $scope.renderSignInButton();
+                gapi.auth2.init({
+                    fetch_basic_profile: true,
+                    scope:'https://www.googleapis.com/auth/plus.login'
+                }).then(function (){
+                      $scope.auth2 = gapi.auth2.getAuthInstance();
+                    });
+                });
+            });  
         };
         
         $scope.start();
+        
+        // executes every route changes
+        // it checks if the user is logged in and if the next route needs permission
+        $rootScope.$on('$routeChangeStart', function(event, next){
+            if(!$scope.signedIn || next.privilege > $scope.privilege){
+                $location.path('/');
+            }
+        })
+        
     }]);
 
 })();
-

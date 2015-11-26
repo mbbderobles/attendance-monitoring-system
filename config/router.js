@@ -1,4 +1,5 @@
 var user = require('./../controllers/user');
+var admin = require('./../controllers/admin');
 var student = require('./../controllers/student');
 var teacher = require('./../controllers/teacher');
 var course = require('./../controllers/course');
@@ -10,6 +11,12 @@ module.exports = function(router) {
 	router.route('/api/users')
 		.get(user.find)
 		.post(user.insert);
+		
+    router.route('/api/admins')
+        .get(admin.find);
+        
+    router.route('/api/admins/:id')
+        .get(admin.findOne);
 
 	router.route('/api/users/:id')
 		.get(user.findOne)
