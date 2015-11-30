@@ -5,6 +5,10 @@
     .module('myApp')
     .controller('CourseCtrl',['$scope', '$parse', 'CourseService', function ($scope, $parse, CourseService) {
 
+        $scope.sortType     = 'courseNum'; // set the default sort type
+        $scope.sortReverse  = false;  // set the default sort order
+        $scope.searchCourse   = '';     // set the default search/filter term
+
         $scope.courses=[];
         $scope.editCourse = {};
         $scope.editUser = {};
@@ -54,13 +58,16 @@
         };
 
         $scope.DeleteCourse = function(id){
-            CourseService.DeleteCourse(id)
-            .then(function(data2){
-                CourseService.GetAll()
-                .then(function(data){
-                    $scope.courses = data;
+            var r = confirm("Are you sure you want to delete this course?");
+            if(r == true){
+                CourseService.DeleteCourse(id)
+                .then(function(data2){
+                    CourseService.GetAll()
+                    .then(function(data){
+                        $scope.courses = data;
+                    });
                 });
-            });
+            }
         };
 
     }]);

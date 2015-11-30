@@ -75,16 +75,19 @@
         };
 
         $scope.DeleteStudent = function(id){
-            StudentService.DeleteUser(id)
-            .then(function(data1){
-                StudentService.DeleteStudent(id)
-                .then(function(data2){
-                    StudentService.GetAll()
-                    .then(function(data){
-                        $scope.students = data;
+            var r = confirm("Are you sure you want to delete this student?");
+            if(r == true){
+                StudentService.DeleteUser(id)
+                .then(function(data1){
+                    StudentService.DeleteStudent(id)
+                    .then(function(data2){
+                        StudentService.GetAll()
+                        .then(function(data){
+                            $scope.students = data;
+                        });
                     });
                 });
-            });
+            }
         };
 
     }]);

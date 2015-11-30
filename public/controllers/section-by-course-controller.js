@@ -55,13 +55,16 @@
         };
 
         $scope.DeleteSection = function(id){
-            SectionByCourseService.DeleteSection(id)
-            .then(function(data2){
-                SectionByCourseService.GetAll()
-                .then(function(data){
-                    $scope.courses = data;
+            var r = confirm("Are you sure you want to delete this section?");
+            if(r == true){
+                SectionByCourseService.DeleteSection(id)
+                .then(function(data2){
+                    SectionByCourseService.GetAll()
+                    .then(function(data){
+                        $scope.courses = data;
+                    });
                 });
-            });
+            }
         };
 
     }]);

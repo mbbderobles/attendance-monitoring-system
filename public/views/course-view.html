@@ -1,32 +1,80 @@
 <h1> Courses </h1>
 <button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addCrs = !addCrs"><span class="glyphicon glyphicon-plus"></span></button>
 
-<div class="default" ng-show="addCrs" style="margin: 0 auto">
-	<form ng-submit="AddCourse()">
-		<input type="text" placeholder="Course Number" ng-model="newCourse.courseNum" /> <br/>
-		<input type="text" placeholder="Course Title" ng-model="newCourse.courseTitle" /> <br/>
-		<input type="submit" value="Add Course" class="btn btn-primary btn-xs" />
-	</form>
+<div class="default well" ng-show="addCrs" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="AddCourse()">
+		<legend>Add Course</legend>
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="CourseNum">Course Number</label>  
+			<div class="col-md-5">
+				<input id="CourseNum" name="CourseNum" placeholder="e.g. CMSC 11" class="form-control input-md" required="" type="text" ng-model="newCourse.courseNum" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="CourseTitle">Course Title</label>  
+			<div class="col-md-5">
+				<input id="CourseTitle" name="CourseTitle" placeholder="e.g. Introduction to Computer Science" class="form-control input-md" required="" type="text" ng-model="newCourse.courseTitle" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="addCourse"></label>
+			<div class="col-md-4">
+				<input type="submit" id="addCourse" name="addCourse" class="btn btn-primary" value="Add Course" />
+			</div>
+		</div>
+	</form> <!--/add course-->
 </div>
 
-<div class="default" ng-show="editCrs" style="margin: 0 auto">
-	<form ng-submit="EditCourse()">
-		<input type="text" placeholder="Course Number" ng-model="editCourse.courseNum" /> <br/>
-		<input type="text" placeholder="Course Title" ng-model="editCourse.courseTitle" /> <br/>
-		<input type="submit" value="Edit Course" class="btn btn-primary btn-xs" />
-	</form>
+<div class="default well" ng-show="editCrs" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="EditCourse()">
+		<legend>Edit Course</legend>
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="CourseNum">Course Number</label>  
+			<div class="col-md-5">
+				<input id="CourseNum" name="CourseNum" class="form-control input-md" type="text" ng-model="editCourse.courseNum" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="CourseTitle">Course Title</label>  
+			<div class="col-md-5">
+				<input id="CourseTitle" name="CourseTitle" class="form-control input-md" type="text" ng-model="editCourse.courseTitle" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="editCourse"></label>
+			<div class="col-md-4">
+				<input type="submit" id="editCourse" name="editCourse" class="btn btn-primary" value="Edit Course" />
+			</div>
+		</div>
+	</form> <!--/edit course-->
 </div>
+
+<form>
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input type="text" class="form-control" placeholder="Search for a Course" ng-model="searchCourse">
+		</div>      
+	</div>
+</form>
+
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Course Number</th>
-			<th>Course Title</th>
+			<th><a ng-click="sortType = 'courseNum'; sortReverse = !sortReverse">Course Number <span ng-show="sortType == 'courseNum' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'courseNum' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'courseTitle'; sortReverse = !sortReverse">Course Title <span ng-show="sortType == 'courseTitle' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'courseTitle' && sortReverse" class="fa fa-caret-up"></span></a></th>
 			<th>Edit / Delete</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="course in courses">
+		<tr ng-repeat="course in courses | orderBy:sortType:sortReverse | filter:searchCourse">
 			<td><a href="/#/sections/{{course.courseId}}">{{course.courseNum}}</a></td>
 			<td>{{course.courseTitle}}</td>
 			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewCourse(course.courseId)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteCourse(course.courseId)"><span class="glyphicon glyphicon-remove"></span></button></td>

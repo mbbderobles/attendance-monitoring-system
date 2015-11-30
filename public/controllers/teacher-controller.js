@@ -71,16 +71,19 @@
         };
 
         $scope.DeleteTeacher = function(id){
-            TeacherService.DeleteUser(id)
-            .then(function(data1){
-                TeacherService.DeleteTeacher(id)
-                .then(function(data2){
-                    TeacherService.GetAll()
-                    .then(function(data){
-                        $scope.teachers = data;
+            var r = confirm("Are you sure you want to delete this teacher?");
+            if(r == true){
+                TeacherService.DeleteUser(id)
+                .then(function(data1){
+                    TeacherService.DeleteTeacher(id)
+                    .then(function(data2){
+                        TeacherService.GetAll()
+                        .then(function(data){
+                            $scope.teachers = data;
+                        });
                     });
                 });
-            });
+            }
         };
 
     }]);
