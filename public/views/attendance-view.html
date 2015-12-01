@@ -1,0 +1,23 @@
+<h1> Attendance Record for {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}} </h1>
+<table class="table table-hover table-bordered attendance">
+	<thead>
+		<tr>
+			<th rowspan="2">Student</th>
+			<th colspan="6"><a ng-click="previousWeek()"><span class="fa fa-arrow-left"></span></a> Dates <a ng-click="nextWeek()"><span class="fa fa-arrow-right"></span></a></th>
+		</tr>
+		<tr>
+			<th ng-repeat="week in weeks">{{week | date : 'MM/dd/yyyy'}} <br/> {{week | date : 'EEEE'}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="at in attendance">
+			<td class="student_name">{{at.name}}</td>
+			<td><i ng-if='at.attendance[0]' class="fa fa-check"></i></td>
+			<td><i ng-if='at.attendance[1]' class="fa fa-check"></i></td>
+			<td><i ng-if='at.attendance[2]' class="fa fa-check"></i></td>
+			<td><i ng-if='at.attendance[3]' class="fa fa-check"></i></td>
+			<td><i ng-if='at.attendance[4]' class="fa fa-check"></i></td>
+			<td><i ng-if='at.attendance[5]' class="fa fa-check"></i></td>
+		</tr>
+	</tbody>
+</table>
