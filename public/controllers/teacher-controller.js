@@ -5,6 +5,10 @@
     .module('myApp')
     .controller('TeacherCtrl',['$scope', '$parse', 'TeacherService', function ($scope, $parse, TeacherService) {
 
+        $scope.sortType     = 'employeeId'; // set the default sort type
+        $scope.sortReverse  = false;  // set the default sort order
+        $scope.searchTeacher   = '';     // set the default search/filter term
+
         $scope.teachers=[];
         $scope.editTeacher = {};
         $scope.editUser = {};

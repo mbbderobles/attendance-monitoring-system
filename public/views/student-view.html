@@ -1,52 +1,208 @@
-
-
 <h1> Students </h1>
-<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addS = !addS"><span class="glyphicon glyphicon-plus"></span></button>
+<button style="float:right" type="button" title="Add a new Student" class="btn btn-success btn-s" ng-click="addS = !addS"><span class="glyphicon glyphicon-plus"></span></button>
 
-<div class="default" ng-show="addS" style="margin: 0 auto">
-	<form ng-submit="AddStudent()">
-		<input type="text" placeholder="Student Number" ng-model="newStudent.studentNumber" /> <br/>
-		<input type="text" placeholder="Last Name" ng-model="newUser.lastName" /> <br/>
-		<input type="text" placeholder="First Name" ng-model="newUser.firstName" /> <br/>
-		<input type="text" placeholder="Middle Name" ng-model="newUser.middleName" /> <br/>
-		<input type="text" placeholder="Email Address" ng-model="newUser.emailAddress" /> <br/>
-		<input type="radio" ng-model="newStudent.sex" value="F"> Female <input type="radio" ng-model="newStudent.sex" value="M"> Male <br/>
-		<input type="text" placeholder="Degree" ng-model="newStudent.degree" /> <br/>
-		<input type="text" placeholder="College" ng-model="newStudent.college" /> <br/>
-		<input type="submit" value="Add Student" class="btn btn-primary btn-xs" />
-	</form>
+<!--Add Student Form-->
+<div class="default well" ng-show="addS" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="AddStudent()">
+		<legend>Add Student</legend>
+		
+		<!--Student Number-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="studentNumber">Student Number</label>  
+			<div class="col-md-5">
+				<input id="studentNumber" name="studentNumber" placeholder="e.g. 2015-12345" class="form-control input-md" required="" type="text" ng-model="newStudent.studentNumber" />
+			</div>
+		</div>
+
+		<!--Last Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="lastName">Last Name</label>  
+			<div class="col-md-5">
+				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="newUser.lastName" />
+			</div>
+		</div>
+
+		<!--First Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="firstName">First Name</label>  
+			<div class="col-md-5">
+				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="newUser.firstName" />
+			</div>
+		</div>
+
+		<!--Middle Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="middleName">Middle Name</label>  
+			<div class="col-md-5">
+				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="newUser.middleName" />
+			</div>
+		</div>
+
+		<!--Email Address-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="emailAddress">Email Address</label>  
+			<div class="col-md-5">
+				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="newUser.emailAddress" />
+			</div>
+		</div>
+
+		<!--Sex-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="sex">Sex</label>
+			<div class="col-md-4"> 
+				<label class="radio-inline" for="sex-0">
+					<input name="sex" id="sex-0" ng-model="newStudent.sex" value="F" type="radio"> Female
+				</label> 
+				<label class="radio-inline" for="sex-1">
+					<input name="sex" id="sex-1" ng-model="newStudent.sex" value="M" type="radio"> Male
+				</label>
+			</div>
+		</div>
+
+		<!--Degree-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="degree">Degree</label>  
+			<div class="col-md-5">
+				<input id="degree" name="degree" class="form-control input-md" required="" type="text" ng-model="newStudent.degree" />
+			</div>
+		</div>
+
+		<!--College-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="college">College</label>  
+			<div class="col-md-5">
+				<input id="college" name="college" class="form-control input-md" required="" type="text" ng-model="newStudent.college" />
+			</div>
+		</div>
+
+		<!--Submit button-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="addStudent"></label>
+			<div class="col-md-4">
+				<input type="submit" id="addStudent" name="addStudent" class="btn btn-primary" value="Add Student" />
+			</div>
+		</div>
+	</form> <!--/add student-->
 </div>
 
-<div class="default" ng-show="editS" style="margin: 0 auto">
-	<form ng-submit="EditStudent()">
-		<input type="text" placeholder="Student Number" ng-model="editStudent.studentNumber" /> <br/>
-		<input type="text" placeholder="Last Name" ng-model="editUser.lastName" /> <br/>
-		<input type="text" placeholder="First Name" ng-model="editUser.firstName" /> <br/>
-		<input type="text" placeholder="Middle Name" ng-model="editUser.middleName" /> <br/>
-		<input type="text" placeholder="Email Address" ng-model="editUser.emailAddress" /> <br/>
-		<input type="radio" ng-model="editStudent.sex" value="F"> Female <input type="radio" ng-model="editStudent.sex" value="M"> Male <br/>
-		<input type="text" placeholder="Degree" ng-model="editStudent.degree" /> <br/>
-		<input type="text" placeholder="College" ng-model="editStudent.college" /> <br/>
-		<input type="submit" value="Edit Student" class="btn btn-primary btn-xs" />
-	</form>
+<!--Edit Student Form-->
+<div class="default well" ng-show="editS" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="EditStudent()">
+		<legend>Edit Student</legend>
+		
+		<!--Student Number-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="studentNumber">Student Number</label>  
+			<div class="col-md-5">
+				<input id="studentNumber" name="studentNumber" class="form-control input-md" required="" type="text" ng-model="editStudent.studentNumber" />
+			</div>
+		</div>
+
+		<!--Last Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="lastName">Last Name</label>  
+			<div class="col-md-5">
+				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="editUser.lastName" />
+			</div>
+		</div>
+
+		<!--First Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="firstName">First Name</label>  
+			<div class="col-md-5">
+				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="editUser.firstName" />
+			</div>
+		</div>
+
+		<!--Middle Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="middleName">Middle Name</label>  
+			<div class="col-md-5">
+				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="editUser.middleName" />
+			</div>
+		</div>
+
+		<!--Email Address-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="emailAddress">Email Address</label>  
+			<div class="col-md-5">
+				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="editUser.emailAddress" />
+			</div>
+		</div>
+
+		<!--Sex-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="sex">Sex</label>
+			<div class="col-md-4"> 
+				<label class="radio-inline" for="sex-0">
+					<input name="sex" id="sex-0" ng-model="editStudent.sex" value="F" type="radio"> Female
+				</label> 
+				<label class="radio-inline" for="sex-1">
+					<input name="sex" id="sex-1" ng-model="editStudent.sex" value="M" type="radio"> Male
+				</label>
+			</div>
+		</div>
+
+		<!--Degree-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="degree">Degree</label>  
+			<div class="col-md-5">
+				<input id="degree" name="degree" class="form-control input-md" required="" type="text" ng-model="editStudent.degree" />
+			</div>
+		</div>
+
+		<!--College-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="college">College</label>  
+			<div class="col-md-5">
+				<input id="college" name="college" class="form-control input-md" required="" type="text" ng-model="editStudent.college" />
+			</div>
+		</div>
+
+		<!--Submit button-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="editStudent"></label>
+			<div class="col-md-4">
+				<input type="submit" id="editStudent" name="editStudent" class="btn btn-primary" value="Edit Student" />
+			</div>
+		</div>
+	</form> <!--/edit student-->
 </div>
+
+<!--Search Student Form-->
+<form>
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input type="text" class="form-control" placeholder="Search for a Student" ng-model="searchStudent">
+		</div>      
+	</div>
+</form>
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Student Number</th>
-			<th>Last Name</th>
-			<th>First Name</th>
-			<th>Middle Name</th>
-			<th>Email Address</th>
-			<th>Sex</th>
-			<th>Degree</th>
-			<th>College</th>
+			<th><a ng-click="sortType = 'studentNumber'; sortReverse = !sortReverse">Student Number <span ng-show="sortType == 'studentNumber' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'studentNumber' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Last Name <span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'lastName' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">First Name <span ng-show="sortType == 'firstName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'firstName' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'middleName'; sortReverse = !sortReverse">Middle Name <span ng-show="sortType == 'middleName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'middleName' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'emailAddress'; sortReverse = !sortReverse">Email Address <span ng-show="sortType == 'emailAddress' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'emailAddress' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'sex'; sortReverse = !sortReverse">Sex <span ng-show="sortType == 'sex' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'sex' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'degree'; sortReverse = !sortReverse">Degree <span ng-show="sortType == 'degree' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'degree' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'college'; sortReverse = !sortReverse">College <span ng-show="sortType == 'college' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'college' && sortReverse" class="fa fa-caret-up"></span></a></th>
 			<th>Edit / Delete</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="student in students">
+		<tr ng-repeat="student in students | orderBy:sortType:sortReverse | filter:searchStudent">
 			<td>{{student.studentNumber}}</td>
 			<td>{{student.lastName}}</td>
 			<td>{{student.firstName}}</td>

@@ -9,13 +9,29 @@
 
 	function SectionByCourseService($http, $q){
 		var section_url = "/api/sections/course";
+		var course_url = "/api/courses/";
 
 		var service = {};
 		service.GetAllByCourse = GetAllByCourse;
+		service.GetCourse = GetCourse;
 		service.AddSection = AddSection;
 		service.EditSection = EditSection;
 		service.DeleteSection = DeleteSection;
 		return service;
+
+		function GetCourse(id){
+        	var deferred = $q.defer();
+
+			$http.get(course_url+id)
+        	.success(function (data){
+        		deferred.resolve(data);
+	        })
+	        .error(function (data, status){
+	        	deferred.reject(status);
+	        });
+
+	        return deferred.promise;
+        };
 
         function GetAllByCourse(id){
         	var deferred = $q.defer();

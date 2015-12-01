@@ -6,10 +6,16 @@
     .controller('SectionByCourseCtrl',['$scope', '$parse', '$routeParams', 'SectionByCourseService', function ($scope, $parse, $routeParams, SectionByCourseService) {
 
         var cId = $routeParams.id;
+        $scope.courseDetails = {};
         $scope.sections=[];
         $scope.editSection = {};
         $scope.addSBC = false;
         $scope.editSBC = false;
+
+        SectionByCourseService.GetCourse(cId)
+        .then(function(data){
+            $scope.courseDetails = data;
+        });
 
         SectionByCourseService.GetAllByCourse(cId)
         .then(function(data){

@@ -1,6 +1,7 @@
 var	db = require(__dirname + '/../config/mysql');
 
 exports.find = function(req, res, next) {
+	console.log('find');
 	db.query("SELECT * FROM attendance_record", function(err, rows) {
 		if (err) return next(err);
 		res.send(rows);
@@ -8,8 +9,22 @@ exports.find = function(req, res, next) {
 };
 
 
+exports.findBySection = function(req, res, next) {
+	db.query("SELECT * FROM attendance_record NATURAL JOIN student NATURAL JOIN user WHERE sectionId=?", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
+
+exports.findStudentsBySection = function(req, res, next) {
+	db.query("SELECT DISTINCT studentNumber,firstName,lastName FROM attendance_record NATURAL JOIN student NATURAL JOIN user WHERE sectionId=?", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
+
 exports.findOne = function(req, res, next) {
-	db.query("SELECT * FROM attendance_record WHERE attendanceId=?", [req.params.id], function(err, rows) {
+	db.query("SELECT * FROM attendance_record WHERE attended=? AND studentNumber=? AND sectionId=?", [req.body.attended,req.body.studentNumber,req.body.sectionId], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			res.status(404).send('Attendance not found.');

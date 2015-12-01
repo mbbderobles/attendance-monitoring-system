@@ -1,5 +1,5 @@
-<h1> Sections </h1>
-<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addSBC = !addSBC"><span class="glyphicon glyphicon-plus"></span></button>
+<h1> <a href="/#/courses"><i title="Back to Courses" class="fa fa-arrow-circle-left"></i></a> {{courseDetails.courseNum}} Sections </h1>
+<button style="float:right" title="Add a new Section" type="button" class="btn btn-success btn-s" ng-click="addSBC = !addSBC"><span class="glyphicon glyphicon-plus"></span></button>
 
 <div class="default" ng-show="addSBC" style="margin: 0 auto">
 	<form ng-submit="AddSection()">
@@ -26,8 +26,6 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Course Number</th>
-			<th>Course Title</th>
 			<th>Section Code</th>
 			<th>Instructor</th>
 			<th>Day</th>
@@ -38,10 +36,8 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="section in sections">
-			<td>{{section.courseNum}}</td>
-			<td>{{section.courseTitle}}</td>
 			<td>{{section.sectionCode}}</td>
-			<td>{{section.employeeId}}</td>
+			<td>{{section.lastName}}</td>
 			<td>{{section.day}}</td>
 			<td>{{section.time}}</td>
 			<td>{{section.room}}</td>

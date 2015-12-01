@@ -62,12 +62,20 @@ module.exports = function(router) {
 	router.route('/api/sections/course/:id')
 		.get(section.findAllByCourse);
 
+	router.route('/api/sections/student/:id')
+		.get(attendance.findStudentsBySection);
+
 	router.route('/api/attendance')
 		.get(attendance.find)
 		.post(attendance.insert);
 
+	router.route('/api/attendance/section/:id')
+		.get(attendance.findBySection);
+
+	router.route('/api/attendance/section')
+		.post(attendance.findOne);
+
 	router.route('/api/attendance/:id')
-		.get(attendance.findOne)
 		.put(attendance.update)
 		.delete(attendance.remove);
 

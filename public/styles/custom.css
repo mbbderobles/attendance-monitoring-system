@@ -1,1 +1,15 @@
 /*Place custom CSS here*/
+
+a {
+	cursor: pointer;
+}
+
+table.attendance > thead > tr > th, table.attendance > tbody > tr > td {
+   text-align: center;
+   vertical-align: middle;
+}
+
+.attendance > tbody > tr > td.student_name {
+   text-align: left;
+   vertical-align: middle;
+}

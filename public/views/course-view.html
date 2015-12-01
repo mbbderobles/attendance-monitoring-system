@@ -1,6 +1,7 @@
 <h1> Courses </h1>
-<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addCrs = !addCrs"><span class="glyphicon glyphicon-plus"></span></button>
+<button style="float:right" type="button" title="Add a new Course" class="btn btn-success btn-s" ng-click="addCrs = !addCrs"><span class="glyphicon glyphicon-plus"></span></button>
 
+<!--Add Course Form-->
 <div class="default well" ng-show="addCrs" style="margin: 0 auto">
 	<form class="form-horizontal" ng-submit="AddCourse()">
 		<legend>Add Course</legend>
@@ -27,6 +28,7 @@
 	</form> <!--/add course-->
 </div>
 
+<!--Edit Course Form-->
 <div class="default well" ng-show="editCrs" style="margin: 0 auto">
 	<form class="form-horizontal" ng-submit="EditCourse()">
 		<legend>Edit Course</legend>
@@ -53,6 +55,7 @@
 	</form> <!--/edit course-->
 </div>
 
+<!--Search Course Form-->
 <form>
 	<div class="form-group">
 		<div class="input-group">
@@ -62,7 +65,7 @@
 	</div>
 </form>
 
-
+<!--Course Table-->
 <table class="table table-hover">
 	<thead>
 		<tr>

@@ -1,47 +1,180 @@
 <h1> Teachers </h1>
-<button style="float:right" type="button" class="btn btn-success btn-s" ng-click="addT = !addT"><span class="glyphicon glyphicon-plus"></span></button>
+<button style="float:right" type="button" title="Add a new Teacher" class="btn btn-success btn-s" ng-click="addT = !addT"><span class="glyphicon glyphicon-plus"></span></button>
 
-<div class="default" ng-show="addT" style="margin: 0 auto">
-	<form ng-submit="AddTeacher()">
-		<input type="text" placeholder="Employee Id" ng-model="newTeacher.employeeId" /> <br/>
-		<input type="text" placeholder="Last Name" ng-model="newUser.lastName" /> <br/>
-		<input type="text" placeholder="First Name" ng-model="newUser.firstName" /> <br/>
-		<input type="text" placeholder="Middle Name" ng-model="newUser.middleName" /> <br/>
-		<input type="text" placeholder="Email Address" ng-model="newUser.emailAddress" /> <br/>
-		<input type="text" placeholder="Unit" ng-model="newTeacher.unit" /> <br/>
-		<input type="text" placeholder="Position" ng-model="newTeacher.position" /> <br/>
-		<input type="submit" value="Add Teacher" class="btn btn-primary btn-xs" />
-	</form>
+<!--Add Teacher Form-->
+<div class="default well" ng-show="addT" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="AddTeacher()">
+		<legend>Add Teacher</legend>
+		
+		<!--Student Number-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="employeeId">Employee Id</label>  
+			<div class="col-md-5">
+				<input id="employeeId" name="employeeId" class="form-control input-md" required="" type="text" ng-model="newTeacher.employeeId" />
+			</div>
+		</div>
+
+		<!--Last Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="lastName">Last Name</label>  
+			<div class="col-md-5">
+				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="newUser.lastName" />
+			</div>
+		</div>
+
+		<!--First Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="firstName">First Name</label>  
+			<div class="col-md-5">
+				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="newUser.firstName" />
+			</div>
+		</div>
+
+		<!--Middle Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="middleName">Middle Name</label>  
+			<div class="col-md-5">
+				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="newUser.middleName" />
+			</div>
+		</div>
+
+		<!--Email Address-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="emailAddress">Email Address</label>  
+			<div class="col-md-5">
+				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="newUser.emailAddress" />
+			</div>
+		</div>
+
+		<!--Degree-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="unit">Unit</label>  
+			<div class="col-md-5">
+				<input id="unit" name="unit" class="form-control input-md" required="" type="text" ng-model="newTeacher.unit" />
+			</div>
+		</div>
+
+		<!--College-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="position">Position</label>  
+			<div class="col-md-5">
+				<input id="position" name="position" class="form-control input-md" required="" type="text" ng-model="newTeacher.position" />
+			</div>
+		</div>
+
+		<!--Submit button-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="addTeacher"></label>
+			<div class="col-md-4">
+				<input type="submit" id="addTeacher" name="addTeacher" class="btn btn-primary" value="Add Teacher" />
+			</div>
+		</div>
+	</form> <!--/add teacher-->
 </div>
 
-<div class="default" ng-show="editT" style="margin: 0 auto">
-	<form ng-submit="EditTeacher()">
-		<input type="text" placeholder="Employee Id" ng-model="editTeacher.employeeId" /> <br/>
-		<input type="text" placeholder="Last Name" ng-model="editUser.lastName" /> <br/>
-		<input type="text" placeholder="First Name" ng-model="editUser.firstName" /> <br/>
-		<input type="text" placeholder="Middle Name" ng-model="editUser.middleName" /> <br/>
-		<input type="text" placeholder="Email Address" ng-model="editUser.emailAddress" /> <br/>
-		<input type="text" placeholder="Unit" ng-model="editTeacher.unit" /> <br/>
-		<input type="text" placeholder="Position" ng-model="editTeacher.position" /> <br/>
-		<input type="submit" value="Edit Teacher" class="btn btn-primary btn-xs" />
-	</form>
+<!--Edit Teacher Form-->
+<div class="default well" ng-show="editT" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="EditTeacher()">
+		<legend>Edit Teacher</legend>
+		
+		<!--Student Number-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="employeeId">Employee Id</label>  
+			<div class="col-md-5">
+				<input id="employeeId" name="employeeId" class="form-control input-md" required="" type="text" ng-model="editTeacher.employeeId" />
+			</div>
+		</div>
+
+		<!--Last Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="lastName">Last Name</label>  
+			<div class="col-md-5">
+				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="editUser.lastName" />
+			</div>
+		</div>
+
+		<!--First Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="firstName">First Name</label>  
+			<div class="col-md-5">
+				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="editUser.firstName" />
+			</div>
+		</div>
+
+		<!--Middle Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="middleName">Middle Name</label>  
+			<div class="col-md-5">
+				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="editUser.middleName" />
+			</div>
+		</div>
+
+		<!--Email Address-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="emailAddress">Email Address</label>  
+			<div class="col-md-5">
+				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="editUser.emailAddress" />
+			</div>
+		</div>
+
+		<!--Degree-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="unit">Unit</label>  
+			<div class="col-md-5">
+				<input id="unit" name="unit" class="form-control input-md" required="" type="text" ng-model="editTeacher.unit" />
+			</div>
+		</div>
+
+		<!--College-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="position">Position</label>  
+			<div class="col-md-5">
+				<input id="position" name="position" class="form-control input-md" required="" type="text" ng-model="editTeacher.position" />
+			</div>
+		</div>
+
+		<!--Submit button-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="editTeacher"></label>
+			<div class="col-md-4">
+				<input type="submit" id="editTeacher" name="editTeacher" class="btn btn-primary" value="Edit Teacher" />
+			</div>
+		</div>
+	</form> <!--/edit teacher-->
 </div>
+
+<!--Search Teacher Form-->
+<form>
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input type="text" class="form-control" placeholder="Search for a Teacher" ng-model="searchTeacher">
+		</div>      
+	</div>
+</form>
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Employee Id</th>
-			<th>Last Name</th>
-			<th>First Name</th>
-			<th>Middle Name</th>
-			<th>Email Address</th>
-			<th>Unit</th>
-			<th>Position</th>
+			<th><a ng-click="sortType = 'employeeId'; sortReverse = !sortReverse">Employee Id <span ng-show="sortType == 'employeeId' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'employeeId' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Last Name <span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'lastName' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">First Name <span ng-show="sortType == 'firstName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'firstName' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'middleName'; sortReverse = !sortReverse">Middle Name <span ng-show="sortType == 'middleName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'middleName' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'emailAddress'; sortReverse = !sortReverse">Email Address <span ng-show="sortType == 'emailAddress' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'emailAddress' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'unit'; sortReverse = !sortReverse">Unit <span ng-show="sortType == 'unit' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'unit' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'position'; sortReverse = !sortReverse">Position <span ng-show="sortType == 'position' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'position' && sortReverse" class="fa fa-caret-up"></span></a></th>
 			<th>Edit / Delete</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="teacher in teachers">
+		<tr ng-repeat="teacher in teachers | orderBy:sortType:sortReverse | filter:searchTeacher">
 			<td>{{teacher.employeeId}}</td>
 			<td>{{teacher.lastName}}</td>
 			<td>{{teacher.firstName}}</td>

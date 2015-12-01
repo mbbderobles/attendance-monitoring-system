@@ -20,12 +20,12 @@ exports.findOne = function(req, res, next) {
 };
 
 exports.findAllByCourse = function(req, res, next) {
-	db.query("SELECT * FROM section NATURAL JOIN course WHERE courseId=?", [req.params.id], function(err, rows) {
+	db.query("SELECT * FROM section NATURAL JOIN course NATURAL JOIN teacher NATURAL JOIN user WHERE courseId=?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			res.status(404).send('Section not found.');
 		} else {
-			res.send(rows[0]);
+			res.send(rows);
 		}
 	});
 };

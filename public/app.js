@@ -15,6 +15,11 @@
     .when('/', {
       templateUrl: 'views/home-view.html'
     })
+    .when('/attendance/:id', {
+      templateUrl: 'views/attendance-view.html',
+      controller: 'AttendanceCtrl',
+      privilege: 3
+    })
     .when('/courses', {
       templateUrl: 'views/course-view.html',
       controller: 'CourseCtrl',
