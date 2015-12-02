@@ -13,3 +13,25 @@ table.attendance > thead > tr > th, table.attendance > tbody > tr > td {
    text-align: left;
    vertical-align: middle;
 }
+
+table > tbody > tr > td > i.clickable {
+	cursor: pointer;
+}
+
+table > thead > tr > .table-head-m {
+	font-size: 20px;
+}
+
+table > thead > tr > .table-head-s {
+	font-size: 13px;
+}
+
+table > thead > tr > .no-border {
+	border-style: none;
+}
+
+table > thead > tr > th > .cal-buttons {
+	font-size: 30px;
+	width: 100%;
+	height: 100%;
+}
