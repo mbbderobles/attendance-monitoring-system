@@ -11,13 +11,30 @@
 		var classlist_url = "/api/sections/students";
 		var student_url = '/api/students';
 		var user_url = '/api/users';
+		var section_url = "/api/sections/";
 
 		var service = {};
+		service.GetSection = GetSection;
 		service.AddClasslist = AddClasslist;
 		service.GetStudents = GetStudents;
 		service.GetStudentsBySection = GetStudentsBySection;
 		service.AddUsers = AddUsers;
 		return service;
+
+		// get section details
+		function GetSection(id){
+        	var deferred = $q.defer();
+
+			$http.get(section_url+id)
+        	.success(function (data){
+        		deferred.resolve(data);
+	        })
+	        .error(function (data, status){
+	        	deferred.reject(status);
+	        });
+
+	        return deferred.promise;
+        };
 
 		// add to user, student, student_section
 		function AddUsers(files,sectionId){

@@ -20,17 +20,17 @@
       controller: 'CourseCtrl',
       privilege: 3
     })
-    .when('/sections/:id/attendance', {
+    .when('/courses/:id/sections/:id2/attendance', {
       templateUrl: 'views/attendance-view.html',
       controller: 'AttendanceCtrl',
       privilege: 3
     })
-    .when('/sections/:id/classlist', {
+    .when('/courses/:id/sections/:id2/classlist', {
       templateUrl: 'views/classlist-view.html',
       controller: 'ClasslistCtrl',
       privilege: 2
     })
-    .when('/sections/:id', {
+    .when('/courses/:id/sections', {
       templateUrl: 'views/section-by-course-view.html',
       controller: 'SectionByCourseCtrl',
       privilege: 3

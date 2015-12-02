@@ -15,7 +15,7 @@
 
 		var service = {};
 		service.GetSection = GetSection;
-		service.GetStudents = GetStudents;
+		service.GetStudentsBySection = GetStudentsBySection;
 		service.GetAttendance = GetAttendance;
 		service.AddAttendance = AddAttendance;
 		service.EditAttendance = EditAttendance;
@@ -52,7 +52,7 @@
         };
 
         // get students enrolled in the section
-        function GetStudents(id){
+        function GetStudentsBySection(id){
         	var deferred = $q.defer();
 
 			$http.get(section_student_url+id)

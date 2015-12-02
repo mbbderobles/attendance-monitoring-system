@@ -36,7 +36,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="section in sections">
-			<td>{{section.sectionCode}}</td>
+			<td><a href="/#/courses/{{courseDetails.courseId}}/sections/{{section.sectionId}}/attendance">{{section.sectionCode}}</a></td>
 			<td>{{section.lastName}}</td>
 			<td>{{section.day}}</td>
 			<td>{{section.time}}</td>

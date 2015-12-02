@@ -1,4 +1,4 @@
-<h1> Attendance Record for {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}} </h1>
+<h1> <a href="/#/courses/{{sectionDetails.courseId}}/sections"><i title="Back to Sections" class="fa fa-arrow-circle-left"></i></a> Attendance Record for {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}} </h1>
 <h4> Day: {{sectionDetails.day}}</h4>
 <h4> Time: {{sectionDetails.time}}</h4>
 <h4> Room: {{sectionDetails.room}}</h4>
@@ -7,9 +7,9 @@
 	<thead>
 		<tr>
 			<th class="no-border table-head-m" rowspan="3">Student</th>
-			<th class="no-border" colspan="2"><button class="cal-buttons btn btn-success" ng-click="previousWeek()"><span class="fa fa-arrow-left"></span></button></th>
-			<th class="no-border table-head-m" colspan="2">Dates</th>
-			<th class="no-border" colspan="2"><button class="cal-buttons btn btn-success" ng-click="nextWeek()"><span class="fa fa-arrow-right"></span></button></th>
+			<th class="no-border" colspan="2"><button class="cal-buttons btn-xs btn-success" ng-click="previousWeek()"><span class="fa fa-arrow-left"></span></button></th>
+			<th class="no-border table-head-m" colspan="2">Date</th>
+			<th class="no-border" colspan="2"><button class="cal-buttons btn-xs btn-success" ng-click="nextWeek()"><span class="fa fa-arrow-right"></span></button></th>
 		</tr>
 		<tr>
 			<th class="table-head-s" ng-repeat="week in weeks">{{week | date : 'MM/dd/yyyy'}} <br/> {{week | date : 'EEEE'}}</th>

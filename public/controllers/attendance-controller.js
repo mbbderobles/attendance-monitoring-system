@@ -3,32 +3,33 @@
 (function(){
     angular
     .module('myApp')
-    .controller('AttendanceCtrl',['$scope', '$parse', '$routeParams', 'AttendanceService', function ($scope, $parse, $routeParams, AttendanceService) {
+    .controller('AttendanceCtrl',['$scope', '$parse', '$window', '$routeParams', 'AttendanceService', function ($scope, $parse, $window, $routeParams, AttendanceService) {
         var students = [], retrievedAttendance, startEndTime;
 
         $scope.attendance = [];         // list of attendance record of students
         $scope.sectionDetails = {};     // details of the section
         $scope.weekStart = 1;           // monday = 1
         $scope.weeks = getWeek();
-        //console.log($scope.attendance);
 
         // get section details given the section id
-        AttendanceService.GetSection($routeParams.id)
+        AttendanceService.GetSection($routeParams.id2)
         .then(function(data1){
             $scope.sectionDetails = data1;
             startEndTime = getStartEndDateTime();
 
             // get students enrolled in a section
             // get attendance by section
-            AttendanceService.GetStudents($routeParams.id)
+            AttendanceService.GetStudentsBySection($routeParams.id2)
             .then(function(data2){
                 students = data2;
-                AttendanceService.GetAttendance($routeParams.id)
+
+                AttendanceService.GetAttendance($routeParams.id2)
                 .then(function(data3){
                     retrievedAttendance = data3;
-                    //console.log(retrievedAttendance);
                     viewAttendance(data2, data3);
                 });
+            }, function(error){
+                $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/classlist';
             });
 
         });
@@ -65,11 +66,11 @@
                     case 2: { desc = "Absent"; break; }
                     case 3: { desc = "Excused"; break; }
                 }
-                //console.log(attended);
+
                 if(id==0){
                     var d = new Date($scope.weeks[attendanceIndex]);
                     d.setUTCHours(startEndTime[0], startEndTime[1], 0, 0);
-                    //console.log(d);
+
                     AttendanceService.AddAttendance({'courseId': $scope.sectionDetails.courseId, 'sectionId': $scope.sectionDetails.sectionId, 'status': desc, 'attended': d, 'studentNumber': $scope.attendance[index].studentNumber})
                     .then(function(data1){
                         $scope.attendance[index].attendance[attendanceIndex] = status;
