@@ -9,23 +9,23 @@
 
 	function AttendanceService($http, $q){
 		var attendance_url = "/api/attendance/";
-		var attendance_section_url = "/api/attendance/section";
-		var section_student_url = "/api/sections/student";
-		var section_url = "/api/sections";
+		var attendance_section_url = "/api/attendance/section/";
+		var section_student_url = "/api/sections/student/";
+		var section_url = "/api/sections/";
 
 		var service = {};
 		service.GetSection = GetSection;
 		service.GetStudents = GetStudents;
 		service.GetAttendance = GetAttendance;
-		service.GetAll = GetAll;
 		service.AddAttendance = AddAttendance;
 		service.EditAttendance = EditAttendance;
 		return service;
 
+		// get section details
 		function GetSection(id){
         	var deferred = $q.defer();
 
-			$http.get(section_url+'/'+id)
+			$http.get(section_url+id)
         	.success(function (data){
         		deferred.resolve(data);
 	        })
@@ -36,12 +36,11 @@
 	        return deferred.promise;
         };
 
+        // get attendance record of a section
         function GetAttendance(id){
         	var deferred = $q.defer();
-        	//var promises = weeks.map(function(week){
-        		//return $http.get(attendance_url, {params:{sectionId:sectionId,studentNumber:studentNumber,attended:week}});
-        	//});
-			$http.get(attendance_section_url+'/'+id)
+
+			$http.get(attendance_section_url+id)
 			.success(function (data){
         		deferred.resolve(data);
 	        })
@@ -52,10 +51,11 @@
 	        return deferred.promise;
         };
 
+        // get students enrolled in the section
         function GetStudents(id){
         	var deferred = $q.defer();
 
-			$http.get(section_student_url+'/'+id)
+			$http.get(section_student_url+id)
         	.success(function (data){
         		deferred.resolve(data);
 	        })
@@ -66,20 +66,7 @@
 	        return deferred.promise;
         };
 
-        function GetAll(){
-        	var deferred = $q.defer();
-
-			$http.get(course_url)
-        	.success(function (data){
-        		deferred.resolve(data);
-	        })
-	        .error(function (data, status){
-	        	deferred.reject(status);
-	        });
-
-	        return deferred.promise;
-        };
-
+        // add attendance record of student
         function AddAttendance(attendance){
         	var deferred = $q.defer();
 
@@ -94,6 +81,7 @@
 	        return deferred.promise;
         };
 
+        // edit attendance status of student
         function EditAttendance(user,id){
         	var deferred = $q.defer();
 

@@ -35,3 +35,11 @@ table > thead > tr > th > .cal-buttons {
 	width: 100%;
 	height: 100%;
 }
+
+.csv-form-child {
+	margin-left: -18px;
+}
+
+.csv-success {
+	margin-left: 100px;
+}

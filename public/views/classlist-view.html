@@ -1,0 +1,22 @@
+<h1>Classlist</h1>
+<div class="default well csv-form col-md-5">
+    <div class="form-group">
+        <label class="control-label" for="classlist" style="display: inline">Select your CSV file</label>
+        <div class="csv-form-child">
+            <ng-csv-import 
+            class="import"
+            content="csv.content"
+            header="csv.header" 
+            header-visible="csv.headerVisible" 
+            separator="csv.separator"
+            separator-visible="csv.separatorVisible"
+            result="csv.result"
+            encoding="csv.encoding"
+            encoding-visible="csv.encodingVisible">
+            </ng-csv-import>
+        </div>
+        <button class="btn btn-primary" ng-click="parseCSV(csv.content)">Submit</button>
+    </div>
+</div>
+
+<div class="csv-success col-md-4" ng-if="finished"><h3>Upload Successful!</h3></div>

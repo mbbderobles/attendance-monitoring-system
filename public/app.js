@@ -15,15 +15,20 @@
     .when('/', {
       templateUrl: 'views/home-view.html'
     })
-    .when('/attendance/:id', {
-      templateUrl: 'views/attendance-view.html',
-      controller: 'AttendanceCtrl',
-      privilege: 3
-    })
     .when('/courses', {
       templateUrl: 'views/course-view.html',
       controller: 'CourseCtrl',
       privilege: 3
+    })
+    .when('/sections/:id/attendance', {
+      templateUrl: 'views/attendance-view.html',
+      controller: 'AttendanceCtrl',
+      privilege: 3
+    })
+    .when('/sections/:id/classlist', {
+      templateUrl: 'views/classlist-view.html',
+      controller: 'ClasslistCtrl',
+      privilege: 2
     })
     .when('/sections/:id', {
       templateUrl: 'views/section-by-course-view.html',
