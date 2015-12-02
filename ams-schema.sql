@@ -83,6 +83,6 @@ CREATE TABLE attendance_record(
     sectionId int(10) NOT NULL,
     studentNumber varchar(10) NOT NULL,
     attended TIMESTAMP NOT NULL,
-    status int DEFAULT 0,
+    status varchar(10) DEFAULT 'Present',           -- Present, Absent, Excused
     PRIMARY KEY(attendanceId)
 );
