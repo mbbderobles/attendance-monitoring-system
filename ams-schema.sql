@@ -86,3 +86,5 @@ CREATE TABLE attendance_record(
     status varchar(10) DEFAULT 'Present',           -- Present, Absent, Excused
     PRIMARY KEY(attendanceId)
 );
+
+ALTER TABLE attendance_record CHANGE attended attended TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
