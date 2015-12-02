@@ -78,7 +78,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="course in courses | orderBy:sortType:sortReverse | filter:searchCourse">
-			<td><a href="/#/sections/{{course.courseId}}">{{course.courseNum}}</a></td>
+			<td><a href="/#/courses/{{course.courseId}}/sections">{{course.courseNum}}</a></td>
 			<td>{{course.courseTitle}}</td>
 			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewCourse(course.courseId)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteCourse(course.courseId)"><span class="glyphicon glyphicon-remove"></span></button></td>
 		</tr>

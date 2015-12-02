@@ -1,21 +1,22 @@
-<div class="block row">
-  <div class="title"><h4>Select your CSV file: </h4></div>
-    <div class="block right">
-      <ng-csv-import 
-        class="import"
-        content="csv.content"
-        header="csv.header" 
-        header-visible="csv.headerVisible" 
-        separator="csv.separator"
-        separator-visible="csv.separatorVisible"
-        result="csv.result"
-        encoding="csv.encoding"
-        encoding-visible="csv.encodingVisible">
-      </ng-csv-import>
-      <button ng-click="parseCSV(csv.content)">Submit</button>
+<h1>Course Offering</h1>
+<div class="default well csv-form col-md-6">
+    <div class="form-group">
+        <label class="control-label" for="course-offering" style="display: inline">Select your CSV file</label>
+        <div class="csv-form-child">
+            <ng-csv-import 
+            class="import"
+            content="csv.content"
+            header="csv.header" 
+            header-visible="csv.headerVisible" 
+            separator="csv.separator"
+            separator-visible="csv.separatorVisible"
+            result="csv.result"
+            encoding="csv.encoding"
+            encoding-visible="csv.encodingVisible">
+            </ng-csv-import>
+        </div>
+        <button class="btn btn-primary" ng-click="parseCSV(csv.content)">Submit</button>
     </div>
-</div> 
-
-<div class="block row"  ng-if="finished">
-  <h3>Successful!</h3>
 </div>
+
+<div class="csv-success col-md-4" ng-if="finished"><h3>Upload Successful!</h3></div>
