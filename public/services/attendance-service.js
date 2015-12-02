@@ -9,8 +9,8 @@
 
 	function AttendanceService($http, $q){
 		var attendance_url = "/api/attendance/";
-		var attendance_section_url = "/api/attendance/section/";
-		var section_student_url = "/api/sections/student/";
+		var attendance_section_url = "/api/attendance/sections/";
+		var section_student_url = "/api/sections/students/";
 		var section_url = "/api/sections/";
 
 		var service = {};

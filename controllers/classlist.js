@@ -1,31 +1,42 @@
 var	db = require(__dirname + '/../config/mysql');
 
 exports.find = function(req, res, next) {
-	db.query("SELECT * FROM course", function(err, rows) {
+	db.query("SELECT * FROM student_section", function(err, rows) {
 		if (err) return next(err);
 		res.send(rows);
 	});
 };
 
 
-exports.findOne = function(req, res, next) {
-	db.query("SELECT * FROM course WHERE courseId=?", [req.params.id], function(err, rows) {
+exports.findStudentsBySection = function(req, res, next) {
+	db.query("SELECT * FROM student_section NATURAL JOIN student NATURAL JOIN user NATURAL JOIN section NATURAL JOIN course WHERE sectionId=?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
-			res.status(404).send('Course not found.');
+			res.status(404).send('Record not found.');
 		} else {
-			res.send(rows[0]);
+			res.send(rows);
+		}
+	});
+};
+
+exports.findSectionsOfStudent = function(req, res, next) {
+	db.query("SELECT * FROM student_section WHERE studentNumber=?", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			res.status(404).send('Record not found.');
+		} else {
+			res.send(rows);
 		}
 	});
 };
 
 
 exports.insert = function(req, res, next) {
-	db.query("INSERT INTO course(courseNum,courseTitle) VALUES(?,?)", [req.body.courseNum, req.body.courseTitle], function(err, row) {
+	db.query("INSERT INTO student_section(studentNumber,sectionId) VALUES(?,?)", [req.body.studentNumber, req.body.sectionId], function(err, row) {
 		if (err) return next(err);
 		selectOne(row.insertId, function(newRow) {
 			if (!newRow) {
-				res.status(552).send('Course ('+ row.insertId +') was not created.');
+				res.status(552).send('Record ('+ row.insertId +') was not created.');
 			} else {
 				res.send(newRow);
 			}
@@ -35,11 +46,11 @@ exports.insert = function(req, res, next) {
 
 
 exports.update = function(req, res, next) {
-	db.query("UPDATE course SET ? WHERE courseId=?", [req.body, req.params.id], function(err, rows) {
+	db.query("UPDATE student_section SET ? WHERE id=?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
-		selectOne(req.params.id, function(updatedRow) {
+		selectOne(row.insertId, function(updatedRow) {
 			if (!updatedRow) {
-				res.status(553).send('Course ('+req.params.id+') was not updated.');
+				res.status(553).send('Record ('+row.insertId+') was not updated.');
 			} else {
 				res.send(updatedRow);
 			}
@@ -49,10 +60,10 @@ exports.update = function(req, res, next) {
 
 
 exports.remove = function(req, res, next) {
-	db.query("DELETE FROM course WHERE courseId=?", [req.params.id], function(err, row) {
+	db.query("DELETE FROM student_section WHERE id=?", [req.params.id], function(err, row) {
 		if (err) return next(err);
 		if (row.affectedRows === 0) {
-			res.send(554, {message: 'Course ('+req.params.id+') was not removed.'});
+			res.send(554, {message: 'Record ('+row.insertId+') was not removed.'});
 		} else {
 			res.send(row);
 		}
@@ -62,7 +73,7 @@ exports.remove = function(req, res, next) {
 
 
 var selectOne = function(id, callback) {
-	db.query("SELECT * FROM course WHERE courseId=? LIMIT 1", [id], function(err, rows) {
+	db.query("SELECT * FROM student_section WHERE id=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			callback(null);

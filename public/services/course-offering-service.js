@@ -17,7 +17,6 @@
 		service.AddCourse = AddCourse;
 		service.AddUser = AddUser;
 		service.AddTeacher = AddTeacher;
-		service.AddSection = AddSection;
 		service.AddCourseOffering = AddCourseOffering;
 		return service;
 
@@ -113,10 +112,6 @@
 	        });
 
 	        return deferred.promise;
-        };
-
-        function AddSection(data){
-        	console.log('section:'+data);
         };
 	}
 

@@ -8,7 +8,7 @@
 	SectionByCourseService.$inject = ["$http", "$q"];
 
 	function SectionByCourseService($http, $q){
-		var section_url = "/api/sections/course";
+		var section_url = "/api/sections/courses";
 		var course_url = "/api/courses/";
 
 		var service = {};

@@ -70,9 +70,10 @@ CREATE TABLE section(
 
 DROP TABLE IF EXISTS student_section;
 CREATE TABLE student_section(
-    id int(11) NOT NULL,
+    studentSectionId int(11) AUTO_INCREMENT,
+    studentNumber varchar(10) NOT NULL,
     sectionId int(10) NOT NULL,
-    PRIMARY KEY(id, sectionId)
+    PRIMARY KEY(studentSectionId)
 );
 
 

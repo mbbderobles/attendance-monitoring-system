@@ -5,6 +5,7 @@ var teacher = require('./../controllers/teacher');
 var course = require('./../controllers/course');
 var section = require('./../controllers/section');
 var attendance = require('./../controllers/attendance');
+var classlist = require('./../controllers/classlist');
 
 module.exports = function(router) {
 
@@ -22,6 +23,9 @@ module.exports = function(router) {
 		.get(user.findOne)
 		.put(user.update)
 		.delete(user.remove);
+
+	router.route('/api/users/email/:id')
+		.get(user.findUserByEmail);
 
 	router.route('/api/students')
 		.get(student.find)
@@ -59,26 +63,28 @@ module.exports = function(router) {
 		.put(section.update)
 		.delete(section.remove);
 
-	router.route('/api/sections/course/:id')
+	router.route('/api/sections/courses/:id')
 		.get(section.findAllByCourse);
 
-	router.route('/api/sections/student/:id')
-		.get(attendance.findStudentsBySection);
+	router.route('/api/sections/students')
+		.get(classlist.find)
+		.post(classlist.insert);
+
+	router.route('/api/sections/students/:id')
+		.get(classlist.findStudentsBySection)
+		.put(classlist.update)
+		.delete(classlist.remove);
 
 	router.route('/api/attendance')
 		.get(attendance.find)
 		.post(attendance.insert);
 
-	router.route('/api/attendance/section/:id')
-		.get(attendance.findBySection);
-
-	router.route('/api/attendance/section')
-		.post(attendance.findOne);
+	router.route('/api/attendance/sections/:id')
+		.get(attendance.findAttendanceBySection);
 
 	router.route('/api/attendance/:id')
 		.put(attendance.update)
 		.delete(attendance.remove);
-
 	
 	/*router.all('*', function (req, res, next) {
 		res.status(404).send('Nothing to do here.');

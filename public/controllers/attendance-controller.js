@@ -104,7 +104,6 @@
                                 d1 = new Date(retrievedAttendance[i].attended);
                                 d2 = createDate($scope.weeks[j], startEndTime[0], startEndTime[1], 0, 0);
                                 d3 = createDate($scope.weeks[j], startEndTime[2], startEndTime[3], 0, 0);
-                                console.log(d1+d2+d3);
                                 if(d1.getTime() >= d2.getTime() && d1.getTime() <= d3.getTime()){
                                     id[j] = retrievedAttendance[i].attendanceId;
                                     if(retrievedAttendance[i].status == "Excused"){ at[j] = 3; }

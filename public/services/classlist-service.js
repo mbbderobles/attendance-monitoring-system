@@ -8,86 +8,39 @@
 	ClasslistService.$inject = ["$http", "$q"];
 
 	function ClasslistService($http, $q){
-		var course_url = "/api/courses";
+		var classlist_url = "/api/sections/students";
+		var student_url = '/api/students';
+		var user_url = '/api/users';
 
 		var service = {};
-		service.AddCourse = AddCourse;
-		service.AddUser = AddUser;
-		service.AddTeacher = AddTeacher;
-		service.AddSection = AddSection;
 		service.AddClasslist = AddClasslist;
+		service.GetStudents = GetStudents;
+		service.AddUsers = AddUsers;
 		return service;
 
-		function AddClasslist(files){
-			var cId, sem=files[0][0], year=files[0][1];
-			files.shift();
-
+		function AddUsers(files,sectionId){
 			var promises = files.map(function(file) {
-				var course={}, user={}, teacher={}, section={};
+				var user = {'lastName': file[1], 'firstName': file[2], 'middleName': file[3], 'emailAddress': file[6]};
+				var student = {'studentNumber': file[0], 'sex': '', 'degree': file[4], 'college': file[5]};
+				var classlist = {'studentNumber': file[0], 'sectionId': sectionId};
 				
-				if(file.length == 3){
-					course.courseNum = file[0];
-					course.courseTitle = file[1];
-					$http.post(course_url,course)
-					.then(function(data3){
-						cId = data3.data.courseId;
-						console.log("2 "+cId);
+				$http.post(user_url, user)
+				.then(function(data1){
+					student['id'] = data1.id;
+					$http.post(student_url, student)
+					.then(function(data2){
+						return $http.post(classlist_url, classlist)
 					});
-
-					return;
-				}else{
-					console.log(cId);
-					user.lastName = file[4];
-					user.middleName = "";
-					user.firstName = "";
-					user.emailAddress = file[5];
-					$http.post(user_url,user)
-					.then(function(data1){
-						teacher.id = data1.data.id;
-						teacher.employeeId = file[6];
-						teacher.unit = "";
-						teacher.position = "";
-						$http.post(teacher_url,teacher)
-						.then(function(data2){
-
-							section.sectionCode = file[0];
-							section.employeeId = data2.data.employeeId;
-							
-							section.courseId = cId;
-							section.day = file[2];
-							section.time = file[1];
-							section.room = file[3];
-							section.semester = sem;
-							section.year = year;
-							return $http.post(section_url,section);
-						});
-					});
-				}
-
+				});
 		    });
 		    
 		    return $q.all(promises);
 		}
 
-		function AddCourse(data){
-			console.log('course:'+data);
-			var deferred = $q.defer();
-
-			$http.post(course_url, data)
-        	.success(function (data){
-        		deferred.resolve(data);
-	        })
-	        .error(function (data, status){
-	        	deferred.reject(status);
-	        });
-
-	        return deferred.promise;
-        };
-
-        function AddUser(data){
+		function AddClasslist(classlist){
         	var deferred = $q.defer();
 
-			$http.post(user_url, data)
+			$http.post(classlist_url, classlist)
         	.success(function (data){
         		deferred.resolve(data);
 	        })
@@ -98,10 +51,10 @@
 	        return deferred.promise;
         };
 
-        function AddTeacher(data){
+		function GetStudents(sectionId){
         	var deferred = $q.defer();
 
-			$http.post(teacher_url, data)
+			$http.get(student_url)
         	.success(function (data){
         		deferred.resolve(data);
 	        })
@@ -110,10 +63,6 @@
 	        });
 
 	        return deferred.promise;
-        };
-
-        function AddSection(data){
-        	console.log('section:'+data);
         };
 	}
 

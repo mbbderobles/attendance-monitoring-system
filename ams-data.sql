@@ -29,9 +29,5 @@ insert into user(firstName,middleName,lastName,emailAddress) values ('Leslie','C
 insert into student values((select id from user where emailAddress='lcledera@gmail.com'),'2010-44329','F','BSN','CHE');
 
 
-insert into section values('2015-12345', 1);
-insert into section values('2011-61214', 1);
-insert into section values('2010-32214', 1);
-insert into section values('2009-60855', 1);
-insert into section values('2011-49156', 1);
-insert into section values('2010-32214', 2);
+insert into student_section(studentNumber, sectionId) values('200960855', 1);
+insert into student_section(studentNumber, sectionId) values('201149156', 1);
