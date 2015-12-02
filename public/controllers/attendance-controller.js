@@ -17,20 +17,23 @@
         .then(function(data1){
             $scope.sectionDetails = data1;
             startEndTime = getStartEndDateTime();
+
+            // get students enrolled in a section
+            // get attendance by section
+            AttendanceService.GetStudents($routeParams.id)
+            .then(function(data2){
+                students = data2;
+                AttendanceService.GetAttendance($routeParams.id)
+                .then(function(data3){
+                    retrievedAttendance = data3;
+                    //console.log(retrievedAttendance);
+                    viewAttendance(data2, data3);
+                });
+            });
+
         });
 
-        // get students enrolled in a section
-        // get attendance by section
-        AttendanceService.GetStudents($routeParams.id)
-        .then(function(data2){
-            students = data2;
-            AttendanceService.GetAttendance($routeParams.id)
-            .then(function(data3){
-                retrievedAttendance = data3;
-                //console.log(retrievedAttendance);
-                viewAttendance(data2, data3);
-            });
-        });
+        
 
         // adjust the calendar to next week
         $scope.nextWeek = function(){

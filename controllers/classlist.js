@@ -46,7 +46,7 @@ exports.insert = function(req, res, next) {
 
 
 exports.update = function(req, res, next) {
-	db.query("UPDATE student_section SET ? WHERE id=?", [req.params.id], function(err, rows) {
+	db.query("UPDATE student_section SET ? WHERE studentSectionId=?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
 		selectOne(row.insertId, function(updatedRow) {
 			if (!updatedRow) {
@@ -60,7 +60,7 @@ exports.update = function(req, res, next) {
 
 
 exports.remove = function(req, res, next) {
-	db.query("DELETE FROM student_section WHERE id=?", [req.params.id], function(err, row) {
+	db.query("DELETE FROM student_section WHERE studentSectionId=?", [req.params.id], function(err, row) {
 		if (err) return next(err);
 		if (row.affectedRows === 0) {
 			res.send(554, {message: 'Record ('+row.insertId+') was not removed.'});
@@ -73,7 +73,7 @@ exports.remove = function(req, res, next) {
 
 
 var selectOne = function(id, callback) {
-	db.query("SELECT * FROM student_section WHERE id=? LIMIT 1", [id], function(err, rows) {
+	db.query("SELECT * FROM student_section WHERE studentSectionId=? LIMIT 1", [id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			callback(null);
