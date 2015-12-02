@@ -4,3 +4,6 @@ package prerequisites:
 
 compilation:
 	gcc record_parser.c -std=c99 `mysql_config --cflags --libs` `xml2-config --cflags --libs`
+	
+execution:
+    ./a.out sample.xml

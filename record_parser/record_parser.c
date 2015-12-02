@@ -1,15 +1,18 @@
+#define __USE_XOPEN
+#define _GNU_SOURCE
+
 #include <mysql.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <libxml/parser.h>
 
-// Change this to the location of the xml to be parsed.
-#define loc "attendancedb.xml"
-
 void exit_with_error(MYSQL *con);
+void set_timestamp(char * timestamp, int *day, int *hour, int *min);
+void set_times(char * time, int *start_h, int *start_m, int *end_h, int *end_m);
 
-int main(){
+int main(int argc, char *argv[]){
 
 	MYSQL *con = mysql_init(NULL);
 
@@ -18,6 +21,13 @@ int main(){
 	xmlChar *subject, *studentNumber, *name, *timestamp;
 	
 	char query[9999];
+	MYSQL_RES *result;
+	MYSQL_ROW row;
+	int day, hour, min;
+	int start_h, start_m, end_h, end_m;
+	
+	int i;
+	char sectionId[100];
 
 	// Establish MySQL connection
 	if(con == NULL){
@@ -30,8 +40,8 @@ int main(){
 	}
 
 	// Parse XML file using libxml2
-	
-	doc = xmlParseFile(loc);
+	// XML to parse is passed as an argument
+	doc = xmlParseFile(argv[1]);
 	root = xmlDocGetRootElement(doc);
 	
 	for(node1 = root->xmlChildrenNode; node1; node1 = node1->next){
@@ -48,7 +58,41 @@ int main(){
 	            timestamp = xmlNodeListGetString(doc, node2->xmlChildrenNode, 1);
 	        }
 	    }
-        strcpy(query, "INSERT INTO attendance_record (courseId, sectionId, studentNumber, attended) SELECT courseId, 0, \'");
+	    
+	    // Find section using course and timestamp
+	    strcpy(query, "SELECT courseId, courseNum, sectionId, day, time FROM course NATURAL JOIN section WHERE courseNum=\"");
+	    strcat(query, subject);
+	    strcat(query, "\";");
+	    if(mysql_query(con, query)){
+	        exit_with_error(con);
+	    }
+	    
+	    result = mysql_store_result(con);
+	    if(result == NULL){
+            exit_with_error(con);
+        }
+        
+        set_timestamp(timestamp, &day, &hour, &min);
+        strcpy(sectionId, "0");
+        
+        while(row = mysql_fetch_row(result)){
+            set_times(row[4], &start_h, &start_m, &end_h, &end_m);
+            for(i=0; i<strlen(row[3]); i++){
+                if(row[3][i]-'0' == day){
+                    //printf("%d %d vs %d %d vs %d %d\n", hour, min, start_h, start_m, end_h, end_m);
+                    if(hour >= start_h && hour < end_h){
+                        strcpy(sectionId, row[2]);
+                    }
+                }
+            }
+        }
+        
+        mysql_free_result(result);
+	    
+	    // Build the string query for insert
+        strcpy(query, "INSERT INTO attendance_record (courseId, sectionId, studentNumber, attended) SELECT courseId, ");
+        strcat(query, sectionId);
+        strcat(query, ", \'");
         strcat(query, studentNumber);
         strcat(query, "\', STR_TO_DATE(\'");
         strcat(query, timestamp);
@@ -56,7 +100,7 @@ int main(){
         strcat(query, subject);
         strcat(query, "\";");
         //printf("%s\n", query);
-        
+
         if(mysql_query(con, query)){
             exit_with_error(con);
         }
@@ -72,5 +116,49 @@ void exit_with_error(MYSQL *con){
 	fprintf(stderr, "%s\n", mysql_error(con));
 	mysql_close(con);
 	exit(1);
+}
+
+void set_timestamp(char * timestamp, int *day, int *hour, int *min){
+
+    struct tm tm;
+    
+    strptime(timestamp, "%m/%d/%Y %I:%M %p", &tm);
+    *day =  tm.tm_wday;
+    *hour = tm.tm_hour;
+    *min = tm.tm_min;
+    
+}
+
+void set_times(char * time, int *start_h, int *start_m, int *end_h, int *end_m){
+
+    int i, j;
+    char temp[3];
+    
+    for(i=0, j=0; time[i]!=':'; i++){
+        temp[j++] = time[i];
+    }
+    temp[j] = '\0';
+    *start_h = atoi(temp);
+    if(*start_h < 7) *start_h+=12;
+    i++;
+    for(j=0; time[i]!='-'; i++){
+        temp[j++] = time[i];
+    }
+    temp[j] = '\0';
+    i++;
+    *start_m = atoi(temp);
+    for(j=0; time[i]!=':'; i++){
+        temp[j++] = time[i];
+    }
+    temp[j] = '\0';
+    *end_h = atoi(temp);
+    if(*end_h <= 7) *end_h+=12;
+    i++;
+    for(j=0; time[i]!='\0'; i++){
+        temp[j++] = time[i];
+    }
+    temp[j] = '\0';
+    *end_m = atoi(temp);
+    
 }
 
