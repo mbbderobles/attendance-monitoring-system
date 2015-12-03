@@ -41,15 +41,12 @@
                 ClasslistService.GetStudentsBySection($routeParams.id2)
                 .then(function(data3){
                     students_enrolled = data3;
-                    console.log('here');
                     addClasslist(myData, students, students_enrolled);
 
-                }, function(fallback1){                 // not students enrolled in the section
-                    console.log('fallback1');
+                }, function(fallback1){                                 // not students enrolled in the section
                     addClasslist(myData, students, students_enrolled);
                 });
-            }, function(fallback2){                     // no students yet
-                console.log('fallback2');
+            }, function(fallback2){                                     // no students yet
                 addClasslist(myData, students, students_enrolled);
             });
 
@@ -61,29 +58,34 @@
 
             while(i < myData.length){
                 myData[i] = myData[i].split(',');
-                if(checkStudent(students,myData[i][6])){                // if student already exists
-                    if(!(checkStudent(students_enrolled,myData[i][6]) && checkStudent(students_enrolled,myData[i][0]))){ // if student is not yet enrolled
+                if(checkStudent(students,'emailAddress',myData[i][6])){                // if student already exists
+                    if(!(checkStudent(students_enrolled, 'emailAddress', myData[i][6]) && checkStudent(students_enrolled,'studentNumber',myData[i][0]))){ // if student is not yet enrolled
                         ClasslistService.AddClasslist({'studentNumber': myData[i][0], 'sectionId': $routeParams.id2});
                     }
                 }else{
-                    data.push(myData[i]);
+                    data.push(myData[i]);               // store non-existent students to be add later
                 }
                 i++;
             }
 
-            // add new students
-            ClasslistService.AddUsers(data, $routeParams.id2)
-            .then(function(data1){
+            if(data.length != 0){
+                // add new students
+                ClasslistService.AddUsers(data, $routeParams.id2)
+                .then(function(data1){
+                    $scope.finished = true;
+                    $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/attendance';
+                });
+            }else{
                 $scope.finished = true;
                 $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/attendance';
-            });
+            }
         }
 
         // check if student already exists
-        function checkStudent(students,property){
+        function checkStudent(students,property,value){
             var i=0;
             while(i < students.length){
-                if(students[i][property] == property){
+                if(students[i][property] == value){
                     return true;
                 }
                 i++;
