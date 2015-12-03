@@ -8,10 +8,13 @@
 	SectionByCourseService.$inject = ["$http", "$q"];
 
 	function SectionByCourseService($http, $q){
-		var section_url = "/api/sections/courses";
+		var section_course_url = "/api/sections/courses";
+		var section_url = "/api/sections";
 		var course_url = "/api/courses/";
+		var teacher_url = "/api/teachers";
 
 		var service = {};
+		service.GetTeachers = GetTeachers;
 		service.GetAllByCourse = GetAllByCourse;
 		service.GetCourse = GetCourse;
 		service.AddSection = AddSection;
@@ -36,7 +39,7 @@
         function GetAllByCourse(id){
         	var deferred = $q.defer();
 
-			$http.get(section_url+'/'+id)
+			$http.get(section_course_url+'/'+id)
         	.success(function (data){
         		deferred.resolve(data);
 	        })
@@ -47,6 +50,20 @@
 	        return deferred.promise;
         };
 
+        function GetTeachers(){
+        	var deferred = $q.defer();
+
+			$http.get(teacher_url)
+        	.success(function (data){
+        		deferred.resolve(data);
+	        })
+	        .error(function (data, status){
+	        	deferred.reject(status);
+	        });
+
+	        return deferred.promise;
+        };
+        
         function AddSection(user){
         	var deferred = $q.defer();
 

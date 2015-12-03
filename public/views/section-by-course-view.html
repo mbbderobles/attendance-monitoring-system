@@ -1,41 +1,219 @@
 <h1> <a href="/#/courses"><i title="Back to Courses" class="fa fa-arrow-circle-left"></i></a> {{courseDetails.courseNum}} Sections </h1>
 <button style="float:right" title="Add a new Section" type="button" class="btn btn-success btn-s" ng-click="addSBC = !addSBC"><span class="glyphicon glyphicon-plus"></span></button>
 
-<div class="default" ng-show="addSBC" style="margin: 0 auto">
-	<form ng-submit="AddSection()">
-		<input type="text" placeholder="Section Code" ng-model="newSection.sectionCode" /> <br/>
-		<input type="text" placeholder="Instructor" ng-model="newSection.employeeId" /> <br/>
-		<input type="text" placeholder="Day" ng-model="newSection.day" /> <br/>
-		<input type="text" placeholder="Time" ng-model="newSection.time" /> <br/>
-		<input type="text" placeholder="Room" ng-model="newSection.room" /> <br/>
-		<input type="submit" value="Add Section" class="btn btn-primary btn-xs" />
-	</form>
+
+<!--Add Section Form-->
+<div class="default well" ng-show="addSBC" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="AddSection()">
+		<legend>Add Section</legend>
+		
+		<!-- Section Code -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="sectionCode">Section Code</label>  
+			<div class="col-md-5">
+				<input id="sectionCode" name="sectionCode" class="form-control input-md" required="" type="text" ng-model="newSection.sectionCode" />
+			</div>
+		</div>
+
+		<!-- Instructor -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="employeeId">Instructor</label>
+			<div class="col-md-5">
+				<select id="employeeId" name="employeeId" class="form-control"
+					ng-options="teacher.employeeId as teacher.lastName for teacher in teachers"
+					ng-model="newSection.employeeId">
+				</select>
+			</div>
+		</div>
+
+		<!-- Day -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="day">Day</label>
+			<div class="col-md-5">
+				<select multiple="" id="day" name="day" class="form-control" ng-model="sectionDays">
+					<option value="S"> Sunday </option>
+					<option value="M"> Monday </option>
+					<option value="T"> Tuesday </option>
+					<option value="W"> Wednesday </option>
+					<option value="Th"> Thursday </option>
+					<option value="F"> Friday </option>
+					<option value="Sa"> Saturday </option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Start Time -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="time"> Start time</label>  
+			<div class="col-md-5">
+				<input id="time" name="time" class="form-control input-md" required="" placeholder="e.g. 1:00" type="text" ng-model="startTime" />
+			</div>
+		</div>
+
+		<!-- End Time -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="time"> End time</label>  
+			<div class="col-md-5">
+				<input id="time" name="time" class="form-control input-md" required="" placeholder="e.g. 4:00" type="text" ng-model="endTime" />
+			</div>
+		</div>
+
+		<!-- Room -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="room">Room</label>  
+			<div class="col-md-5">
+				<input id="room" name="room" class="form-control input-md" required="" type="text" ng-model="newSection.room" />
+			</div>
+		</div>
+
+		<!-- Semester -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="semester">Semester</label>
+			<div class="col-md-5">
+				<select id="semester" name="semester" class="form-control" ng-model="newSection.semester">
+					<option value="1"> 1st </option>
+					<option value="2"> 2nd </option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Year -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="year">Year</label>  
+			<div class="col-md-5">
+				<input id="year" name="year" class="form-control input-md" required="" type="text" ng-model="newSection.year" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="addSection"></label>
+			<div class="col-md-4">
+				<input type="submit" id="addSection" name="addSection" placeholder="e.g. 2015-2016" class="btn btn-primary" value="Add Section" />
+			</div>
+		</div>
+	</form> <!--/add section-->
 </div>
 
-<div class="default" ng-show="editSBC" style="margin: 0 auto">
-	<form ng-submit="EditSection()">
-		<input type="text" placeholder="Section Code" ng-model="editSection.sectionCode" /> <br/>
-		<input type="text" placeholder="Instructor" ng-model="editSection.employeeId" /> <br/>
-		<input type="text" placeholder="Day" ng-model="editSection.day" /> <br/>
-		<input type="text" placeholder="Time" ng-model="editSection.time" /> <br/>
-		<input type="text" placeholder="Year" ng-model="editSection.year" /> <br/>
-		<input type="submit" value="Edit Section" class="btn btn-primary btn-xs" />
-	</form>
+<!--Edit Section Form-->
+<div class="default well" ng-show="editSBC" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="EditSection()">
+		<legend>Add Section</legend>
+		
+		<!-- Section Code -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="sectionCode">Section Code</label>  
+			<div class="col-md-5">
+				<input id="sectionCode" name="sectionCode" class="form-control input-md" required="" type="text" ng-model="editSection.sectionCode" />
+			</div>
+		</div>
+
+		<!-- Instructor -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="employeeId">Instructor</label>
+			<div class="col-md-5">
+				<select id="employeeId" name="employeeId" class="form-control"
+					ng-options="teacher.employeeId as teacher.lastName for teacher in teachers"
+					ng-model="editSection.employeeId">
+				</select>
+			</div>
+		</div>
+
+		<!-- Day -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="day">Day</label>
+			<div class="col-md-5">
+				<select multiple="" id="day" name="day" class="form-control" ng-model="sectionDays">
+					<option value="S"> Sunday </option>
+					<option value="M"> Monday </option>
+					<option value="T"> Tuesday </option>
+					<option value="W"> Wednesday </option>
+					<option value="Th"> Thursday </option>
+					<option value="F"> Friday </option>
+					<option value="Sa"> Saturday </option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Start Time -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="time"> Start time</label>  
+			<div class="col-md-5">
+				<input id="time" name="time" class="form-control input-md" required="" type="text" ng-model="startTime" />
+			</div>
+		</div>
+
+		<!-- End Time -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="time"> End time</label>  
+			<div class="col-md-5">
+				<input id="time" name="time" class="form-control input-md" required="" type="text" ng-model="endTime" />
+			</div>
+		</div>
+
+		<!-- Room -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="room">Room</label>  
+			<div class="col-md-5">
+				<input id="room" name="room" class="form-control input-md" required="" type="text" ng-model="editSection.room" />
+			</div>
+		</div>
+
+		<!-- Semester -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="semester">Semester</label>
+			<div class="col-md-5">
+				<select id="semester" name="semester" class="form-control" ng-model="editSection.semester">
+					<option value="1"> 1st </option>
+					<option value="2"> 2nd </option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Year -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="year">Year</label>  
+			<div class="col-md-5">
+				<input id="year" name="year" class="form-control input-md" required="" type="text" ng-model="editSection.year" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="editSection"></label>
+			<div class="col-md-4">
+				<input type="submit" id="editSection" name="editSection" class="btn btn-primary" value="Edit Section" />
+			</div>
+		</div>
+	</form> <!--/add section-->
 </div>
+
+<!--Search Section Form-->
+<form>
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input type="text" class="form-control" placeholder="Search for a Section" ng-model="searchSection">
+		</div>      
+	</div>
+</form>
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Section Code</th>
-			<th>Instructor</th>
-			<th>Day</th>
-			<th>Time</th>
-			<th>Room</th>
+			<th><a ng-click="sortType = 'sectionCode'; sortReverse = !sortReverse">Section Code<span ng-show="sortType == 'sectionCode' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'sectionCode' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Instructor<span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'lastName' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'day'; sortReverse = !sortReverse">Day<span ng-show="sortType == 'day' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'day' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'time'; sortReverse = !sortReverse">Time<span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'room'; sortReverse = !sortReverse">Room<span ng-show="sortType == 'room' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'room' && sortReverse" class="fa fa-caret-up"></span></a></th>
 			<th>Edit / Delete</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="section in sections">
+		<tr ng-repeat="section in sections | orderBy:sortType:sortReverse | filter:searchSection">
 			<td><a href="/#/courses/{{courseDetails.courseId}}/sections/{{section.sectionId}}/attendance">{{section.sectionCode}}</a></td>
 			<td>{{section.lastName}}</td>
 			<td>{{section.day}}</td>
