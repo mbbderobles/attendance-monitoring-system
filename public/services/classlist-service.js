@@ -45,7 +45,6 @@
 				
 				$http.post(user_url, user)					// add user
 				.then(function(data1){
-					console.log(data1);
 					student['id'] = data1.data.id;
 					$http.post(student_url, student)		// add student
 					.then(function(data2){
