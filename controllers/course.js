@@ -19,6 +19,16 @@ exports.findOne = function(req, res, next) {
 	});
 };
 
+exports.findCourseByCourseNum = function(req, res, next) {
+	db.query("SELECT * FROM course WHERE courseNum=?", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			res.status(404).send('Course not found.');
+		} else {
+			res.send(rows[0]);
+		}
+	});
+};
 
 exports.insert = function(req, res, next) {
 	db.query("INSERT INTO course(courseNum,courseTitle) VALUES(?,?)", [req.body.courseNum, req.body.courseTitle], function(err, row) {

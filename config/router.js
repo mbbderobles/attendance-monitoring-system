@@ -53,10 +53,16 @@ module.exports = function(router) {
 		.get(course.findOne)
 		.put(course.update)
 		.delete(course.remove);
+		
+	router.route('/api/courses/number/:id')
+	    .get(course.findCourseByCourseNum);
 
 	router.route('/api/sections')
 		.get(section.find)
 		.post(section.insert);
+		
+	router.route('/api/sections/code/:courseNum/:sectionCode/:sem/:year')
+	    .get(section.findSectionBySectionCode);
 
 	router.route('/api/sections/:id')
 		.get(section.findOne)
