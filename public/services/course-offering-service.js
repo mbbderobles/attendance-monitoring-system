@@ -14,32 +14,32 @@
 		var section_url = "/api/sections";
 
 		var service = {};
-		service.AddCourse = AddCourse;
-		service.AddSection = AddSection;
-		service.AddUser = AddUser;
-		service.AddTeacher = AddTeacher;
 		service.AddCourseOffering = AddCourseOffering;
 		return service;
 
-		function AddCourseOffering(courses, c_count, sections, s_count){
+		function AddCourseOffering(courses, sections){
             
             var deferred = $q.defer();
-            var i;
             
-            for(i=0; i<c_count; i++){
-                AddCourse(courses[i]);
-                console.log(courses[i][0]);
-            }
-            
-            for(i=0; i<s_count; i++){
-                AddSection(sections[i]);
-                console.log(sections[i][0]);
-            }
+            AddCourses(courses)
+            .then(function(){
+                AddSections(sections);
+            });
             
             deferred.resolve();
             return deferred.promise;
             
-		}
+		};
+		
+        function AddCourses(courses, sections){
+        
+		    var promises = courses.map(function (course){
+                return AddCourse(course);
+            });
+            
+            return $q.all(promises);
+            
+        };
 
 		function AddCourse(data){
 
@@ -47,23 +47,30 @@
 			var course = {};
 
             $http.get(course_url+'/number/'+data[0])
-            .success(function (data1){
-                deferred.reject("Existing");
-            })
-            .error(function (data1, status){
+            .then(function (data1){
+                deferred.resolve();
+            }, function (data1, status){
                 course.courseNum = data[0];
                 course.courseTitle = data[1];
-                $http.post(course_url, course)
-            	.success(function (data2){
-            		deferred.resolve(data2);
-	            })
-	            .error(function (data2, status){
-	            	deferred.reject(status);
-	            });
+                $http.post(course_url, course).then(function (data2){
+                    deferred.resolve();
+                }, function (data, status){
+                    deferred.reject();
+                });
             });
 
 	        return deferred.promise;
-
+	        
+        };
+        
+        function AddSections(sections){
+        
+            var promises = sections.map(function (section){
+                return AddSection(section);
+            });
+            
+            return $q.all(promises);
+        
         };
         
         function AddSection(data){
@@ -71,14 +78,13 @@
             var section_promise = $q.defer();
             var course_promise = $q.defer();
             var user_promise = $q.defer();
-  
+
             var section = {}, user = {}, teacher = {};
             
             $http.get(section_url+'/code/'+data[7]+'/'+data[0]+'/'+data[8]+'/'+data[9])
-            .success(function (section_data){
+            .then(function (section_data){
                 section_promise.reject("Existing");
-            })
-            .error(function (section_data, status){
+            }, function (section_data){
                 section.sectionCode = data[0];
                 section.employeeId = data[6];
                 if(data[2] == "Sun"){
@@ -123,82 +129,56 @@
             });
             
             $http.get(course_url+'/number/'+data[7])
-            .success(function (course_data){
-                section.courseId = course_data.courseId;
+            .then(function (course_data){
+                section.courseId = course_data.data.courseId;
                 course_promise.resolve(course_data);
             });
             
             $http.get(user_url+'/email/'+data[5])
-            .success(function (user_data){
-                $http.get(teacher_url+'/'+user_data.id)
-                .success(function (teacher_data){
-                    section.employeeId = teacher_data.employeeId;
-                })
-                .error(function (teacher_data, status){
-                    teacher.id = user_data.id;
+            .then(function (user_data){
+                $http.get(teacher_url+'/'+user_data.data.id)
+                .then(function (teacher_data){
+                    section.employeeId = teacher_data.data.employeeId;
+                }, function(teacher_data){
+                    teacher.id = user_data.data.id;
 					teacher.employeeId = data[6];
 					teacher.unit = "";
 					teacher.position = "";
 					$http.post(teacher_url, teacher)
-					.success(function (teacher_data2){
-					    section.employeeId = teacher_data2.employeeId;
+					.then(function (teacher_data2){
+					    section.employeeId = teacher_data2.data.employeeId;
 					});
                 });
                 user_promise.resolve(user_data);
-            })
-            .error(function (user_data, status){
+            }, function(user_data){
                 user.lastName = data[4];
                 user.firstName = "";
                 user.middleName = "";
                 user.emailAddress = data[5];
                 $http.post(user_url, user)
-                .success(function (user_data2){
-                    teacher.id = user_data2.id;
+                .then(function (user_data2){
+                    teacher.id = user_data2.data.id;
 					teacher.employeeId = data[6];
 					teacher.unit = "";
 					teacher.position = "";
 					$http.post(teacher_url, teacher)
-					.success(function (teacher_data){
-					    section.employeeId = teacher_data.employeeId;
+					.then(function (teacher_data){
+					    section.employeeId = teacher_data.data.employeeId;
 					});
                 });
                 user_promise.resolve(user_data);
             });
             
-            $q.all([section_promise, course_promise, user_promise]).then(function() {
-                console.log(section);
-                //$http.post(section_url, section);
+            $q.all([section_promise.promise, course_promise.promise, user_promise.promise]).then(function() {
+                //console.log(section);
+                $http.post(section_url, section);
             });
         
-        }
-
-        function AddUser(data){
-        	var deferred = $q.defer();
-
-			$http.post(user_url, data)
-        	.success(function (data){
-        		deferred.resolve(data);
-	        })
-	        .error(function (data, status){
-	        	deferred.reject(status);
-	        });
-
-	        return deferred.promise;
         };
 
-        function AddTeacher(data){
-        	var deferred = $q.defer();
+        
 
-			$http.post(teacher_url, data)
-        	.success(function (data){
-        		deferred.resolve(data);
-	        })
-	        .error(function (data, status){
-	        	deferred.reject(status);
-	        });
-
-	        return deferred.promise;
-        };
+        
 	}
 
 })();

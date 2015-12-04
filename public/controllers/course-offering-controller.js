@@ -17,11 +17,11 @@
 
         $scope.parseCSV = function(myData){
             var data = myData.split('\n');
-            var i=0, c_count=0, s_count=0, courses={}, sections={}, temp_course;
+            var i=0, c_count=0, s_count=0, courses=[], sections=[], temp_course;
             var sem;
             var year;
 
-            // Create array from CSV
+            // Create array of courses and sections from CSV
             while(i < data.length){
                 data[i] = data[i].split(',');
                 if(data[i].length == 3){
@@ -34,29 +34,18 @@
                     sections[s_count][9] = year;
                     s_count++;
                 }else if(data[i].length == 2){
-                    sem = data[i][0];
+                    sem = data[i][0][0];
                     year = data[i][1];
                 }
                 i++;
             }
             
-            // Insert courses to DB
-            /*
-            for(i=0; i<c_count; i++){
-                CourseOfferingService.AddCourse(courses[i]);
-            }
-            
-            // Insert sections to DB and teachers
-            for(i=0; i<s_count; i++){
-                CourseOfferingService.AddSection(sections[i]);
-            }
-            */
-            
-            CourseOfferingService.AddCourseOffering(courses, c_count, sections, s_count)
+            // Insert all of them into the DB
+            CourseOfferingService.AddCourseOffering(courses, sections)
             .then(function(data1){
                 $scope.finished = true;
             });
-            
+
         };
     }]);
 
