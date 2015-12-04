@@ -41,6 +41,7 @@
             }
             
             // Insert courses to DB
+            /*
             for(i=0; i<c_count; i++){
                 CourseOfferingService.AddCourse(courses[i]);
             }
@@ -49,14 +50,13 @@
             for(i=0; i<s_count; i++){
                 CourseOfferingService.AddSection(sections[i]);
             }
+            */
             
-            /*
-            CourseOfferingService.AddCourseOffering(data)
+            CourseOfferingService.AddCourseOffering(courses, c_count, sections, s_count)
             .then(function(data1){
-                console.log('done!');
                 $scope.finished = true;
             });
-            */
+            
         };
     }]);
 

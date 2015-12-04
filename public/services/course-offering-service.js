@@ -21,55 +21,24 @@
 		service.AddCourseOffering = AddCourseOffering;
 		return service;
 
-		function AddCourseOffering(files){
-			var cId, sem=files[0][0], year=files[0][1];
-			files.shift();
-
-			var promises = files.map(function(file) {
-				var course={}, user={}, teacher={}, section={};
-				
-				if(file.length == 3){
-					course.courseNum = file[0];
-					course.courseTitle = file[1];
-					$http.post(course_url,course)
-					.then(function(data3){
-						cId = data3.data.courseId;
-						console.log("2 "+cId);
-					});
-
-					return;
-				}else{
-					console.log(cId);
-					user.lastName = file[4];
-					user.middleName = "";
-					user.firstName = "";
-					user.emailAddress = file[5];
-					$http.post(user_url,user)
-					.then(function(data1){
-						teacher.id = data1.data.id;
-						teacher.employeeId = file[6];
-						teacher.unit = "";
-						teacher.position = "";
-						$http.post(teacher_url,teacher)
-						.then(function(data2){
-
-							section.sectionCode = file[0];
-							section.employeeId = data2.data.employeeId;
-							
-							section.courseId = cId;
-							section.day = file[2];
-							section.time = file[1];
-							section.room = file[3];
-							section.semester = sem;
-							section.year = year;
-							return $http.post(section_url,section);
-						});
-					});
-				}
-
-		    });
-		    
-		    return $q.all(promises);
+		function AddCourseOffering(courses, c_count, sections, s_count){
+            
+            var deferred = $q.defer();
+            var i;
+            
+            for(i=0; i<c_count; i++){
+                AddCourse(courses[i]);
+                console.log(courses[i][0]);
+            }
+            
+            for(i=0; i<s_count; i++){
+                AddSection(sections[i]);
+                console.log(sections[i][0]);
+            }
+            
+            deferred.resolve();
+            return deferred.promise;
+            
 		}
 
 		function AddCourse(data){
@@ -102,10 +71,7 @@
             var section_promise = $q.defer();
             var course_promise = $q.defer();
             var user_promise = $q.defer();
-            //var teacher_promise = $q.defer();
-        
-            
-            
+  
             var section = {}, user = {}, teacher = {};
             
             $http.get(section_url+'/code/'+data[7]+'/'+data[0]+'/'+data[8]+'/'+data[9])
@@ -115,6 +81,44 @@
             .error(function (section_data, status){
                 section.sectionCode = data[0];
                 section.employeeId = data[6];
+                if(data[2] == "Sun"){
+                    section.day = "1000000";
+                }else if(data[2] == "Mon"){
+                    section.day = "0100000";
+                }else if(data[2] == "Tue"){
+                    section.day = "0010000";
+                }else if(data[2] == "Wed"){
+                    section.day = "0001000";
+                }else if(data[2] == "Thur"){
+                    section.day = "0000100";
+                }else if(data[2] == "Fri"){
+                    section.day = "0000010";
+                }else if(data[2] == "Sat"){
+                    section.day = "0000001";
+                }else{
+                    var i, j=0;
+                    section.day = "0000000";
+                    for(i=data[2].length-1; i>=0; i--){
+                        if(data[2][i] == 'M'){
+                            section.day = section.day.substr(0,1) + '1' +section.day.substr(2);
+                        }else if(data[2][i] == 'T'){
+                            section.day = section.day.substr(0,2) + '1' +section.day.substr(3);
+                        }else if(data[2][i] == 'W'){
+                            section.day = section.day.substr(0,3) + '1' +section.day.substr(4);
+                        }else if(data[2][i] == 'h'){
+                            section.day = section.day.substr(0,4) + '1' +section.day.substr(4);
+                            i--;
+                        }else if(data[2][i] == 'F'){
+                            section.day = section.day.substr(0,5) + '1' +section.day.substr(6);
+                        }else if(data[2][i] == 'S'){
+                            section.day = section.day.substr(0,6) + '1' +section.day.substr(7);
+                        }
+                    }
+                }
+				section.time = data[1];
+				section.room = data[3];
+				section.semester = data[8];
+				section.year = data[9];
                 section_promise.resolve(section_data);
             });
             
@@ -126,16 +130,45 @@
             
             $http.get(user_url+'/email/'+data[5])
             .success(function (user_data){
-                
+                $http.get(teacher_url+'/'+user_data.id)
+                .success(function (teacher_data){
+                    section.employeeId = teacher_data.employeeId;
+                })
+                .error(function (teacher_data, status){
+                    teacher.id = user_data.id;
+					teacher.employeeId = data[6];
+					teacher.unit = "";
+					teacher.position = "";
+					$http.post(teacher_url, teacher)
+					.success(function (teacher_data2){
+					    section.employeeId = teacher_data2.employeeId;
+					});
+                });
+                user_promise.resolve(user_data);
             })
             .error(function (user_data, status){
-            
+                user.lastName = data[4];
+                user.firstName = "";
+                user.middleName = "";
+                user.emailAddress = data[5];
+                $http.post(user_url, user)
+                .success(function (user_data2){
+                    teacher.id = user_data2.id;
+					teacher.employeeId = data[6];
+					teacher.unit = "";
+					teacher.position = "";
+					$http.post(teacher_url, teacher)
+					.success(function (teacher_data){
+					    section.employeeId = teacher_data.employeeId;
+					});
+                });
+                user_promise.resolve(user_data);
             });
             
-            $q.all([section_promise, course_promise]).then(function() {
+            $q.all([section_promise, course_promise, user_promise]).then(function() {
                 console.log(section);
+                //$http.post(section_url, section);
             });
-            
         
         }
 
