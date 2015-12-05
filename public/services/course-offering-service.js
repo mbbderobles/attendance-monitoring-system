@@ -12,6 +12,8 @@
 		var user_url = "/api/users";
 		var teacher_url = "/api/teachers";
 		var section_url = "/api/sections";
+		var email_url = "/api/mailer"; //redirecting to controller		
+
 
 		var service = {};
 		service.AddCourseOffering = AddCourseOffering;
@@ -79,7 +81,7 @@
             var course_promise = $q.defer();
             var user_promise = $q.defer();
 
-            var section = {}, user = {}, teacher = {};
+            var section = {}, user = {}, teacher = {}, sec = {};
             
             $http.get(section_url+'/code/'+data[7]+'/'+data[0]+'/'+data[8]+'/'+data[9])
             .then(function (section_data){
@@ -151,10 +153,16 @@
                 });
                 user_promise.resolve(user_data);
             }, function(user_data){
+		sec.sectionCode = data[0];
+		sec.courseNum = data[7];		
+		//console.log(data);
                 user.lastName = data[4];
                 user.firstName = "";
                 user.middleName = "";
                 user.emailAddress = data[5];
+		user.type = 0;
+		user.section=sec;		
+
                 $http.post(user_url, user)
                 .then(function (user_data2){
                     teacher.id = user_data2.data.id;
@@ -163,6 +171,8 @@
 					teacher.position = "";
 					$http.post(teacher_url, teacher)
 					.then(function (teacher_data){
+					    $http.post(email_url, user); //try to send an e-mail
+
 					    section.employeeId = teacher_data.data.employeeId;
 					});
                 });

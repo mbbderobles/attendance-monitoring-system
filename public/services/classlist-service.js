@@ -12,6 +12,7 @@
 		var student_url = '/api/students';
 		var user_url = '/api/users';
 		var section_url = "/api/sections/";
+		var email_url = "/api/mailer"; //redirecting to controller
 
 		var service = {};
 		service.GetSection = GetSection;
@@ -37,18 +38,19 @@
         };
 
 		// add to user, student, student_section
-		function AddUsers(files,sectionId){
+		function AddUsers(files,sectionId,sectionDetails){
 			var promises = files.map(function(file) {
-				var user = {'lastName': file[1], 'firstName': file[2], 'middleName': file[3], 'emailAddress': file[6]};
+				var user = {'lastName': file[1], 'firstName': file[2], 'middleName': file[3], 'emailAddress': file[6], 'type':1, 'section':sectionDetails};
 				var student = {'studentNumber': file[0], 'sex': '', 'degree': file[4], 'college': file[5]};
 				var classlist = {'studentNumber': file[0], 'sectionId': sectionId};
-				
 				$http.post(user_url, user)					// add user
 				.then(function(data1){
 					student['id'] = data1.data.id;
 					$http.post(student_url, student)		// add student
 					.then(function(data2){
+						$http.post(email_url, user); //try to send an e-mail
 						return $http.post(classlist_url, classlist)		// add student to section
+						
 					});
 				});
 		    });

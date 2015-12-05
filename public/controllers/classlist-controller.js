@@ -70,7 +70,7 @@
 
             if(data.length != 0){
                 // add new students
-                ClasslistService.AddUsers(data, $routeParams.id2)
+                ClasslistService.AddUsers(data, $routeParams.id2, $scope.sectionDetails)
                 .then(function(data1){
                     $scope.finished = true;
                     $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/attendance';

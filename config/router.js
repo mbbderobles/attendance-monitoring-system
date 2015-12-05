@@ -6,6 +6,7 @@ var course = require('./../controllers/course');
 var section = require('./../controllers/section');
 var attendance = require('./../controllers/attendance');
 var classlist = require('./../controllers/classlist');
+var mailer = require('./../controllers/mailer'); //mailer controller
 
 module.exports = function(router) {
 
@@ -92,6 +93,9 @@ module.exports = function(router) {
 		.put(attendance.update)
 		.delete(attendance.remove);
 	
+	router.route('/api/mailer') //mailing
+		.post(mailer.send);
+
 	/*router.all('*', function (req, res, next) {
 		res.status(404).send('Nothing to do here.');
 	});*/
