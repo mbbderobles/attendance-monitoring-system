@@ -3,7 +3,7 @@
 (function(){
     angular
     .module('myApp')
-    .controller('CourseOfferingCtrl',['$scope', '$parse', 'CourseOfferingService', function ($scope, $parse, CourseOfferingService) {
+    .controller('CourseOfferingCtrl',['$scope', '$parse', '$window', '$timeout', 'CourseOfferingService', function ($scope, $parse, $window, $timeout, CourseOfferingService) {
         $scope.csv = {
             content: null,
             header: true,
@@ -44,6 +44,7 @@
             CourseOfferingService.AddCourseOffering(courses, sections)
             .then(function(data1){
                 $scope.finished = true;
+                $timeout(function(){$window.location.href = '/#/courses/'}, 700);
             });
 
         };

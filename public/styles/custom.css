@@ -43,3 +43,7 @@ table > thead > tr > th > .cal-buttons {
 .csv-success {
 	margin-left: 100px;
 }
+
+.fa-star, .fa-star-o, .fa-star-half-o {
+	color: #1A242F;
+}

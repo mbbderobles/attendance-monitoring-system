@@ -92,6 +92,15 @@ module.exports = function(router) {
 	router.route('/api/attendance/:id')
 		.put(attendance.update)
 		.delete(attendance.remove);
+
+	router.route('/api/attendance/sections/present/:id')
+		.get(attendance.countPresent);
+
+	router.route('/api/attendance/sections/absent/:id')
+		.get(attendance.countAbsent);
+
+	router.route('/api/attendance/sections/excused/:id')
+		.get(attendance.countExcused);
 	
 	router.route('/api/mailer') //mailing
 		.post(mailer.send);

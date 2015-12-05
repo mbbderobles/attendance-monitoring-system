@@ -1,5 +1,26 @@
 var	db = require(__dirname + '/../config/mysql');
 
+exports.countPresent = function(req, res, next) {
+	db.query("SELECT COUNT(*) AS present, studentNumber FROM attendance_record WHERE sectionId=? AND status='Present' GROUP BY studentNumber", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
+
+exports.countAbsent = function(req, res, next) {
+	db.query("SELECT COUNT(*) AS absent, studentNumber FROM attendance_record WHERE sectionId=? AND status='Absent'  GROUP BY studentNumber", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
+
+exports.countExcused = function(req, res, next) {
+	db.query("SELECT COUNT(*) AS excused, studentNumber FROM attendance_record WHERE sectionId=? AND status='Excused'  GROUP BY studentNumber", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		res.send(rows);
+	});
+};
+
 exports.find = function(req, res, next) {
 	console.log('find');
 	db.query("SELECT * FROM attendance_record", function(err, rows) {
