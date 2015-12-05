@@ -8,33 +8,44 @@
 
         $scope.attendance = [];         // list of attendance record of students
         $scope.sectionDetails = {};     // details of the section
-        $scope.weekStart = 1;           // monday = 1
+        $scope.weekStart = 0;           // sunday = 0
         $scope.weeks = getWeek();
+
+        var studentRemarks = [];
 
         // get section details given the section id
         AttendanceService.GetSection($routeParams.id2)
         .then(function(data1){
+            data1.day = convertBinToDay(data1.day);
             $scope.sectionDetails = data1;
+
             startEndTime = getStartEndDateTime();
 
-            // get students enrolled in a section
-            // get attendance by section
-            AttendanceService.GetStudentsBySection($routeParams.id2)
+            AttendanceService.GetStudentsBySection($routeParams.id2)        // get students enrolled in a section
             .then(function(data2){
                 students = data2;
 
-                AttendanceService.GetAttendance($routeParams.id2)
-                .then(function(data3){
-                    retrievedAttendance = data3;
-                    viewAttendance(data2, data3);
+                AttendanceService.GetAbsentStudents($routeParams.id2)       // count students' absences
+                .then(function(abs){
+                    AttendanceService.GetExcusedStudents($routeParams.id2)  // count students' excused record
+                    .then(function(exc){
+                        studentRemarks = viewRemarks(students,abs,exc);
+
+                        AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
+                        .then(function(data3){
+                            retrievedAttendance = data3;
+                            viewAttendance(data2, data3);
+                        });
+
+                    });
                 });
+
+                
             }, function(error){
                 $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/classlist';
             });
 
         });
-
-        
 
         // adjust the calendar to next week
         $scope.nextWeek = function(){
@@ -52,14 +63,14 @@
             viewAttendance(students, retrievedAttendance);
         }
 
-        //change student status (present, absent, excused)
+        //change student status (present, absent, excused, no record)
         $scope.changeStatus = function(index, attendanceIndex){
             var desc;
             var status = $scope.attendance[index].attendance[attendanceIndex];
             var id = $scope.attendance[index].id[attendanceIndex];
 
             if(status != 0){
-                status = (status + 1) % 4;
+                status = (status + 1) % 5;
                 if(status == 0){ status++; }
                 switch(status){
                     case 1: { desc = "Present"; break; }
@@ -70,35 +81,81 @@
                 if(id==0){
                     var d = new Date($scope.weeks[attendanceIndex]);
                     d.setUTCHours(startEndTime[0], startEndTime[1], 0, 0);
-
+                    // 0 to present
                     AttendanceService.AddAttendance({'courseId': $scope.sectionDetails.courseId, 'sectionId': $scope.sectionDetails.sectionId, 'status': desc, 'attended': d, 'studentNumber': $scope.attendance[index].studentNumber})
                     .then(function(data1){
+                        console.log('PRESENT');
                         $scope.attendance[index].attendance[attendanceIndex] = status;
                         $scope.attendance[index].id[attendanceIndex] = data1.attendanceId;
                     });
-                }else{
-                    AttendanceService.EditAttendance({'status': desc}, id)
+                }else if(status == 4){
+                    // excused to no record
+                    AttendanceService.DeleteAttendance(id)
                     .then(function(data2){
+                        console.log('NO RECORD');
                         $scope.attendance[index].attendance[attendanceIndex] = status;
+                        $scope.attendance[index].remarks.excused--;
+                    });                  
+                }else{
+                    // ___ to absent or excused
+                    AttendanceService.EditAttendance({'status': desc}, id)
+                    .then(function(data3){
+                        $scope.attendance[index].attendance[attendanceIndex] = status;
+                        if(status == 2){        // absent
+                            console.log('ABSENT');
+                            $scope.attendance[index].remarks.absent++;
+                        }else{                  // excused
+                            console.log('EXCUSED');
+                            $scope.attendance[index].remarks.absent--;
+                            $scope.attendance[index].remarks.excused++;
+                        }
                     });
                 }
                 
             }
         }
 
+        // store and organize remarks of each student
+        function viewRemarks(students, abs, exc){
+            var remarks = [];
+            students.forEach(function(student){
+                var i=0, rem={absent:0, excused:0};
+
+                while(i<abs.length){
+                    if(student.studentNumber == abs[i].studentNumber){
+                        rem.absent = abs[i].absent;
+                        break;
+                    }
+                    i++;
+                }
+
+                i=0;
+                while(i<exc.length){
+                    if(student.studentNumber == exc[i].studentNumber){
+                        rem.excused = exc[i].excused;
+                        break;
+                    }
+                    i++;
+                }
+                remarks.push(rem);
+            });
+            return remarks;
+        }
+
         // store and organize attendance record
-        //1 - present, 2 - absent, 3 - excused, 0 - none
+        //1 - present, 2 - absent, 3 - excused, 4 - no record, 0 - none
         function viewAttendance(studentNumbers,retrievedAttendance){
+            var cnt = 0;
             studentNumbers.forEach(function(studentNumber){ // loop for all students registered in the course
                 var i=0, j=0, sectionTime;
                 var currDate = new Date();
-                var at = [0,0,0,0,0,0];
-                var id = [0,0,0,0,0];
+                var at = [0,0,0,0,0,0,0];     // attendance
+                var id = [0,0,0,0,0,0,0];
                 while(j<$scope.weeks.length){   // loop for checking attendance for all dates of the week
                     var wk = createDate($scope.weeks[j], startEndTime[2], startEndTime[3], 0, 0);
                     if(wk.getTime() <= currDate.getTime()){  // only checks dates on or before current date
                         i=0;
-                        at[j] = 2;  // initially absent
+                        at[j] = 4;  // no record
                         while(i < retrievedAttendance.length){
                             var d1 = createDate(retrievedAttendance[i].attended, 0, 0, 0, 0);
                             var d2 = createDate($scope.weeks[j], 0, 0, 0, 0);
@@ -123,7 +180,7 @@
                     }
                     j++;
                 }// end of weeks loop
-                $scope.attendance.push({'studentNumber': studentNumber.studentNumber, 'name': studentNumber.lastName +  ', ' + studentNumber.firstName, 'attendance': at, 'id': id});
+                $scope.attendance.push({'studentNumber': studentNumber.studentNumber, 'name': studentNumber.lastName +  ', ' + studentNumber.firstName, 'attendance': at, 'id': id, 'remarks': studentRemarks[cnt++]});
             });
         }
 
@@ -145,13 +202,14 @@
         function getWeek(){
             var curr = new Date();
             var day = curr.getDay() - $scope.weekStart;
-            var mon = new Date(curr.getTime() - 60*60*24*day*1000); // returns first day (monday) of the week 
-            var tues = new Date(curr.getTime() - 60*60*24*(day-1)*1000);
-            var wed = new Date(curr.getTime() - 60*60*24*(day-2)*1000);
-            var thurs = new Date(curr.getTime() - 60*60*24*(day-3)*1000);
-            var fri = new Date(curr.getTime() - 60*60*24*(day-4)*1000);
-            var sat = new Date(curr.getTime() - 60*60*24*(day-5)*1000);
-            return [mon,tues,wed,thurs,fri,sat];
+            var su = new Date(curr.getTime() - 60*60*24*day*1000); // returns first day (monday) of the week 
+            var mon = new Date(curr.getTime() - 60*60*24*(day-1)*1000);
+            var tues = new Date(curr.getTime() - 60*60*24*(day-2)*1000);
+            var wed = new Date(curr.getTime() - 60*60*24*(day-3)*1000);
+            var thurs = new Date(curr.getTime() - 60*60*24*(day-4)*1000);
+            var fri = new Date(curr.getTime() - 60*60*24*(day-5)*1000);
+            var sat = new Date(curr.getTime() - 60*60*24*(day-6)*1000);
+            return [su,mon,tues,wed,thurs,fri,sat];
         }
 
         // convert time from 12hr format to 24hr format
@@ -170,6 +228,21 @@
             if (hours < 10) sHours = "0" + sHours;
             if (minutes < 10) sMinutes = "0" + sMinutes;
             return [sHours,sMinutes];
+        }
+
+        //convert bin days to word
+        function convertBinToDay(binDays){
+            var i=0;
+            var days = "", week = ['S','M','T','W','Th','F','Sa'];
+            binDays = binDays.split('');
+            while(i < binDays.length){
+                if(binDays[i] == 1){
+                    days = days + week[i];
+                }
+                i++;
+            }
+
+            return days;
         }
         
     }]);

@@ -3,7 +3,7 @@
 (function(){
     angular
     .module('myApp')
-    .controller('ClasslistCtrl',['$scope', '$parse', '$window', '$routeParams', 'ClasslistService', function ($scope, $parse, $window, $routeParams, ClasslistService) {
+    .controller('ClasslistCtrl',['$scope', '$parse', '$window', '$timeout', '$routeParams', 'ClasslistService', function ($scope, $parse, $window, $timeout, $routeParams, ClasslistService) {
         $scope.sectionDetails;
         
         // csv details
@@ -73,11 +73,11 @@
                 ClasslistService.AddUsers(data, $routeParams.id2)
                 .then(function(data1){
                     $scope.finished = true;
-                    $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/attendance';
+                    $timeout(function(){$window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/attendance'}, 700);
                 });
             }else{
                 $scope.finished = true;
-                $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/attendance';
+                $timeout(function(){$window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/attendance'}, 700);
             }
         }
 
