@@ -37,6 +37,9 @@ module.exports = function(router) {
 		.put(student.update)
 		.delete(student.remove);
 
+	router.route('/api/students/sections/:id')
+		.get(classlist.findSectionsOfStudent);
+
 	router.route('/api/teachers')
 		.get(teacher.find)
 		.post(teacher.insert);

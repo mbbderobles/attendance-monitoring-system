@@ -31,7 +31,7 @@ exports.findStudentsNotEnrolledInSection = function(req, res, next) {
 };
 
 exports.findSectionsOfStudent = function(req, res, next) {
-	db.query("SELECT * FROM student_section WHERE studentNumber=?", [req.params.id], function(err, rows) {
+	db.query("SELECT * FROM student_section NATURAL JOIN section NATURAL JOIN course NATURAL JOIN student NATURAL JOIN user WHERE studentNumber=?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			res.status(404).send('Record not found.');

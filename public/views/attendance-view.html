@@ -2,6 +2,7 @@
 <h4> Day: {{sectionDetails.day}}</h4>
 <h4> Time: {{sectionDetails.time}}</h4>
 <h4> Room: {{sectionDetails.room}}</h4>
+<h4> Maximum Allowed Absences: {{sectionDetails.maxAllowedAbsences}}</h4>
 
 <button ng-show="privilege==3 || privilege==2" style="float:right" type="button" title="Delete a Student from Section" class="btn btn-danger btn-s" ng-click="deleteS2S = !deleteS2S"><span class="glyphicon glyphicon-remove"></span></button>
 
@@ -80,10 +81,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="at in attendance">
+		<tr ng-repeat="at in attendance" ng-class="{'red': at.remarks.absent >= sectionDetails.maxAllowedAbsences}">
 			<td class="student_name">{{at.studentNumber}}</td>
-			<td class="student_name">{{at.name}}</td>
-			<td ng-click="changeStatus($index,0)"><i ng-if='at.attendance[0]==1' class=" clickable fa fa-star"></i><i ng-if='at.attendance[0]==2' class=" clickable fa fa-star-o"></i><i ng-if='at.attendance[0]==3' class="clickable fa fa-star-half-o"></i><i ng-if='at.attendance[0]==4' class="clickable fa fa-minus"></i></td>
+			<td class="student_name">{{at.name}}</td
+>			<td ng-click="changeStatus($index,0)"><i ng-if='at.attendance[0]==1' class=" clickable fa fa-star"></i><i ng-if='at.attendance[0]==2' class=" clickable fa fa-star-o"></i><i ng-if='at.attendance[0]==3' class="clickable fa fa-star-half-o"></i><i ng-if='at.attendance[0]==4' class="clickable fa fa-minus"></i></td>
 			<td ng-click="changeStatus($index,1)"><i ng-if='at.attendance[1]==1' class="clickable fa fa-star"></i><i ng-if='at.attendance[1]==2' class="clickable fa fa-star-o"></i><i ng-if='at.attendance[1]==3' class="clickable fa fa-star-half-o"></i><i ng-if='at.attendance[1]==4' class="clickable fa fa-minus"></i></td>
 			<td ng-click="changeStatus($index,2)"><i ng-if='at.attendance[2]==1' class="clickable fa fa-star"></i><i ng-if='at.attendance[2]==2' class="clickable fa fa-star-o"></i><i ng-if='at.attendance[2]==3' class="clickable fa fa-star-half-o"></i><i ng-if='at.attendance[2]==4' class="clickable fa fa-minus"></i></td>
 			<td ng-click="changeStatus($index,3)"><i ng-if='at.attendance[3]==1' class="clickable fa fa-star"></i><i ng-if='at.attendance[3]==2' class="clickable fa fa-star-o"></i><i ng-if='at.attendance[3]==3' class="clickable fa fa-star-half-o"></i><i ng-if='at.attendance[3]==4' class="clickable fa fa-minus"></i></td>

@@ -141,29 +141,52 @@
 
         function retrieveRecords(){
             $scope.attendance = [];
-            AttendanceService.GetStudentsBySection($routeParams.id2)        // get students enrolled in a section
-            .then(function(data2){
-                students = data2;
+            if($scope.privilege==2 || $scope.privilege==3){                     // teacher and admin view
+                AttendanceService.GetStudentsBySection($routeParams.id2)        // get students enrolled in a section
+                .then(function(data2){
+                    students = data2;
 
-                AttendanceService.GetAbsentStudents($routeParams.id2)       // count students' absences
-                .then(function(abs){
-                    AttendanceService.GetExcusedStudents($routeParams.id2)  // count students' excused record
-                    .then(function(exc){
-                        studentRemarks = viewRemarks(students,abs,exc);
+                    AttendanceService.GetAbsentStudents($routeParams.id2)       // count students' absences
+                    .then(function(abs){
+                        AttendanceService.GetExcusedStudents($routeParams.id2)  // count students' excused record
+                        .then(function(exc){
+                            studentRemarks = viewRemarks(students,abs,exc);
 
-                        AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
-                        .then(function(data3){
-                            retrievedAttendance = data3;
-                            viewAttendance(data2, data3);
+                            AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
+                            .then(function(data3){
+                                retrievedAttendance = data3;
+                                viewAttendance(data2, data3);
+                            });
+
                         });
+                    });
 
+                    
+                }, function(error){
+                    $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/classlist';
+                });
+            }else if($scope.privilege==1){                                      // student view
+                AttendanceService.GetStudent($scope.userId)        // get students enrolled in a section
+                .then(function(data2){
+                    students = [];
+                    students.push(data2);
+                    console.log(students);
+                    AttendanceService.GetAbsentStudents($routeParams.id2)       // count students' absences
+                    .then(function(abs){
+                        AttendanceService.GetExcusedStudents($routeParams.id2)  // count students' excused record
+                        .then(function(exc){
+                            studentRemarks = viewRemarks(students,abs,exc);
+
+                            AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
+                            .then(function(data3){
+                                retrievedAttendance = data3;
+                                viewAttendance(students, data3);
+                            });
+
+                        });
                     });
                 });
-
-                
-            }, function(error){
-                $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/classlist';
-            });
+            }
         }
 
         // store and organize remarks of each student

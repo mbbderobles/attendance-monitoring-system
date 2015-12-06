@@ -38,7 +38,7 @@
     .when('/users/sections', {
       templateUrl: 'views/section-by-user-view.html',
       controller: 'SectionByUserCtrl',
-      privilege: 2
+      privilege: 1
     })
     .when('/course-offering', {
       templateUrl: 'views/course-offering-view.html',

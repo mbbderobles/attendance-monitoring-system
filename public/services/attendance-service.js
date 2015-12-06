@@ -16,10 +16,12 @@
 		var section_student_url = "/api/sections/students/";
 		var section_not_enrolled_url = "/api/sections/notEnrolled/";
 		var section_url = "/api/sections/";
+		var student_url = "/api/students/";
 
 		var service = {};
 		service.GetSection = GetSection;
 		service.GetStudentsBySection = GetStudentsBySection;
+		service.GetStudent = GetStudent;
 		service.GetStudentsNotEnrolledInSection = GetStudentsNotEnrolledInSection;
 		service.GetAttendance = GetAttendance;
 		service.GetPresentStudents = GetPresentStudents;
@@ -67,6 +69,20 @@
         	var deferred = $q.defer();
 
 			$http.get(section_student_url+id)
+        	.success(function (data){
+        		deferred.resolve(data);
+	        })
+	        .error(function (data, status){
+	        	deferred.reject(status);
+	        });
+
+	        return deferred.promise;
+        };
+
+        function GetStudent(id){
+        	var deferred = $q.defer();
+
+			$http.get(student_url+id)
         	.success(function (data){
         		deferred.resolve(data);
 	        })

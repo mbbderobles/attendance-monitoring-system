@@ -5,7 +5,7 @@
     .module('myApp')
     .controller('SectionByUserCtrl',['$scope', '$parse', '$window', 'SectionByUserService', function ($scope, $parse, $window, SectionByUserService) {
 
-        $scope.sortType     = 'sectionCode'; // set the default sort type
+        $scope.sortType     = 'courseNum'; // set the default sort type
         $scope.sortReverse  = false;  // set the default sort order
         $scope.searchSection   = '';     // set the default search/filter term
 
@@ -14,7 +14,7 @@
         $scope.sections=[];
         $scope.userDetails={};
         $scope.editSBT = false;
-        var employeeId = 0;
+        var employeeId=0, studentNumber=0;
 
         if($scope.privilege == 2){      // teacher view
             // get teacher details
@@ -24,6 +24,24 @@
                 employeeId = data1.employeeId;
                 // get all sections of teacher
                 SectionByUserService.GetSectionsOfTeacher(employeeId)
+                .then(function(data2){
+                    var i=0;
+                    while(i < data2.length){             // convert day to appropriate format (for display)
+                        data2[i].sectionDays = convertBinToArray(data2[i].day);
+                        data2[i].day = convertBinToDay(data2[i].day);
+                        i++;
+                    }
+                    $scope.sections = data2;
+                });
+            });
+        }else if($scope.privilege == 1){    // student view
+            // get student details
+            SectionByUserService.GetStudent($scope.userId)
+            .then(function(data1){
+                $scope.userDetails = data1;
+                studentNumber = data1.studentNumber;
+                // get all sections of student
+                SectionByUserService.GetSectionsOfStudent(studentNumber)
                 .then(function(data2){
                     var i=0;
                     while(i < data2.length){             // convert day to appropriate format (for display)
