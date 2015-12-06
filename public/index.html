@@ -28,15 +28,21 @@
                         <li><a href="/#/courses">Courses</a></li>
                         <li><a href="/#/teachers">Teachers</a></li>
                         <li><a href="/#/students">Students</a></li>
+                        <li><a href="/#/profile">Profile</a></li>
                         <li><a href="#/" ng-click="logout()">Logout</a></li>
                     </ul>
                     <ul class="nav navbar-nav" ng-switch-when="2">
                         <li><a href="/#/teachers">Teachers</a></li>
                         <li><a href="/#/students">Students</a></li>
+                        <li><a href="/#/profile">Profile</a></li>
                         <li><a href="#/" ng-click="logout()">Logout</a></li>
                     </ul>
                     <ul class="nav navbar-nav" ng-switch-when="1">
                         <li><a href="/#/students">Students</a></li>
+                        <li><a href="/#/profile">Profile</a></li>
+                        <li><a href="#/" ng-click="logout()">Logout</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" ng-switch-when="0">
                         <li><a href="#/" ng-click="logout()">Logout</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
@@ -73,6 +79,7 @@
         <script src="controllers/student-controller.js"></script>
         <script src="controllers/section-by-course-controller.js"></script>
         <script src="controllers/auth-controller.js"></script>
+        <script src="controllers/profile-controller.js"></script>
         <script src="services/attendance-service.js"></script>
         <script src="services/classlist-service.js"></script>
         <script src="services/course-offering-service.js"></script>
@@ -81,6 +88,7 @@
         <script src="services/student-service.js"></script>
         <script src="services/section-by-course-service.js"></script>
         <script src="services/auth-service.js"></script>
+        <script src="services/profile-service.js"></script>
         <script src='https://apis.google.com/js/client:plusone.js'></script>
     </body>
 </html>

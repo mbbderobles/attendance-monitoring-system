@@ -22,6 +22,7 @@
         
         $scope.signInSuccess = function(googleUser){
             $scope.signedIn = true;
+            $scope.privilege = 0;
             $scope.user = googleUser.getBasicProfile().getName();
             $scope.email = googleUser.getBasicProfile().getEmail();
             AuthService.GetUsers()
@@ -35,10 +36,12 @@
                                     AuthService.CheckTeacher(data[i].id)
                                         .then(function(data2){
                                             $scope.privilege = 2;
-                                        }, function(error){                     //If not, check if Student
+                                        }, function(error){                     // If not, check if Student
                                             AuthService.CheckStudent(data[i].id)
                                                 .then(function(data2){
                                                     $scope.privilege = 1;
+                                                }, function (data2){            // Unidentified
+                                                    $scope.privilege = 0;
                                                 });
                                         });
                                 });

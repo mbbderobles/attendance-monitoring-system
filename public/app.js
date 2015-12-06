@@ -50,6 +50,11 @@
       controller: 'TeacherCtrl',
       privilege: 2
     })
+    .when('/profile', {
+      templateUrl: 'views/profile-view.html',
+      controller: 'ProfileCtrl',
+      privilege: 1
+    })
     .otherwise({redirectTo: '/'});
   }
 
