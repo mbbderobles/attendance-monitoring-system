@@ -1,0 +1,105 @@
+<h1> Sections </h1>
+
+<!--Edit Section Form-->
+<div class="default well" ng-show="editSBT" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="EditSection()">
+		<legend>Edit Section</legend>
+
+		<!-- Day -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="day">Day</label>
+			<div class="col-md-5">
+				<select multiple="" id="day" name="day" class="form-control" ng-model="sectionDays">
+					<option value="S"> Sunday </option>
+					<option value="M"> Monday </option>
+					<option value="T"> Tuesday </option>
+					<option value="W"> Wednesday </option>
+					<option value="Th"> Thursday </option>
+					<option value="F"> Friday </option>
+					<option value="Sa"> Saturday </option>
+				</select>
+			</div>
+		</div>
+
+		<!-- Start Time -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="time"> Start time</label>  
+			<div class="col-md-5">
+				<input id="time" name="time" class="form-control input-md" required="" type="text" ng-model="startTime" />
+			</div>
+		</div>
+
+		<!-- End Time -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="time"> End time</label>  
+			<div class="col-md-5">
+				<input id="time" name="time" class="form-control input-md" required="" type="text" ng-model="endTime" />
+			</div>
+		</div>
+
+		<!-- Room -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="room">Room</label>  
+			<div class="col-md-5">
+				<input id="room" name="room" class="form-control input-md" required="" type="text" ng-model="editSection.room" />
+			</div>
+		</div>
+
+		<!-- Max Allowed Absences -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="maxAllowedAbsences">Maximum Allowable Absences</label>  
+			<div class="col-md-5">
+				<input id="maxAllowedAbsences" name="maxAllowedAbsences" class="form-control input-md" required="" type="number" min="0" ng-model="editSection.maxAllowedAbsences" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="editSection"></label>
+			<div class="col-md-4">
+				<input type="submit" id="editSection" name="editSection" class="btn btn-primary" value="Edit Section" />
+			</div>
+		</div>
+	</form> <!--/edit section-->
+</div>
+
+<!--Search Section Form-->
+<form>
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search"></i></div>
+			<input type="text" class="form-control" placeholder="Search for a Section" ng-model="searchSection">
+		</div>      
+	</div>
+</form>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th><a ng-click="sortType = 'sectionCode'; sortReverse = !sortReverse">Course Number<span ng-show="sortType == 'sectionCode' && !sortReverse" class="fa fa-caret-down"></span>
+			<th><a ng-click="sortType = 'sectionCode'; sortReverse = !sortReverse">Section Code<span ng-show="sortType == 'sectionCode' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'sectionCode' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'day'; sortReverse = !sortReverse">Day<span ng-show="sortType == 'day' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'day' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'time'; sortReverse = !sortReverse">Time<span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th><a ng-click="sortType = 'room'; sortReverse = !sortReverse">Room<span ng-show="sortType == 'room' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'room' && sortReverse" class="fa fa-caret-up"></span></a></th>
+        	<th><a ng-click="sortType = 'maxAllowedAbsences'; sortReverse = !sortReverse">Maximum <br/>Allowable <br/>Absences<span ng-show="sortType == 'maxAllowedAbsences' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'maxAllowedAbsences' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th>Edit</th>
+			<th>Attendance</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="section in sections | orderBy:sortType:sortReverse | filter:searchSection">
+			<td>{{section.courseNum}}</td>
+			<td>{{section.sectionCode}}</td>
+			<td>{{section.day}}</td>
+			<td>{{section.time}}</td>
+			<td>{{section.room}}</td>
+			<td>{{section.maxAllowedAbsences}}</td>
+			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewSection(section.sectionId)"><span class="glyphicon glyphicon-edit"></span></button></td>
+			<td><button type="button" class="btn btn-success btn-s" ng-click="ViewAttendance(section.courseId, section.sectionId)"><span class="glyphicon glyphicon-th-list"></span></button></td>
+		</tr>
+	</tbody>
+</table>

@@ -9,6 +9,7 @@
         $scope.g = {};
         $scope.signedIn = false;
         $scope.privilege = -1;
+        $scope.userId = 0;
         $scope.user = '';
         $scope.email = '';
                 
@@ -28,6 +29,7 @@
                 .then(function(data){
                     for(var i=0; i<data.length; i++){
                         if($scope.email == data[i].emailAddress){               // To find privilege, find user based from email
+                            $scope.userId = data[i].id;
                             AuthService.CheckAdmin(data[i].id)                  // Check if Admin
                                 .then(function(data2){
                                     $scope.privilege = 3;

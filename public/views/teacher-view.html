@@ -1,8 +1,8 @@
 <h1> Teachers </h1>
-<button style="float:right" type="button" title="Add a new Teacher" class="btn btn-success btn-s" ng-click="addT = !addT"><span class="glyphicon glyphicon-plus"></span></button>
+<button ng-show="privilege==3" style="float:right" type="button" title="Add a new Teacher" class="btn btn-success btn-s" ng-click="addT = !addT"><span class="glyphicon glyphicon-plus"></span></button>
 
 <!--Add Teacher Form-->
-<div class="default well" ng-show="addT" style="margin: 0 auto">
+<div ng-show="privilege==3" class="default well" ng-show="addT" style="margin: 0 auto">
 	<form class="form-horizontal" ng-submit="AddTeacher()">
 		<legend>Add Teacher</legend>
 		
@@ -73,7 +73,7 @@
 </div>
 
 <!--Edit Teacher Form-->
-<div class="default well" ng-show="editT" style="margin: 0 auto">
+<div ng-show="privilege==3" class="default well" ng-show="editT" style="margin: 0 auto">
 	<form class="form-horizontal" ng-submit="EditTeacher()">
 		<legend>Edit Teacher</legend>
 		
@@ -170,7 +170,7 @@
         <span ng-show="sortType == 'unit' && sortReverse" class="fa fa-caret-up"></span></a></th>
 			<th><a ng-click="sortType = 'position'; sortReverse = !sortReverse">Position <span ng-show="sortType == 'position' && !sortReverse" class="fa fa-caret-down"></span>
         <span ng-show="sortType == 'position' && sortReverse" class="fa fa-caret-up"></span></a></th>
-			<th>Edit / Delete</th>
+			<th ng-show="privilege==3">Edit / Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -182,7 +182,7 @@
 			<td>{{teacher.emailAddress}}</td>
 			<td>{{teacher.unit}}</td>
 			<td>{{teacher.position}}</td>
-			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewTeacher(teacher.id)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteTeacher(teacher.id)"><span class="glyphicon glyphicon-remove"></span></button></td>
+			<td ng-show="privilege==3"><button type="button" class="btn btn-info btn-s" ng-click="ViewTeacher(teacher.id)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteTeacher(teacher.id)"><span class="glyphicon glyphicon-remove"></span></button></td>
 		</tr>
 	</tbody>
 </table>

@@ -29,6 +29,7 @@
         .then(function(data){
             var i=0;
             while(i < data.length){             // convert day to appropriate format (for display)
+                data[i].sectionDays = convertBinToArray(data[i].day);
                 data[i].day = convertBinToDay(data[i].day);
                 i++;
             }
@@ -42,92 +43,106 @@
         });
 
         $scope.AddSection = function(){
-            $scope.newSection.courseId = cId;                                   // get courseId
-            $scope.newSection.day = convertDayToBin($scope.sectionDays);        // convert day to appropriate format
-            $scope.newSection.time = $scope.startTime + '-' + $scope.endTime;   // convert time
+            if($scope.privilege==3){    // check if admin
+                $scope.newSection.courseId = cId;                                   // get courseId
+                $scope.newSection.day = convertDayToBin($scope.sectionDays);        // convert day to appropriate format
+                $scope.newSection.time = $scope.startTime + '-' + $scope.endTime;   // convert time
 
-            SectionByCourseService.AddSection($scope.newSection)
-            .then(function(data){
-                // get all sections by course
-                SectionByCourseService.GetAllByCourse(cId)
-                .then(function(data){
-                    var i=0;
-                    while(i < data.length){             // convert day to appropriate format (for display)
-                        data[i].day = convertBinToDay(data[i].day);
-                        i++;
-                    }
-                    $scope.sections = data;
+                SectionByCourseService.AddSection($scope.newSection)
+                .then(function(data1){
+                    // get all sections by course
+                    SectionByCourseService.GetAllByCourse(cId)
+                    .then(function(data2){
+                        var i=0;
+                        while(i < data2.length){             // convert day to appropriate format (for display)
+                            data2[i].sectionDays = convertBinToArray(data2[i].day);
+                            data2[i].day = convertBinToDay(data2[i].day);
+                            i++;
+                        }
+                        $scope.sections = data2;
+                    });
+
+                    $scope.addSBC = !$scope.addSBC;
                 });
-
-                $scope.addSBC = !$scope.addSBC;
-            });
+            }
         };
 
+        // populate control fields in edit form
         $scope.ViewSection = function(id){
-            $scope.editSBC = !$scope.editSBC;
+            if($scope.privilege==3){    // check if admin
+                $scope.editSBC = !$scope.editSBC;
 
-            $scope.sections.forEach(function(section) {
-                if(section.sectionId === id) {
-                    $scope.editSection.sectionCode = section.sectionCode;
-                    $scope.editSection.employeeId = section.employeeId;
-                    $scope.sectionDays = section.day.split('');
-                    section.time = section.time.split('-');
-                    $scope.startTime = section.time[0];
-                    $scope.endTime = section.time[1];
-                    $scope.editSection.room = section.room;
-                    $scope.editSection.semester = section.semester;
-                    $scope.editSection.year = section.year;
+                $scope.sections.forEach(function(section) {
+                    if(section.sectionId === id) {
+                        $scope.editSection.courseId = section.courseId;
+                        $scope.editSection.sectionId = section.sectionId;
+                        $scope.editSection.sectionCode = section.sectionCode;
+                        $scope.editSection.employeeId = section.employeeId;
+                        $scope.sectionDays = section.sectionDays;
+                        section.sectionTime = section.time.split('-');
+                        $scope.startTime = section.sectionTime[0];
+                        $scope.endTime = section.sectionTime[1];
+                        $scope.editSection.room = section.room;
+                        $scope.editSection.semester = section.semester;
+                        $scope.editSection.year = section.year;
 
-                    return;
-                }
-            });
+                        return;
+                    }
+                });
+            }
         };
 
-        $scope.EditSection = function(id){
-            $scope.editSection.courseId = cId;                                   // get courseId
-            $scope.editSection.day = convertDayToBin($scope.sectionDays);        // convert day to appropriate format
-            $scope.editSection.time = $scope.startTime + '-' + $scope.endTime;   // convert time
+        $scope.EditSection = function(){
+            if($scope.privilege==3){    // check if admin
+                //$scope.editSection.courseId = cId;                                   // get courseId
+                $scope.editSection.day = convertDayToBin($scope.sectionDays);        // convert day to appropriate format
+                $scope.editSection.time = $scope.startTime + '-' + $scope.endTime;   // convert time
 
-            SectionByCourseService.EditSection($scope.editSection, $scope.editSection.courseId)
-            .then(function(data){
-                SectionByCourseService.GetAllByCourse(cId)
-                .then(function(data){
-                    var i=0;
-                    while(i < data.length){             // convert day to appropriate format (for display)
-                        data[i].day = convertBinToDay(data[i].day);
-                        i++;
-                    }
-                    $scope.sections = data;
+                SectionByCourseService.EditSection($scope.editSection, $scope.editSection.sectionId)
+                .then(function(data1){
+                    SectionByCourseService.GetAllByCourse(cId)
+                    .then(function(data2){
+                        var i=0;
+                        while(i < data2.length){             // convert day to appropriate format (for display)
+                            data2[i].sectionDays = convertBinToArray(data2[i].day);
+                            data2[i].day = convertBinToDay(data2[i].day);
+                            i++;
+                        }
+                        $scope.sections = data2;
+                    });
+
+                    $scope.editSection.sectionCode = "";
+                    $scope.editSection.employeeId = "";
+                    $scope.sectionDays = "";
+                    $scope.startTime = "";
+                    $scope.endTime = "";
+                    $scope.editSection.room = "";
+                    $scope.editSection.semester = "";
+                    $scope.editSection.year = "";
+
+                    $scope.editSBC = !$scope.editSBC;
                 });
-
-                $scope.editSection.sectionCode = "";
-                $scope.editSection.employeeId = "";
-                $scope.sectionDays = "";
-                $scope.startTime = "";
-                $scope.endTime = "";
-                $scope.editSection.room = "";
-                $scope.editSection.semester = "";
-                $scope.editSection.year = "";
-
-                $scope.editSBC = !$scope.editSBC;
-            });
+            }
         };
 
         $scope.DeleteSection = function(id){
-            var r = confirm("Are you sure you want to delete this section?");
-            if(r == true){
-                SectionByCourseService.DeleteSection(id)
-                .then(function(data2){
-                    SectionByCourseService.GetAllByCourse(cId)
-                    .then(function(data){
-                        var i=0;
-                        while(i < data.length){             // convert day to appropriate format (for display)
-                            data[i].day = convertBinToDay(data[i].day);
-                            i++;
-                        }
-                        $scope.sections = data;
+            if($scope.privilege==3){    // check if admin
+                var r = confirm("Are you sure you want to delete this section?");
+                if(r == true){
+                    SectionByCourseService.DeleteSection(id)
+                    .then(function(data1){
+                        SectionByCourseService.GetAllByCourse(cId)
+                        .then(function(data2){
+                            var i=0;
+                            while(i < data2.length){             // convert day to appropriate format (for display)
+                                data2[i].sectionDays = convertBinToArray(data2[i].day);
+                                data2[i].day = convertBinToDay(data2[i].day);
+                                i++;
+                            }
+                            $scope.sections = data2;
+                        });
                     });
-                });
+                }
             }
         };
 
@@ -160,6 +175,21 @@
             while(i < binDays.length){
                 if(binDays[i] == 1){
                     days = days + week[i];
+                }
+                i++;
+            }
+
+            return days;
+        }
+
+        //convert days to array
+        function convertBinToArray(binDays){
+            var i=0;
+            var days = [], week = ['S','M','T','W','Th','F','Sa'];
+            binDays = binDays.split('');
+            while(i < binDays.length){
+                if(binDays[i] == 1){
+                    days.push(week[i]);
                 }
                 i++;
             }

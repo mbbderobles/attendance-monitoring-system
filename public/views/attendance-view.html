@@ -1,11 +1,11 @@
-<h1> <a href="/#/courses/{{sectionDetails.courseId}}/sections"><i title="Back to Sections" class="fa fa-arrow-circle-left"></i></a> Attendance Record for {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}} </h1>
+<h1> <a ng-show="privilege==3" href="/#/courses/{{sectionDetails.courseId}}/sections"><i title="Back to Sections" class="fa fa-arrow-circle-left"></i></a> <a ng-show="privilege==2" href="/#/users/sections"><i title="Back to Sections" class="fa fa-arrow-circle-left"></i></a> Attendance Record for {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}} </h1>
 <h4> Day: {{sectionDetails.day}}</h4>
 <h4> Time: {{sectionDetails.time}}</h4>
 <h4> Room: {{sectionDetails.room}}</h4>
 
-<button style="float:right" type="button" title="Delete a Student from Section" class="btn btn-danger btn-s" ng-click="deleteS2S = !deleteS2S"><span class="glyphicon glyphicon-remove"></span></button>
+<button ng-show="privilege==3 || privilege==2" style="float:right" type="button" title="Delete a Student from Section" class="btn btn-danger btn-s" ng-click="deleteS2S = !deleteS2S"><span class="glyphicon glyphicon-remove"></span></button>
 
-<button style="float:right" type="button" title="Add a Student to Section" class="btn btn-success btn-s" ng-click="addS2S = !addS2S"><span class="glyphicon glyphicon-plus"></span></button>
+<button ng-show="privilege==3 || privilege==2" style="float:right" type="button" title="Add a Student to Section" class="btn btn-success btn-s" ng-click="addS2S = !addS2S"><span class="glyphicon glyphicon-plus"></span></button>
 
 <!--Add Student to Section Form-->
 <div class="default well" ng-show="addS2S" style="margin: 0 auto">

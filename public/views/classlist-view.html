@@ -1,4 +1,4 @@
-<h1><a href="/#/courses/{{sectionDetails.courseId}}/sections"><i title="Back to Sections" class="fa fa-arrow-circle-left"></i></a> Classlist for {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}}</h1>
+<h1><a ng-show="privilege==3" href="/#/courses/{{sectionDetails.courseId}}/sections"><i title="Back to Sections" class="fa fa-arrow-circle-left"></i></a> <a ng-show="privilege==2" href="/#/users/sections"><i title="Back to Sections" class="fa fa-arrow-circle-left"></i></a> Classlist for {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}}</h1>
 <div class="default well csv-form col-md-6">
     <div class="form-group">
         <label class="control-label" for="classlist" style="display: inline">Select your CSV file</label>
