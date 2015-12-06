@@ -83,6 +83,7 @@
                         $scope.startTime = section.sectionTime[0];
                         $scope.endTime = section.sectionTime[1];
                         $scope.editSection.room = section.room;
+                        $scope.editSection.maxAllowedAbsences = section.maxAllowedAbsences;
                         $scope.editSection.semester = section.semester;
                         $scope.editSection.year = section.year;
 
@@ -117,6 +118,7 @@
                     $scope.startTime = "";
                     $scope.endTime = "";
                     $scope.editSection.room = "";
+                    $scope.editSection.maxAllowedAbsences = "";
                     $scope.editSection.semester = "";
                     $scope.editSection.year = "";
 

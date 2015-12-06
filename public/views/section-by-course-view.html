@@ -158,6 +158,14 @@
 			</div>
 		</div>
 
+		<!-- Max Allowed Absences -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="maxAllowedAbsences">Maximum Allowable Absences</label>  
+			<div class="col-md-5">
+				<input id="maxAllowedAbsences" name="maxAllowedAbsences" class="form-control input-md" required="" type="number" min="0" ng-model="editSection.maxAllowedAbsences" />
+			</div>
+		</div>
+
 		<!-- Semester -->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="semester">Semester</label>
@@ -199,27 +207,30 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th><a ng-click="sortType = 'sectionCode'; sortReverse = !sortReverse">Section Code<span ng-show="sortType == 'sectionCode' && !sortReverse" class="fa fa-caret-down"></span>
+			<th class="text-center"><a ng-click="sortType = 'sectionCode'; sortReverse = !sortReverse">Section Code<span ng-show="sortType == 'sectionCode' && !sortReverse" class="fa fa-caret-down"></span>
         <span ng-show="sortType == 'sectionCode' && sortReverse" class="fa fa-caret-up"></span></a></th>
-			<th><a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Instructor<span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"></span>
+			<th class="text-center"><a ng-click="sortType = 'lastName'; sortReverse = !sortReverse">Instructor<span ng-show="sortType == 'lastName' && !sortReverse" class="fa fa-caret-down"></span>
         <span ng-show="sortType == 'lastName' && sortReverse" class="fa fa-caret-up"></span></a></th>
-			<th><a ng-click="sortType = 'day'; sortReverse = !sortReverse">Day<span ng-show="sortType == 'day' && !sortReverse" class="fa fa-caret-down"></span>
+			<th class="text-center"><a ng-click="sortType = 'day'; sortReverse = !sortReverse">Day<span ng-show="sortType == 'day' && !sortReverse" class="fa fa-caret-down"></span>
         <span ng-show="sortType == 'day' && sortReverse" class="fa fa-caret-up"></span></a></th>
-			<th><a ng-click="sortType = 'time'; sortReverse = !sortReverse">Time<span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-down"></span>
+			<th class="text-center"><a ng-click="sortType = 'time'; sortReverse = !sortReverse">Time<span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-down"></span>
         <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-up"></span></a></th>
-			<th><a ng-click="sortType = 'room'; sortReverse = !sortReverse">Room<span ng-show="sortType == 'room' && !sortReverse" class="fa fa-caret-down"></span>
+			<th class="text-center"><a ng-click="sortType = 'room'; sortReverse = !sortReverse">Room<span ng-show="sortType == 'room' && !sortReverse" class="fa fa-caret-down"></span>
         <span ng-show="sortType == 'room' && sortReverse" class="fa fa-caret-up"></span></a></th>
-			<th>Edit / Delete</th>
+        	<th class="text-center"><a ng-click="sortType = 'maxAllowedAbsences'; sortReverse = !sortReverse">Maximum <br/>Allowable <br/>Absences<span ng-show="sortType == 'maxAllowedAbsences' && !sortReverse" class="fa fa-caret-down"></span>
+        <span ng-show="sortType == 'maxAllowedAbsences' && sortReverse" class="fa fa-caret-up"></span></a></th>
+			<th ng-show="privilege==3" class="text-center">Edit / Delete</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="section in sections | orderBy:sortType:sortReverse | filter:searchSection">
-			<td><a href="/#/courses/{{courseDetails.courseId}}/sections/{{section.sectionId}}/attendance">{{section.sectionCode}}</a></td>
-			<td>{{section.lastName}}</td>
-			<td>{{section.day}}</td>
-			<td>{{section.time}}</td>
-			<td>{{section.room}}</td>
-			<td><button type="button" class="btn btn-info btn-s" ng-click="ViewSection(section.sectionId)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteSection(section.sectionId)"><span class="glyphicon glyphicon-remove"></span></button></td>
+			<td class="text-center"><a href="/#/courses/{{courseDetails.courseId}}/sections/{{section.sectionId}}/attendance">{{section.sectionCode}}</a></td>
+			<td class="text-center">{{section.lastName}}</td>
+			<td class="text-center">{{section.day}}</td>
+			<td class="text-center">{{section.time}}</td>
+			<td class="text-center">{{section.room}}</td>
+			<td class="text-center">{{section.maxAllowedAbsences}}</td>
+			<td ng-show="privilege==3" class="text-center"><button type="button" class="btn btn-info btn-s" ng-click="ViewSection(section.sectionId)"><span class="glyphicon glyphicon-edit"></span></button> <button type="button" class="btn btn-danger btn-s" ng-click="DeleteSection(section.sectionId)"><span class="glyphicon glyphicon-remove"></span></button></td>
 		</tr>
 	</tbody>
 </table>
