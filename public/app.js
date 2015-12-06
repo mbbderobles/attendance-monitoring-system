@@ -13,7 +13,8 @@
   function config($routeProvider){
     $routeProvider
     .when('/', {
-      templateUrl: 'views/home-view.html'
+      templateUrl: 'views/home-view.html',
+      controller: 'HomeCtrl'
     })
     .when('/courses', {
       templateUrl: 'views/course-view.html',
@@ -54,6 +55,11 @@
       templateUrl: 'views/teacher-view.html',
       controller: 'TeacherCtrl',
       privilege: 2
+    })
+    .when('/profile', {
+      templateUrl: 'views/profile-view.html',
+      controller: 'ProfileCtrl',
+      privilege: 1
     })
     .otherwise({redirectTo: '/'});
   }

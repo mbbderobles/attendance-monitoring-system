@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Attendance Monitoring System</title>
+        <title>ATMOST:ATtendance MOnitoring SysTem</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <meta name="google-signin-client_id" content="740121264589-1gm3r2gtlb391so2d7ustvgmmmnncrsl.apps.googleusercontent.com">
@@ -20,7 +20,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                <a class="navbar-brand" href="#/">Attendance Monitoring System</a>
+                <a class="navbar-brand" href="#/">ATMOST:ATtendance MOnitoring SysTem</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse" ng-switch="privilege">
                     <ul class="nav navbar-nav" ng-switch-when="3">
@@ -28,6 +28,7 @@
                         <li><a href="/#/courses">Courses</a></li>
                         <li><a href="/#/teachers">Teachers</a></li>
                         <li><a href="/#/students">Students</a></li>
+                        <li><a href="/#/profile">Profile</a></li>
                         <li><a href="#/" ng-click="logout()">Logout</a></li>
                     </ul>
                     <ul class="nav navbar-nav" ng-switch-when="2">
@@ -35,10 +36,15 @@
                         <li><a href="/#/courses">Courses</a></li>
                         <li><a href="/#/teachers">Teachers</a></li>
                         <li><a href="/#/students">Students</a></li>
+                        <li><a href="/#/profile">Profile</a></li>
                         <li><a href="#/" ng-click="logout()">Logout</a></li>
                     </ul>
                     <ul class="nav navbar-nav" ng-switch-when="1">
                         <li><a href="/#/users/sections">Sections</a></li>
+                        <li><a href="/#/profile">Profile</a></li>
+                        <li><a href="/#/" ng-click="logout()">Logout</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" ng-switch-when="0">
                         <li><a href="#/" ng-click="logout()">Logout</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
@@ -76,6 +82,8 @@
         <script src="controllers/section-by-course-controller.js"></script>
         <script src="controllers/section-by-user-controller.js"></script>
         <script src="controllers/auth-controller.js"></script>
+        <script src="controllers/profile-controller.js"></script>
+        <script src="controllers/home-controller.js"></script>
         <script src="services/attendance-service.js"></script>
         <script src="services/classlist-service.js"></script>
         <script src="services/course-offering-service.js"></script>
@@ -85,6 +93,7 @@
         <script src="services/section-by-course-service.js"></script>
         <script src="services/section-by-user-service.js"></script>
         <script src="services/auth-service.js"></script>
+        <script src="services/profile-service.js"></script>
         <script src='https://apis.google.com/js/client:plusone.js'></script>
     </body>
 </html>
