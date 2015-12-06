@@ -133,8 +133,10 @@
         }
 
         function GetStudentsNotEnrolledInSection(){
+            $scope.not_enrolled = [];
             AttendanceService.GetStudentsNotEnrolledInSection($routeParams.id2)        // get students not enrolled in a section
             .then(function(data){
+                console.log(data);
                 $scope.not_enrolled = data;
             });
         }
