@@ -18,12 +18,12 @@
     .when('/courses', {
       templateUrl: 'views/course-view.html',
       controller: 'CourseCtrl',
-      privilege: 3
+      privilege: 2
     })
     .when('/courses/:id/sections/:id2/attendance', {
       templateUrl: 'views/attendance-view.html',
       controller: 'AttendanceCtrl',
-      privilege: 3
+      privilege: 1
     })
     .when('/courses/:id/sections/:id2/classlist', {
       templateUrl: 'views/classlist-view.html',
@@ -34,6 +34,11 @@
       templateUrl: 'views/section-by-course-view.html',
       controller: 'SectionByCourseCtrl',
       privilege: 3
+    })
+    .when('/users/sections', {
+      templateUrl: 'views/section-by-user-view.html',
+      controller: 'SectionByUserCtrl',
+      privilege: 2
     })
     .when('/course-offering', {
       templateUrl: 'views/course-offering-view.html',

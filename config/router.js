@@ -41,6 +41,9 @@ module.exports = function(router) {
 		.get(teacher.find)
 		.post(teacher.insert);
 
+	router.route('/api/teachers/sections/:id')
+		.get(section.findSectionsByTeacher);
+
 	router.route('/api/teachers/:id')
 		.get(teacher.findOne)
 		.put(teacher.update)
@@ -61,9 +64,6 @@ module.exports = function(router) {
 	router.route('/api/sections')
 		.get(section.find)
 		.post(section.insert);
-		
-	router.route('/api/sections/code/:courseNum/:sectionCode/:sem/:year')
-	    .get(section.findSectionBySectionCode);
 
 	router.route('/api/sections/:id')
 		.get(section.findOne)

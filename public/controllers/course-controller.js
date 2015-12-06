@@ -15,58 +15,68 @@
         $scope.addCrs = false;
         $scope.editCrs = false;
 
+        // get all courses
         CourseService.GetAll()
         .then(function(data){
             $scope.courses = data;
         });
 
         $scope.AddCourse = function(){
-            CourseService.AddCourse($scope.newCourse)
-            .then(function(data){
-                $scope.courses.push(data);
-                $scope.addCrs = !$scope.addCrs;
-            });
+            if($scope.privilege==3){    // check if admin
+                CourseService.AddCourse($scope.newCourse)
+                .then(function(data){
+                    $scope.courses.push(data);
+                    $scope.addCrs = !$scope.addCrs;
+                });
+            }
         };
 
+        // populate control fields in edit form
         $scope.ViewCourse = function(id){
-            $scope.editCrs = !$scope.editCrs;
+            if($scope.privilege==3){    // check if admin
+                $scope.editCrs = !$scope.editCrs;
 
-            $scope.courses.forEach(function(course) {
-                if(course.courseId === id) {
-                    $scope.editCourse.courseNum = course.courseNum;
-                    $scope.editCourse.courseTitle = course.courseTitle;
-                    $scope.editCourse.courseId = id;
+                $scope.courses.forEach(function(course) {
+                    if(course.courseId === id) {
+                        $scope.editCourse.courseNum = course.courseNum;
+                        $scope.editCourse.courseTitle = course.courseTitle;
+                        $scope.editCourse.courseId = id;
 
-                    return;
-                }
-            });
+                        return;
+                    }
+                });
+            }
         };
 
         $scope.EditCourse = function(){
-            CourseService.EditCourse($scope.editCourse, $scope.editCourse.courseId)
-            .then(function(data){
-                CourseService.GetAll()
+            if($scope.privilege==3){    // check if admin
+                CourseService.EditCourse($scope.editCourse, $scope.editCourse.courseId)
                 .then(function(data){
-                    $scope.courses = data;
-                });
-
-                $scope.editCourse.courseNum = "";
-                $scope.editCourse.courseTitle = "";
-                $scope.editCourse.courseId = "";
-                $scope.editCrs = !$scope.editCrs;
-            });
-        };
-
-        $scope.DeleteCourse = function(id){
-            var r = confirm("Are you sure you want to delete this course?");
-            if(r == true){
-                CourseService.DeleteCourse(id)
-                .then(function(data2){
                     CourseService.GetAll()
                     .then(function(data){
                         $scope.courses = data;
                     });
+
+                    $scope.editCourse.courseNum = "";
+                    $scope.editCourse.courseTitle = "";
+                    $scope.editCourse.courseId = "";
+                    $scope.editCrs = !$scope.editCrs;
                 });
+            }
+        };
+
+        $scope.DeleteCourse = function(id){
+            if($scope.privilege==3){    // check if admin
+                var r = confirm("Are you sure you want to delete this course?");
+                if(r == true){
+                    CourseService.DeleteCourse(id)
+                    .then(function(data2){
+                        CourseService.GetAll()
+                        .then(function(data){
+                            $scope.courses = data;
+                        });
+                    });
+                }
             }
         };
 

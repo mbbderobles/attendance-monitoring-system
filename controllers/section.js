@@ -19,14 +19,10 @@ exports.findOne = function(req, res, next) {
 	});
 };
 
-exports.findSectionBySectionCode = function(req, res, next) {
-	db.query("SELECT * FROM section NATURAL JOIN course WHERE courseNum=? AND sectionCode=? AND semester=? AND year=?", [req.params.courseNum, req.params.sectionCode, req.params.sem, req.params.year], function(err, rows) {
+exports.findSectionsByTeacher = function(req, res, next) {
+	db.query("SELECT * FROM section NATURAL JOIN course NATURAL JOIN teacher NATURAL JOIN user WHERE employeeId=?", [req.params.id], function(err, rows) {
 		if (err) return next(err);
-		if (rows.length === 0) {
-			res.status(404).send('Course not found.');
-		} else {
-			res.send(rows[0]);
-		}
+		res.send(rows);
 	});
 };
 

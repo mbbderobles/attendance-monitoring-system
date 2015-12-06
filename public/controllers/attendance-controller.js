@@ -32,7 +32,11 @@
             $scope.weekStart += 7;
             $scope.weeks = getWeek();
             $scope.attendance = [];
-            viewAttendance(students, retrievedAttendance);
+            AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
+            .then(function(data){
+                retrievedAttendance = data;
+                viewAttendance(students, data);
+            });
         }
 
         // adjust the calendar to previous week
@@ -40,80 +44,91 @@
             $scope.weekStart -= 7;
             $scope.weeks = getWeek();
             $scope.attendance = [];
-            viewAttendance(students, retrievedAttendance);
+            AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
+            .then(function(data){
+                retrievedAttendance = data;
+                viewAttendance(students, data);
+            });
         }
 
         //change student status (present, absent, excused, no record)
         $scope.changeStatus = function(index, attendanceIndex){
-            var desc;
-            var status = $scope.attendance[index].attendance[attendanceIndex];
-            var id = $scope.attendance[index].id[attendanceIndex];
+            if($scope.privilege==2 || $scope.privilege==3){
+                var desc;
+                var status = $scope.attendance[index].attendance[attendanceIndex];
+                var id = $scope.attendance[index].id[attendanceIndex];
 
-            if(status != 0){
-                status = (status + 1) % 5;
-                if(status == 0){ status++; }
-                switch(status){
-                    case 1: { desc = "Present"; break; }
-                    case 2: { desc = "Absent"; break; }
-                    case 3: { desc = "Excused"; break; }
-                }
+                if(status != 0){
+                    status = (status + 1) % 5;
+                    if(status == 0){ status++; }
+                    switch(status){
+                        case 1: { desc = "Present"; break; }
+                        case 2: { desc = "Absent"; break; }
+                        case 3: { desc = "Excused"; break; }
+                    }
 
-                if(id==0){
-                    var d = new Date($scope.weeks[attendanceIndex]);
-                    d.setUTCHours(startEndTime[0], startEndTime[1], 0, 0);
-                    // 0 to present
-                    AttendanceService.AddAttendance({'courseId': $scope.sectionDetails.courseId, 'sectionId': $scope.sectionDetails.sectionId, 'status': desc, 'attended': d, 'studentNumber': $scope.attendance[index].studentNumber})
-                    .then(function(data1){
-                        console.log('PRESENT');
-                        $scope.attendance[index].attendance[attendanceIndex] = status;
-                        $scope.attendance[index].id[attendanceIndex] = data1.attendanceId;
-                    });
-                }else if(status == 4){
-                    // excused to no record
-                    AttendanceService.DeleteAttendance(id)
-                    .then(function(data2){
-                        console.log('NO RECORD');
-                        $scope.attendance[index].attendance[attendanceIndex] = status;
-                        $scope.attendance[index].remarks.excused--;
-                    });                  
-                }else{
-                    // ___ to absent or excused
-                    AttendanceService.EditAttendance({'status': desc}, id)
-                    .then(function(data3){
-                        $scope.attendance[index].attendance[attendanceIndex] = status;
-                        if(status == 2){        // absent
-                            console.log('ABSENT');
-                            $scope.attendance[index].remarks.absent++;
-                        }else{                  // excused
-                            console.log('EXCUSED');
-                            $scope.attendance[index].remarks.absent--;
-                            $scope.attendance[index].remarks.excused++;
-                        }
-                    });
+                    if(id==0){
+                        var d = new Date($scope.weeks[attendanceIndex]);
+                        d.setUTCHours(startEndTime[0], startEndTime[1], 0, 0);
+                        // 0 to present
+                        AttendanceService.AddAttendance({'courseId': $scope.sectionDetails.courseId, 'sectionId': $scope.sectionDetails.sectionId, 'status': desc, 'attended': d, 'studentNumber': $scope.attendance[index].studentNumber})
+                        .then(function(data1){
+                            console.log('PRESENT');
+                            $scope.attendance[index].attendance[attendanceIndex] = status;
+                            $scope.attendance[index].id[attendanceIndex] = data1.attendanceId;
+                        });
+                    }else if(status == 4){
+                        // excused to no record
+                        AttendanceService.DeleteAttendance(id)
+                        .then(function(data2){
+                            console.log('NO RECORD');
+                            $scope.attendance[index].attendance[attendanceIndex] = status;
+                            $scope.attendance[index].remarks.excused--;
+                            $scope.attendance[index].id[attendanceIndex] = 0;
+                        });                  
+                    }else{
+                        // ___ to absent or excused
+                        AttendanceService.EditAttendance({'status': desc}, id)
+                        .then(function(data3){
+                            $scope.attendance[index].attendance[attendanceIndex] = status;
+                            if(status == 2){        // absent
+                                console.log('ABSENT');
+                                $scope.attendance[index].remarks.absent++;
+                            }else{                  // excused
+                                console.log('EXCUSED');
+                                $scope.attendance[index].remarks.absent--;
+                                $scope.attendance[index].remarks.excused++;
+                            }
+                        });
+                    }
                 }
-                
             }
+            
         }
 
         $scope.AddStudentToSection = function(){
-            $scope.newStudentToSection.sectionId = $routeParams.id2;
-            AttendanceService.AddStudentToSection($scope.newStudentToSection)
-            .then(function(data){
-                students.push(data);
-                retrieveRecords();
-                $scope.addS2S = !$scope.addS2S;
-                GetStudentsNotEnrolledInSection();
-            });
+            if($scope.privilege==2 || $scope.privilege==3){
+                $scope.newStudentToSection.sectionId = $routeParams.id2;
+                AttendanceService.AddStudentToSection($scope.newStudentToSection)
+                .then(function(data){
+                    students.push(data);
+                    retrieveRecords();
+                    $scope.addS2S = !$scope.addS2S;
+                    GetStudentsNotEnrolledInSection();
+                });
+            }
         }
 
         $scope.DeleteStudentFromSection = function(){
-            if(confirm('Are you sure you want to delete the student from the section?')){
-                AttendanceService.DeleteStudentFromSection($scope.deleteStudentFromSection.studentSectionId)
-                .then(function(data){
-                    $scope.deleteS2S = !$scope.deleteS2S;
-                    GetStudentsNotEnrolledInSection();
-                    retrieveRecords();
-                });
+            if($scope.privilege==2 || $scope.privilege==3){
+                if(confirm('Are you sure you want to delete the student from the section?')){
+                    AttendanceService.DeleteStudentFromSection($scope.deleteStudentFromSection.studentSectionId)
+                    .then(function(data){
+                        $scope.deleteS2S = !$scope.deleteS2S;
+                        GetStudentsNotEnrolledInSection();
+                        retrieveRecords();
+                    });
+                }
             }
         }
 
