@@ -2,7 +2,7 @@
 <button ng-show="privilege==3" style="float:right" type="button" title="Add a new Teacher" class="btn btn-success btn-s" ng-click="addT = !addT"><span class="glyphicon glyphicon-plus"></span></button>
 
 <!--Add Teacher Form-->
-<div ng-show="privilege==3" class="default well" ng-show="addT" style="margin: 0 auto">
+<div class="default well" ng-show="addT" style="margin: 0 auto">
 	<form class="form-horizontal" ng-submit="AddTeacher()">
 		<legend>Add Teacher</legend>
 		
@@ -73,7 +73,7 @@
 </div>
 
 <!--Edit Teacher Form-->
-<div ng-show="privilege==3" class="default well" ng-show="editT" style="margin: 0 auto">
+<div class="default well" ng-show="editT" style="margin: 0 auto">
 	<form class="form-horizontal" ng-submit="EditTeacher()">
 		<legend>Edit Teacher</legend>
 		
