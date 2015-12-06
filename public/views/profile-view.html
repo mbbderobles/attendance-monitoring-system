@@ -1,20 +1,11 @@
-<div class="default well" ng-show="editT" style="margin: 0 auto">
-	<form class="form-horizontal" ng-submit="EditTeacher()">
-		<legend>Edit Teacher</legend>
-		
-		<!--Student Number-->
-		<div class="form-group">
-			<label class="col-md-4 control-label" for="employeeId">Employee Id</label>  
-			<div class="col-md-5">
-				<input id="employeeId" name="employeeId" class="form-control input-md" required="" type="text" ng-model="editTeacher.employeeId" />
-			</div>
-		</div>
-
-		<!--Last Name-->
+<div class="default well" style="margin: 0 auto" ng-switch="privilege">
+    
+    <form class="form-horizontal" ng-submit="EditAdmin()" ng-switch-when="3">
+        <!--Last Name-->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="lastName">Last Name</label>  
 			<div class="col-md-5">
-				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="editUser.lastName" />
+				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="user.lastName" />
 			</div>
 		</div>
 
@@ -22,7 +13,7 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="firstName">First Name</label>  
 			<div class="col-md-5">
-				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="editUser.firstName" />
+				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="user.firstName" />
 			</div>
 		</div>
 
@@ -30,7 +21,7 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="middleName">Middle Name</label>  
 			<div class="col-md-5">
-				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="editUser.middleName" />
+				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="user.middleName" />
 			</div>
 		</div>
 
@@ -38,23 +29,75 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="emailAddress">Email Address</label>  
 			<div class="col-md-5">
-				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="editUser.emailAddress" />
+				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="user.emailAddress" />
+			</div>
+		</div>
+		
+		<!--Submit button-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="editAdmin"></label>
+			<div class="col-md-4">
+				<input type="submit" id="editAdmin" name="editAdmin" class="btn btn-primary" value="Edit Profile" />
+			</div>
+		</div>
+		
+	</form> <!--/edit admin-->
+    
+	<form class="form-horizontal" ng-submit="EditTeacher()" ng-switch-when="2">
+		
+		<!--Employee Number-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="employeeId">Employee Id</label>  
+			<div class="col-md-5">
+				<input id="employeeId" name="employeeId" class="form-control input-md" required="" type="text" ng-model="teacher.employeeId" />
 			</div>
 		</div>
 
-		<!--Degree-->
+		<!--Last Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="lastName">Last Name</label>  
+			<div class="col-md-5">
+				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="user.lastName" />
+			</div>
+		</div>
+
+		<!--First Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="firstName">First Name</label>  
+			<div class="col-md-5">
+				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="user.firstName" />
+			</div>
+		</div>
+
+		<!--Middle Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="middleName">Middle Name</label>  
+			<div class="col-md-5">
+				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="user.middleName" />
+			</div>
+		</div>
+
+		<!--Email Address-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="emailAddress">Email Address</label>  
+			<div class="col-md-5">
+				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="user.emailAddress" />
+			</div>
+		</div>
+
+		<!--Unit-->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="unit">Unit</label>  
 			<div class="col-md-5">
-				<input id="unit" name="unit" class="form-control input-md" required="" type="text" ng-model="editTeacher.unit" />
+				<input id="unit" name="unit" class="form-control input-md" required="" type="text" ng-model="teacher.unit" />
 			</div>
 		</div>
 
-		<!--College-->
+		<!--Position-->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="position">Position</label>  
 			<div class="col-md-5">
-				<input id="position" name="position" class="form-control input-md" required="" type="text" ng-model="editTeacher.position" />
+				<input id="position" name="position" class="form-control input-md" required="" type="text" ng-model="teacher.position" />
 			</div>
 		</div>
 
@@ -62,8 +105,90 @@
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="editTeacher"></label>
 			<div class="col-md-4">
-				<input type="submit" id="editTeacher" name="editTeacher" class="btn btn-primary" value="Edit Teacher" />
+				<input type="submit" id="editTeacher" name="editTeacher" class="btn btn-primary" value="Edit Profile" />
 			</div>
 		</div>
 	</form> <!--/edit teacher-->
+	
+	<!--Edit Student Form-->
+	<form class="form-horizontal" ng-submit="EditStudent()" ng-switch-when="1">
+		
+		<!--Student Number-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="studentNumber">Student Number</label>  
+			<div class="col-md-5">
+				<input id="studentNumber" name="studentNumber" class="form-control input-md" required="" type="text" ng-model="student.studentNumber" />
+			</div>
+		</div>
+
+		<!--Last Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="lastName">Last Name</label>  
+			<div class="col-md-5">
+				<input id="lastName" name="lastName" class="form-control input-md" required="" type="text" ng-model="user.lastName" />
+			</div>
+		</div>
+
+		<!--First Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="firstName">First Name</label>  
+			<div class="col-md-5">
+				<input id="firstName" name="firstName" class="form-control input-md" required="" type="text" ng-model="user.firstName" />
+			</div>
+		</div>
+
+		<!--Middle Name-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="middleName">Middle Name</label>  
+			<div class="col-md-5">
+				<input id="middleName" name="middleName" class="form-control input-md" type="text" ng-model="user.middleName" />
+			</div>
+		</div>
+
+		<!--Email Address-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="emailAddress">Email Address</label>  
+			<div class="col-md-5">
+				<input id="emailAddress" name="emailAddress" class="form-control input-md" required="" type="email" ng-model="user.emailAddress" />
+			</div>
+		</div>
+
+		<!--Sex-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="sex">Sex</label>
+			<div class="col-md-4"> 
+				<label class="radio-inline" for="sex-0">
+					<input name="sex" id="sex-0" ng-model="student.sex" value="F" type="radio"> Female
+				</label> 
+				<label class="radio-inline" for="sex-1">
+					<input name="sex" id="sex-1" ng-model="student.sex" value="M" type="radio"> Male
+				</label>
+			</div>
+		</div>
+
+		<!--Degree-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="degree">Degree</label>  
+			<div class="col-md-5">
+				<input id="degree" name="degree" class="form-control input-md" required="" type="text" ng-model="student.degree" />
+			</div>
+		</div>
+
+		<!--College-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="college">College</label>  
+			<div class="col-md-5">
+				<input id="college" name="college" class="form-control input-md" required="" type="text" ng-model="student.college" />
+			</div>
+		</div>
+
+		<!--Submit button-->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="editStudent"></label>
+			<div class="col-md-4">
+				<input type="submit" id="editStudent" name="editStudent" class="btn btn-primary" value="Edit Profile" />
+			</div>
+		</div>
+	</form> <!--/edit student-->
+	
 </div>
