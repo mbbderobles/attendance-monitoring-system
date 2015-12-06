@@ -10,6 +10,8 @@
         $scope.sectionDetails = {};     // details of the section
         $scope.weekStart = 0;           // sunday = 0
         $scope.weeks = getWeek();
+        $scope.not_enrolled = [];
+        GetStudentsNotEnrolledInSection();
 
         var studentRemarks = [];
 
@@ -21,29 +23,7 @@
 
             startEndTime = getStartEndDateTime();
 
-            AttendanceService.GetStudentsBySection($routeParams.id2)        // get students enrolled in a section
-            .then(function(data2){
-                students = data2;
-
-                AttendanceService.GetAbsentStudents($routeParams.id2)       // count students' absences
-                .then(function(abs){
-                    AttendanceService.GetExcusedStudents($routeParams.id2)  // count students' excused record
-                    .then(function(exc){
-                        studentRemarks = viewRemarks(students,abs,exc);
-
-                        AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
-                        .then(function(data3){
-                            retrievedAttendance = data3;
-                            viewAttendance(data2, data3);
-                        });
-
-                    });
-                });
-
-                
-            }, function(error){
-                $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/classlist';
-            });
+            retrieveRecords();
 
         });
 
@@ -115,6 +95,62 @@
             }
         }
 
+        $scope.AddStudentToSection = function(){
+            $scope.newStudentToSection.sectionId = $routeParams.id2;
+            AttendanceService.AddStudentToSection($scope.newStudentToSection)
+            .then(function(data){
+                students.push(data);
+                retrieveRecords();
+                $scope.addS2S = !$scope.addS2S;
+                GetStudentsNotEnrolledInSection();
+            });
+        }
+
+        $scope.DeleteStudentFromSection = function(){
+            if(confirm('Are you sure you want to delete the student from the section?')){
+                AttendanceService.DeleteStudentFromSection($scope.deleteStudentFromSection.studentSectionId)
+                .then(function(data){
+                    $scope.deleteS2S = !$scope.deleteS2S;
+                    GetStudentsNotEnrolledInSection();
+                    retrieveRecords();
+                });
+            }
+        }
+
+        function GetStudentsNotEnrolledInSection(){
+            AttendanceService.GetStudentsNotEnrolledInSection($routeParams.id2)        // get students not enrolled in a section
+            .then(function(data){
+                $scope.not_enrolled = data;
+            });
+        }
+
+        function retrieveRecords(){
+            $scope.attendance = [];
+            AttendanceService.GetStudentsBySection($routeParams.id2)        // get students enrolled in a section
+            .then(function(data2){
+                students = data2;
+
+                AttendanceService.GetAbsentStudents($routeParams.id2)       // count students' absences
+                .then(function(abs){
+                    AttendanceService.GetExcusedStudents($routeParams.id2)  // count students' excused record
+                    .then(function(exc){
+                        studentRemarks = viewRemarks(students,abs,exc);
+
+                        AttendanceService.GetAttendance($routeParams.id2)   // get attendance by section
+                        .then(function(data3){
+                            retrievedAttendance = data3;
+                            viewAttendance(data2, data3);
+                        });
+
+                    });
+                });
+
+                
+            }, function(error){
+                $window.location.href = '/#/courses/'+$routeParams.id+'/sections/'+$routeParams.id2+'/classlist';
+            });
+        }
+
         // store and organize remarks of each student
         function viewRemarks(students, abs, exc){
             var remarks = [];
@@ -180,7 +216,7 @@
                     }
                     j++;
                 }// end of weeks loop
-                $scope.attendance.push({'studentNumber': studentNumber.studentNumber, 'name': studentNumber.lastName +  ', ' + studentNumber.firstName, 'attendance': at, 'id': id, 'remarks': studentRemarks[cnt++]});
+                $scope.attendance.push({'studentNumber': studentNumber.studentNumber, 'studentSectionId': studentNumber.studentSectionId, 'name': studentNumber.lastName +  ', ' + studentNumber.firstName, 'attendance': at, 'id': id, 'remarks': studentRemarks[cnt++]});
             });
         }
 

@@ -3,6 +3,60 @@
 <h4> Time: {{sectionDetails.time}}</h4>
 <h4> Room: {{sectionDetails.room}}</h4>
 
+<button style="float:right" type="button" title="Delete a Student from Section" class="btn btn-danger btn-s" ng-click="deleteS2S = !deleteS2S"><span class="glyphicon glyphicon-remove"></span></button>
+
+<button style="float:right" type="button" title="Add a Student to Section" class="btn btn-success btn-s" ng-click="addS2S = !addS2S"><span class="glyphicon glyphicon-plus"></span></button>
+
+<!--Add Student to Section Form-->
+<div class="default well" ng-show="addS2S" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="AddStudentToSection()">
+		<legend>Add Student to {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}}</legend>
+		
+		<!-- Student -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="studentNumber">Student</label>
+			<div class="col-md-5">
+				<select id="studentNumber" name="studentNumber" class="form-control"
+					ng-options="ne.studentNumber as ne.lastName+', '+ne.firstName for ne in not_enrolled"
+					ng-model="newStudentToSection.studentNumber">
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="addStudentToSection"></label>
+			<div class="col-md-4">
+				<input type="submit" id="addStudentToSection" name="addStudentToSection" class="btn btn-primary" value="Add Student" />
+			</div>
+		</div>
+	</form> <!--/add student to section-->
+</div>
+
+<!--Delete Student from Section Form-->
+<div class="default well" ng-show="deleteS2S" style="margin: 0 auto">
+	<form class="form-horizontal" ng-submit="DeleteStudentFromSection()">
+		<legend>Delete Student from {{sectionDetails.courseNum + ', ' + sectionDetails.sectionCode}}</legend>
+		
+		<!-- Student -->
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="studentNumber">Student</label>
+			<div class="col-md-5">
+				<select id="studentNumber" name="studentNumber" class="form-control"
+					ng-options="st.studentSectionId as st.name for st in attendance"
+					ng-model="deleteStudentFromSection.studentSectionId">
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-md-4 control-label" for="deleteStudentFromSection"></label>
+			<div class="col-md-4">
+				<input type="submit" id="deleteStudentFromSection" name="deleteStudentFromSection" class="btn btn-primary" value="Delete Student" />
+			</div>
+		</div>
+	</form> <!--/delete student from section-->
+</div>
+
 <table class="table table-hover table-bordered attendance">
 	<thead>
 		<tr>

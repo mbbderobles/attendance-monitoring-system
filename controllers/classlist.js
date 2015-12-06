@@ -9,7 +9,18 @@ exports.find = function(req, res, next) {
 
 
 exports.findStudentsBySection = function(req, res, next) {
-	db.query("SELECT * FROM student_section NATURAL JOIN student NATURAL JOIN user NATURAL JOIN section NATURAL JOIN course WHERE sectionId=?", [req.params.id], function(err, rows) {
+	db.query("SELECT * FROM student_section NATURAL JOIN student NATURAL JOIN user NATURAL JOIN section NATURAL JOIN course WHERE sectionId=? ORDER BY lastName ASC", [req.params.id], function(err, rows) {
+		if (err) return next(err);
+		if (rows.length === 0) {
+			res.status(404).send('Record not found.');
+		} else {
+			res.send(rows);
+		}
+	});
+};
+
+exports.findStudentsNotEnrolledInSection = function(req, res, next) {
+	db.query("SELECT * FROM student NATURAL JOIN user WHERE studentNumber NOT IN (SELECT studentNumber FROM student_section WHERE sectionId=?) ORDER BY lastName ASC", [req.params.id], function(err, rows) {
 		if (err) return next(err);
 		if (rows.length === 0) {
 			res.status(404).send('Record not found.');

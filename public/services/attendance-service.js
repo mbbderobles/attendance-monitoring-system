@@ -14,11 +14,13 @@
 		var attendance_absent_url = "/api/attendance/sections/absent/";
 		var attendance_excused_url = "/api/attendance/sections/excused/";
 		var section_student_url = "/api/sections/students/";
+		var section_not_enrolled_url = "/api/sections/notEnrolled/";
 		var section_url = "/api/sections/";
 
 		var service = {};
 		service.GetSection = GetSection;
 		service.GetStudentsBySection = GetStudentsBySection;
+		service.GetStudentsNotEnrolledInSection = GetStudentsNotEnrolledInSection;
 		service.GetAttendance = GetAttendance;
 		service.GetPresentStudents = GetPresentStudents;
 		service.GetAbsentStudents = GetAbsentStudents;
@@ -26,6 +28,8 @@
 		service.AddAttendance = AddAttendance;
 		service.EditAttendance = EditAttendance;
 		service.DeleteAttendance = DeleteAttendance;
+		service.AddStudentToSection = AddStudentToSection;
+		service.DeleteStudentFromSection = DeleteStudentFromSection;
 		return service;
 
 		// get section details
@@ -63,6 +67,21 @@
         	var deferred = $q.defer();
 
 			$http.get(section_student_url+id)
+        	.success(function (data){
+        		deferred.resolve(data);
+	        })
+	        .error(function (data, status){
+	        	deferred.reject(status);
+	        });
+
+	        return deferred.promise;
+        };
+
+        // get students not enrolled in the section
+        function GetStudentsNotEnrolledInSection(id){
+        	var deferred = $q.defer();
+
+			$http.get(section_not_enrolled_url+id)
         	.success(function (data){
         		deferred.resolve(data);
 	        })
@@ -153,6 +172,36 @@
         	var deferred = $q.defer();
 
 			$http.delete(attendance_url+id)
+        	.success(function (data){
+        		deferred.resolve(data);
+	        })
+	        .error(function (data, status){
+	        	deferred.reject(status);
+	        });
+
+	        return deferred.promise;
+        };
+
+        // add student to section
+        function AddStudentToSection(student){
+        	var deferred = $q.defer();
+
+			$http.post(section_student_url, student)
+        	.success(function (data){
+        		deferred.resolve(data);
+	        })
+	        .error(function (data, status){
+	        	deferred.reject(status);
+	        });
+
+	        return deferred.promise;
+        };
+
+        // delete student from section
+        function DeleteStudentFromSection(id){
+        	var deferred = $q.defer();
+
+			$http.delete(section_student_url+id)
         	.success(function (data){
         		deferred.resolve(data);
 	        })

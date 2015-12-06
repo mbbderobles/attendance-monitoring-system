@@ -77,6 +77,9 @@ module.exports = function(router) {
 		.get(classlist.find)
 		.post(classlist.insert);
 
+	router.route('/api/sections/notEnrolled/:id')
+		.get(classlist.findStudentsNotEnrolledInSection);
+
 	router.route('/api/sections/students/:id')
 		.get(classlist.findStudentsBySection)
 		.put(classlist.update)
