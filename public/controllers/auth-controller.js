@@ -18,7 +18,7 @@
             $scope.email = '';
             $scope.signedIn = false;
             $scope.privilege = -1;
-            $scope.auth2.signOut();
+            $scope.auth2.disconnect();
         }
         
         $scope.signInSuccess = function(googleUser){
@@ -86,7 +86,7 @@
                       $scope.auth2 = gapi.auth2.getAuthInstance();
                     });
                 });
-            });  
+            });
         };
         
         $scope.start();
@@ -97,7 +97,8 @@
             if(!$scope.signedIn || next.privilege > $scope.privilege){
                 $location.path('/');
             }
-        })
+        });
+
         
     }]);
 
