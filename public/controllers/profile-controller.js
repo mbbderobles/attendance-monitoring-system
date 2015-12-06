@@ -5,13 +5,13 @@
     .module('myApp')
     .controller('ProfileCtrl',['$scope', 'ProfileService', function ($scope, ProfileService) {
     
-        $scope.user = {};
+        $scope.user_p = {};
         $scope.teacher = {};
         $scope.student = {};
     
         ProfileService.GetUser($scope.userId)
         .then(function(data){
-            $scope.user = data
+            $scope.user_p = data
         });
         
         if($scope.privilege == 3){
@@ -37,13 +37,13 @@
         
         $scope.EditAdmin = function(){
             if($scope.privilege==3){                                                // check if admin
-                ProfileService.EditUser($scope.user, $scope.user.id);
+                ProfileService.EditUser($scope.user_p, $scope.user_p.id);
             }
         };
         
         $scope.EditTeacher = function(){
             if($scope.privilege==2){
-                ProfileService.EditUser($scope.user, $scope.user.id)
+                ProfileService.EditUser($scope.user_p, $scope.user_p.id)
                 .then(function(data1){
                     ProfileService.EditTeacher($scope.teacher, data1.id)
                 });
@@ -52,7 +52,7 @@
         
         $scope.EditStudent = function(){
             if($scope.privilege==1){
-                ProfileService.EditUser($scope.user, $scope.user.id)
+                ProfileService.EditUser($scope.user_p, $scope.user_p.id)
                 .then(function(data1){
                     ProfileService.EditStudent($scope.student, data1.id)
                 });

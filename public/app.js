@@ -13,7 +13,8 @@
   function config($routeProvider){
     $routeProvider
     .when('/', {
-      templateUrl: 'views/home-view.html'
+      templateUrl: 'views/home-view.html',
+      controller: 'HomeCtrl'
     })
     .when('/courses', {
       templateUrl: 'views/course-view.html',
