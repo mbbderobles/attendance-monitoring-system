@@ -24,6 +24,8 @@ INSERT INTO user (firstName, middleName, lastName, emailAddress) VALUES ("Shiela
 INSERT INTO admin (id) SELECT id FROM user WHERE emailAddress="shielakathleenborja@gmail.com";
 INSERT INTO user (firstName, middleName, lastName, emailAddress) VALUES ("Mark Froilan", "Bunao", "Tandoc", "markfroilantandoc@gmail.com");
 INSERT INTO admin (id) SELECT id FROM user WHERE emailAddress="markfroilantandoc@gmail.com";
+INSERT INTO user (firstName, middleName, lastName, emailAddress) VALUES ("Admin", "Bu", "ATMOST", "atmostams3@gmail.com");
+INSERT INTO admin (id) SELECT id FROM user WHERE emailAddress="atmostams3@gmail.com";
 
 DROP TABLE IF EXISTS student;
 CREATE TABLE student(
