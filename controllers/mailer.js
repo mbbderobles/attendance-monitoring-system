@@ -12,7 +12,7 @@ var transporter = nodemailer.createTransport({
 
 exports.send = function(req, res, next){
 	//console.log("INSIDE SEND FUNCTION");
-	var linkadd="10.0.3.200.xip.io";
+	var linkadd="http://10.0.3.200.xip.io:3000";
 	var course_sec=req.body.section.courseNum+' '+req.body.section.sectionCode;
 
 	if(req.body.type>0)
