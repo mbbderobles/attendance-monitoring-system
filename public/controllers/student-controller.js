@@ -21,7 +21,7 @@
         });
 
         $scope.AddStudent = function(){
-            if($scope.privilege==3){    // check if admin
+            if($scope.privilege==3 || $scope.privilege==2){    // check if admin
                 StudentService.AddUser($scope.newUser)
                 .then(function(data1){
                     $scope.newStudent.id=data1.id;
@@ -36,7 +36,7 @@
 
         // populate control fields in edit form
         $scope.ViewStudent = function(id){
-            if($scope.privilege==3){    // check if admin
+            if($scope.privilege==3 || $scope.privilege==2){    // check if admin
                 $scope.editS = !$scope.editS;
 
                 console.log('ID'+id);
@@ -60,7 +60,7 @@
         };
 
         $scope.EditStudent = function(){
-            if($scope.privilege==3){    // check if admin
+            if($scope.privilege==3 || $scope.privilege==2){    // check if admin
                 StudentService.EditUser($scope.editUser, $scope.editUser.id)
                 .then(function(data1){
                     StudentService.EditStudent($scope.editStudent, data1.id)
