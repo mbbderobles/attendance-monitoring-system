@@ -4,7 +4,7 @@
 
     angular
     .module('myApp')
-    .controller('AuthCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
+    .controller('AuthCtrl', ['$scope', '$rootScope', '$location', 'AuthService', 'ProfileService', function($scope, $rootScope, $location, AuthService, ProfileService){
         $scope.auth2 = {};
         $scope.g = {};
         $scope.signedIn = false;
@@ -31,6 +31,10 @@
                     for(var i=0; i<data.length; i++){
                         if($scope.email == data[i].emailAddress){               // To find privilege, find user based from email
                             $scope.userId = data[i].id;
+                            ProfileService.GetUser($scope.userId)
+                            .then(function(data){
+                                $scope.fullname = data.firstName + ' ' + data.lastName;
+                            });
                             AuthService.CheckAdmin(data[i].id)                  // Check if Admin
                                 .then(function(data2){
                                     $scope.privilege = 3;
