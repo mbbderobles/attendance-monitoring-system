@@ -63,7 +63,7 @@ CREATE TABLE section(
     room varchar(20) NOT NULL,
     semester varchar(1) NOT NULL,
     year varchar(9) NOT NULL,
-    maxAllowedAbsences int DEFAULT 0,
+    maxAllowedAbsences int DEFAULT 6,
     combinedAbsences int DEFAULT 0,
     PRIMARY KEY(sectionId)
 );

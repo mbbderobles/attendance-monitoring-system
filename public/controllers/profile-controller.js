@@ -8,6 +8,7 @@
         $scope.user_p = {};
         $scope.teacher = {};
         $scope.student = {};
+        $scope.success = false;
     
         ProfileService.GetUser($scope.userId)
         .then(function(data){
@@ -37,7 +38,10 @@
         
         $scope.EditAdmin = function(){
             if($scope.privilege==3){                                                // check if admin
-                ProfileService.EditUser($scope.user_p, $scope.user_p.id);
+                ProfileService.EditUser($scope.user_p, $scope.user_p.id)
+                .then(function(data5){
+                    $scope.success = true;
+                });
             }
         };
         
@@ -45,7 +49,9 @@
             if($scope.privilege==2){
                 ProfileService.EditUser($scope.user_p, $scope.user_p.id)
                 .then(function(data1){
-                    ProfileService.EditTeacher($scope.teacher, data1.id)
+                    ProfileService.EditTeacher($scope.teacher, data1.id).then(function(data5){
+                        $scope.success = true;
+                    });
                 });
             }
         };
@@ -54,7 +60,9 @@
             if($scope.privilege==1){
                 ProfileService.EditUser($scope.user_p, $scope.user_p.id)
                 .then(function(data1){
-                    ProfileService.EditStudent($scope.student, data1.id)
+                    ProfileService.EditStudent($scope.student, data1.id).then(function(data5){
+                        $scope.success = true;
+                    });
                 });
             }
         };
